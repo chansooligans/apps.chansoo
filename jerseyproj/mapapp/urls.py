@@ -3,6 +3,9 @@ from django.urls import path
 
 urlpatterns = [
     path('', views.index, name='index'),
+
+    path('leaflet/', views.leaflet, name='leaflet'),
+
     path('wawa/', views.wawa, name='wawa'),
     path('dunkin/', views.dunkin, name='dunkin'),
     path('edu_college/', views.edu_college, name='edu_college'),

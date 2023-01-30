@@ -67,6 +67,6 @@ nj_data["tract"] = [x.params()[2][1] for x in nj_data["tract_name"].values]
 nj_data["county"] = [x.params()[1][1] for x in nj_data["tract_name"].values]
 
 # %%
-nj_data.to_csv(f"../../data/censustracts.csv", index=False)
+nj_data.to_csv(f"../data/censustracts.csv", index=False)
 
 # %%

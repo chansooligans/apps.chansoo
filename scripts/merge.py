@@ -5,10 +5,10 @@ import json
 import geopandas as gpd
 
 # %%
-census = pd.read_csv(f"../../data/censustracts.csv", dtype={"tract":str,"county":str})
+census = pd.read_csv(f"../data/censustracts.csv", dtype={"tract":str,"county":str})
 census = census.drop_duplicates(subset="tract_name")
 nfl = (
-    pd.read_csv(f"../../data/nfl.csv")
+    pd.read_csv(f"../data/nfl.csv")
     .rename({
         "County":"COUNTY",
         "Giants":"nfl_giants",
@@ -19,7 +19,7 @@ nfl = (
 )
 nfl["COUNTY"] = nfl["COUNTY"].str.upper()
 pork = (
-    pd.read_csv(f"../../data/pork_ham.csv")
+    pd.read_csv(f"../data/pork_ham.csv")
     .rename({
         "County":"COUNTY",
         "Pork Roll":"pork_pork_roll",
@@ -29,8 +29,8 @@ pork = (
 pork["COUNTY"] = pork["COUNTY"].str.upper()
 
 # %%
-tracts = gpd.read_file("../../data/tl_2018_34_tract/tl_2018_34_tract.shp")
-counties = gpd.read_file("../../data/county_boundaries/County_Boundaries_of_NJ.shp")
+tracts = gpd.read_file("../data/tl_2018_34_tract/tl_2018_34_tract.shp")
+counties = gpd.read_file("../data/county_boundaries/County_Boundaries_of_NJ.shp")
 counties = counties.to_crs("EPSG:4269")
 
 # Perform the spatial merge
@@ -42,7 +42,7 @@ df = df.merge(nfl).merge(pork)
 df = df.merge(census, how='left', left_on = "TRACTCE", right_on="tract")
 
 # %%
-df.fillna(0).to_file("../../data/merged_tracts.geojson", driver='GeoJSON')
+df.fillna(0).to_file("../data/merged_tracts.geojson", driver='GeoJSON')
 
 # %% [markdown]
 """
@@ -67,7 +67,7 @@ Dunkin / Wawa
 """
 
 # %%
-files = glob.glob("../../data/dunkin/*")
+files = glob.glob("../data/dunkin/*")
 
 dunkinfiles = []
 for file in files:
@@ -99,7 +99,7 @@ df_county = df_county.merge(
 
 
 # %%
-files = glob.glob("../../data/wawa/*")
+files = glob.glob("../data/wawa/*")
 
 wawafiles = []
 for file in files:
@@ -134,6 +134,6 @@ df_county = df_county.merge(
 Export
 """
 # %%
-df_county.fillna(0).to_file("../../data/merged_counties.geojson", driver='GeoJSON')
+df_county.fillna(0).to_file("../data/merged_counties.geojson", driver='GeoJSON')
 
 # %%

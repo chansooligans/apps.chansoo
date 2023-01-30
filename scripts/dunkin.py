@@ -27,7 +27,7 @@ def query(auth, longlat):
     return response.json()
 
 # Load the census tract data for New Jersey
-tracts = gpd.read_file("../../data/tl_2018_34_tract/tl_2018_34_tract.shp")
+tracts = gpd.read_file("../data/tl_2018_34_tract/tl_2018_34_tract.shp")
 
 # Calculate the centroid of each tract and store in a new column
 tracts["centroid"] = tracts.geometry.centroid
@@ -54,11 +54,11 @@ for i,x in tqdm.tqdm(enumerate(tracts["longlat"].values)):
         auth=authorization,
         longlat=x
     )
-    with open(f"../../data/dunkin/{i}.json", "w") as f:
+    with open(f"../data/dunkin/{i}.json", "w") as f:
         json.dump(result, f)
     # dflist.append(pd.DataFrame(result["results"]))
     # df = pd.concat(dflist).drop_duplicates(subset="fsq_id")
-    # df.to_csv(f"../../data/dunkin.csv", index=False)
+    # df.to_csv(f"../data/dunkin.csv", index=False)
     time.sleep(0.25)
 
 # %%

@@ -73,3 +73,7 @@ _build/*
 */oag_logo.png
 
 api.yaml
+
+data/*
+
+*.geojson

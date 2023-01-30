@@ -3,7 +3,7 @@ import folium
 import pandas as pd
 import geopandas as gpd
 
-filename = "../../data/merged_tracts.geojson"
+filename = "../data/merged_tracts.geojson"
 with open(filename) as file:
     df = gpd.read_file(file, driver='GeoJSON') 
 
@@ -41,6 +41,6 @@ for col in cols:
     smooth_factor=0
     )
 
-    m.save(f"../../data/mapstracts.nosync/{col}.html")
+    m.save(f"../data/mapstracts.nosync/{col}.html")
 
 # %%

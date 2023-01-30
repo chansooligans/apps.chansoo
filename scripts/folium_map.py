@@ -3,7 +3,7 @@ import folium
 import pandas as pd
 import geopandas as gpd
 
-filename = "../../data/merged_counties.geojson"
+filename = "../data/merged_counties.geojson"
 with open(filename) as file:
     df = gpd.read_file(file, driver='GeoJSON')    
 

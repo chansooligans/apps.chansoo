@@ -4,8 +4,7 @@ from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
-    my_dict = {'insert_me':"Hello I am from views.py !"}
-    return render(request, 'mapapp/index.html', context=my_dict)
+    return render(request, 'mapapp/index.html')
 
 def wawa(request):
     return render(request, 'maps/wawa.html')
@@ -33,3 +32,9 @@ def pob_native_jeresy(request):
 
 def pob_foreigh_born(request):
     return render(request, 'maps/pob_foreigh_born.html')
+
+def leaflet(request):
+    context = {
+        'geojson_url': '/static/geojson/merged.geojson'
+    }
+    return render(request, 'mapapp/leaflet.html', context)
