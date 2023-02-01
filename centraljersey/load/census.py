@@ -61,10 +61,9 @@ class Census:
 
     def get_county(self, s):
         return [x.params()[1][1] for x in s.values]
-        x.params()[1][1] for x in df["tract_name"].values
 
-    @cache.localcache()
     @cached_property
+    @cache.localcache()
     def nj_data(self):
         
         df = censusdata.download(
@@ -80,8 +79,8 @@ class Census:
             .rename({"index":"tract_name"}, axis=1)
         )
 
-        df["tract"] = self.get_tract(s)
-        df["county"] = []
+        df["tract"] = self.get_tract(df["tract_name"])
+        df["county"] = self.get_county(df["tract_name"])
         return df
 
 # nj_data.to_csv(f"../data/censustracts.csv", index=False)
