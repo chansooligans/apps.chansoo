@@ -75,5 +75,7 @@ _build/*
 api.yaml
 
 data/*
+cache/*
+scratch/*
 
 *.geojson
