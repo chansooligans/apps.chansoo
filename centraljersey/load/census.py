@@ -63,7 +63,7 @@ class Census:
         return [x.params()[1][1] for x in s.values]
 
     @cached_property
-    @cache.localcache()
+    @cache.localcache(dtype={"tract":str,"county":str})
     def nj_data(self):
         
         df = censusdata.download(
