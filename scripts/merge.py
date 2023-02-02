@@ -15,11 +15,6 @@ df.fillna(0).to_file("../data/merged_tracts.geojson", driver='GeoJSON')
 
 # %%
 df_county = merger.df_counties
-df.fillna(0).to_file("../data/merged_tracts.geojson", driver='GeoJSON')
+df.fillna(0).to_file("../data/merged_counties.geojson", driver='GeoJSON')
 
-# %%
-merger.df_tracts["edu_college"].isnull().sum()
-
-# %%
-merger.tracts
 # %%

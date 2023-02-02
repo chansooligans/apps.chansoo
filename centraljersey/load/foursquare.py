@@ -116,7 +116,7 @@ class Foursquare(CensusCentroids):
     def df_dunkins_tract(self):
         return(
             self.df_dunkins
-            .groupby("dunkin_tract")
+            .groupby(["dunkin_county","dunkin_tract"])
             .agg({
                 "dunkin_id":"count"
             })
@@ -127,7 +127,7 @@ class Foursquare(CensusCentroids):
     def df_wawa_tract(self):
         return(
             self.df_wawas
-            .groupby("wawa_tract")
+            .groupby(["wawa_county","wawa_tract"])
             .agg({
                 "wawa_id":"count"
             })

@@ -1,7 +1,3 @@
-# %%
-if get_ipython() is not None:
-    get_ipython().run_line_magic("load_ext", "autoreload")
-    get_ipython().run_line_magic("autoreload", "2")
 from centraljersey.load import (
     census, 
     foursquare,
@@ -29,28 +25,26 @@ class Merge:
     @cached_property
     def df_tracts(self):
         # Perform the spatial merge
-        merged = gpd.sjoin(
-            self.tracts, 
-            self.counties, 
-            how="inner", 
-            op="intersects"
+        
+        df = self.tracts.merge(
+            self.census, 
+            how='left', 
+            left_on = ["COUNTYFP","TRACTCE"], 
+            right_on=["county","tract"]
         )
-        df = merged.drop_duplicates(subset="TRACTCE")
-        df = df.merge(self.nfl).merge(self.pork)
-        df = df.merge(self.census, how='left', left_on = "TRACTCE", right_on="tract")
 
         df = df.merge(
             self.dunkin.df_dunkins_tract, 
             how="left", 
-            left_on="TRACTCE",
-            right_on="dunkin_tract"
+            left_on=["COUNTYFP","TRACTCE"],
+            right_on=["dunkin_county", "dunkin_tract"]
         )
 
         df = df.merge(
             self.wawa.df_wawa_tract, 
             how="left", 
-            left_on="TRACTCE",
-            right_on="wawa_tract"
+            left_on=["COUNTYFP","TRACTCE"],
+            right_on=["wawa_county", "wawa_tract"]
         )
 
         return df
