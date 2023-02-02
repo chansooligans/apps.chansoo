@@ -103,11 +103,55 @@ class Foursquare(CensusCentroids):
         return df.drop_duplicates(subset=f"{self.company}_id")
 
     @cached_property
-    @cache.localcache()
+    @cache.localcache(dtype={"dunkin_tract":str,"dunkin_county":str})
     def df_dunkins(self):
         return self.get_df()
 
     @cached_property
-    @cache.localcache()
+    @cache.localcache(dtype={"wawa_tract":str,"wawa_county":str})
     def df_wawas(self):
         return self.get_df()
+
+    @cached_property
+    def df_dunkins_tract(self):
+        return(
+            self.df_dunkins
+            .groupby("dunkin_tract")
+            .agg({
+                "dunkin_id":"count"
+            })
+            .reset_index()
+        )
+
+    @cached_property
+    def df_wawa_tract(self):
+        return(
+            self.df_wawas
+            .groupby("wawa_tract")
+            .agg({
+                "wawa_id":"count"
+            })
+            .reset_index()
+        )
+
+    @cached_property
+    def df_dunkins_county(self):
+        return(
+            self.df_dunkins
+            .groupby("dunkin_county")
+            .agg({
+                "dunkin_id":"count"
+            })
+            .reset_index()
+        )
+
+    @cached_property
+    def df_wawa_county(self):
+        return(
+            self.df_wawas
+            .groupby("wawa_county")
+            .agg({
+                "wawa_id":"count"
+            })
+            .reset_index()
+        )
