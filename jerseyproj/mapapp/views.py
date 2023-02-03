@@ -35,6 +35,6 @@ def pob_foreigh_born(request):
 
 def leaflet(request):
     context = {
-        'geojson_url': '/static/geojson/merged.geojson'
+        'geojson_url': '/static/geojson/merged_tracts.geojson'
     }
     return render(request, 'mapapp/leaflet.html', context)

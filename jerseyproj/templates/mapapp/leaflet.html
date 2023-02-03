@@ -39,14 +39,29 @@
 </body>
 
 <script>
-    var map = L.map('map').setView([40.11851, -74.671826], 8);
+    var map = L.map('map').setView([40.11851, -74.671826], 9);
 
+    var column = "income_200k_to_more";
     var geojson;
+
+    var values = [];
+    var buckets = {};
+    const percentile = 25;
+    
 
     d3.json("{{ geojson_url }}", function (error, data) {
         if (error) throw error;
 
         geojson = data;
+        geojson.features.forEach(feature => {
+            values.push(feature.properties[column]/ feature.properties["total_pop"]);
+        });
+        const sortedValues = values.sort();
+        for (let i = 0; i <= 100; i+=percentile) {
+            const index = Math.floor((sortedValues.length - 1) * i / 100);
+            console.log(index)
+            buckets[i + "%"] = sortedValues[index];
+        }
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
@@ -54,18 +69,20 @@
         }).addTo(map);
 
         function style(feature) {
-            var value = feature.properties["edu_college"] / feature.properties["total_pop"];
+            var value = feature.properties[column] / feature.properties["total_pop"];
 
             // Define the fill color based on the value
             var fillColor;
-            if (value < 0.10) {
+            if (value < buckets['25%']) {
                 fillColor = '#F13D16';
-            } else if (value >= 0.10 && value < 0.20) {
+            } else if (value >= buckets['25%'] && value < buckets['50%']) {
                 fillColor = '#F09D8B';
-            } else if (value >= 0.20 && value < 0.30) {
+            } else if (value >= buckets['50%'] && value < buckets['75%']) {
                 fillColor = '#8BBDF0';
+            } else if (value > buckets['75%']) {
+                fillColor = '#0153A7';
             } else {
-                fillColor = '#0153A7';  
+                fillColor = '#c2c2c2';  
             }
 
             return {
@@ -80,7 +97,7 @@
 
         function onEachFeature(feature, layer) {
             layer.bindTooltip(
-                "Value: " + feature.properties["edu_college"] / feature.properties["total_pop"],
+                "Value: " + feature.properties[column] / feature.properties["total_pop"],
                 { permanent: false, direction: 'center', className: 'myCSSClass' }
             );
             layer.on({

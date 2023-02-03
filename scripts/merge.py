@@ -18,3 +18,5 @@ df_county = merger.df_counties
 df.fillna(0).to_file("../data/merged_counties.geojson", driver='GeoJSON')
 
 # %%
+df.columns
+# %%
