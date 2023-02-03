@@ -10,6 +10,9 @@
     <!-- d3 -->
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 
+    <!-- Scrollama -->
+    <script src="https://unpkg.com/scrollama"></script>
+
     <!-- leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
         integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
@@ -28,93 +31,131 @@
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'css/leaflet.css' %}">
 
+    <!-- js leaflet -->
+    <script type="module" src="{% static 'js/leaflet.js' %}"></script>
+    <script type="module" src="{% static 'js/leaflet-scroll.js' %}"></script>
+
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Work+Sans:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+
     <title>JERSEY</title>
 </head>
 
 <body>
-    <div class="container">
-        <h1>Jersey Map</h1>
-        <div id="map"></div>
-    </div>
+    <main>
+        <div class="container my-5"></div>
+        <section id="scrolly">
+            <article>
+                <div class="step">
+                    <div class="container site-header">
+                        <h1 id="title">Is Central Jersey Real?</h1>
+                    </div>
+                    <div class="container description">
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusamus provident dolores quas consectetur sequi quisquam possimus repellendus. Excepturi porro nesciunt distinctio eos perspiciatis accusamus eum, in nostrum, neque incidunt qui?
+                    </div>
+                </div>
+                <div class="step" data-step="4" value="wawa_id" map="/static/geojson/merged_counties.geojson">
+                    <p class="subtitle">WAWAs</p>
+                    <div class="container description">
+                        Per 100,000 residents
+                    </div>
+                    <div class="map-container-4"></div>
+                </div>
+                <div class="step" data-step="5" value="giants_or_jets" map="/static/geojson/merged_counties.geojson">
+                    <p class="subtitle">NFL: GIANTS/JETS FANS</p>
+                    <div class="container description">
+                        As a percentage of Giants, Jets, Eagles fans (NJ.com poll)
+                    </div>
+                    <div class="map-container-5"></div>
+                </div>
+                <div class="step" data-step="6" value="pork_roll" map="/static/geojson/merged_counties.geojson">
+                    <p class="subtitle">PORK ROLL</p>
+                    <div class="container description">
+                        Percentage of people who say Por Roll instead of Taylor Ham (NJ.com poll)
+                    </div>
+                    <div class="map-container-6"></div>
+                </div>
+
+                <div class="step" data-step="8" value="loc" map="/static/geojson/merged_tracts.geojson">
+                    <p class="subtitle">Prediction</p>
+                    <div class="container description">
+                        prediction
+                    </div>
+                    <div class="map-container-8"></div>
+                </div>
+                
+                <div class="container">
+                    <p class="subtitle">Model Inputs</p>
+                    <div class="container description">
+                        inputs
+                    </div>
+                    <div class="mx-auto text-center">
+                        <img src="{% static 'images/barplot.png' %}" alt="" class="barplot">
+                    </div>
+                </div>
+
+                <div class="step" data-step="1" value="pob_foreign_born" map="/static/geojson/merged_tracts.geojson">
+                    <p class="subtitle">FOREIGN BORN POPULATION</p>
+                    <div class="container description">
+                        Percentage of the population that was born outside of the United States.
+                    </div>
+                    <div class="map-container-1"></div>
+                </div>
+                <div class="step" data-step="2" value="asian_pop" map="/static/geojson/merged_tracts.geojson">
+                    <p class="subtitle">ASIAN POPULATION</p>
+                    <div class="container description">
+                        Percentage of the population that is Asian.
+                    </div>
+                    <div class="map-container-2"></div>
+                </div>
+                <div class="step" data-step="3" value="edu_college" map="/static/geojson/merged_tracts.geojson">
+                    <p class="subtitle">COLLEGE EDUCATED</p>
+                    <div class="container description">
+                        Percentage of the population with college degrees.
+                    </div>
+                    <div class="map-container-3"></div>
+                </div>
+                <div class="step" data-step="7" value='occu_Management, business, science, and arts occupations:' map="/static/geojson/merged_tracts.geojson">
+                    <p class="subtitle">Management, Business, Science</p>
+                    <div class="container description">
+                        Percentage of the population that works in Management, Business, Science
+                    </div>
+                    <div class="map-container-7"></div>
+                </div>
+                <div class="step" data-step="9" value='occu_Production, transportation, and material moving occupations:' map="/static/geojson/merged_tracts.geojson">
+                    <p class="subtitle">Production, Transportation, Material Moving</p>
+                    <div class="container description">
+                        Percentage of the population that works in Production, Transportation, Material Moving
+                    </div>
+                    <div class="map-container-9"></div>
+                </div>
+                <div class="step" data-step="10" value='occu_Transportation and warehousing, and utilities' map="/static/geojson/merged_tracts.geojson">
+                    <p class="subtitle">Transportation, Warehousing, Utilities</p>
+                    <div class="container description">
+                        Percentage of the population that works in Transportation, Warehousing, Utilities
+                    </div>
+                    <div class="map-container-10"></div>
+                </div>
+            </article>
+            <figure>
+                <div id="map"></div>
+            </figure>
+        </section>
+        <section id="outro"></section>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    </main>
 </body>
-
 <script>
-    var map = L.map('map').setView([40.11851, -74.671826], 9);
-
-    var column = "income_200k_to_more";
-    var geojson;
-
-    var values = [];
-    var buckets = {};
-    const percentile = 25;
+    var geojson_url = "/static/geojson/merged_counties.geojson";
     
-
-    d3.json("{{ geojson_url }}", function (error, data) {
-        if (error) throw error;
-
-        geojson = data;
-        geojson.features.forEach(feature => {
-            values.push(feature.properties[column]/ feature.properties["total_pop"]);
-        });
-        const sortedValues = values.sort();
-        for (let i = 0; i <= 100; i+=percentile) {
-            const index = Math.floor((sortedValues.length - 1) * i / 100);
-            console.log(index)
-            buckets[i + "%"] = sortedValues[index];
-        }
-
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
-
-        function style(feature) {
-            var value = feature.properties[column] / feature.properties["total_pop"];
-
-            // Define the fill color based on the value
-            var fillColor;
-            if (value < buckets['25%']) {
-                fillColor = '#F13D16';
-            } else if (value >= buckets['25%'] && value < buckets['50%']) {
-                fillColor = '#F09D8B';
-            } else if (value >= buckets['50%'] && value < buckets['75%']) {
-                fillColor = '#8BBDF0';
-            } else if (value > buckets['75%']) {
-                fillColor = '#0153A7';
-            } else {
-                fillColor = '#c2c2c2';  
-            }
-
-            return {
-                fillColor: fillColor,
-                weight: 1,
-                opacity: 0.4,
-                color: 'white',
-                dashArray: '3',
-                fillOpacity: 0.4
-            };
-        }
-
-        function onEachFeature(feature, layer) {
-            layer.bindTooltip(
-                "Value: " + feature.properties[column] / feature.properties["total_pop"],
-                { permanent: false, direction: 'center', className: 'myCSSClass' }
-            );
-            layer.on({
-                mouseover: function (e) {
-                    this.openTooltip();
-                },
-                mouseout: function (e) {
-                    this.closeTooltip();
-                }
-            });
-        }
-
-        L.geoJSON(geojson, { style: style, onEachFeature: onEachFeature }).addTo(map);
-
-    });
-
+    const dropdownItems = document.querySelectorAll(".dropdown-item");
+    const dropdownButton = document.querySelector(".dropdown-toggle");
 
 </script>
+
 
 </html>
