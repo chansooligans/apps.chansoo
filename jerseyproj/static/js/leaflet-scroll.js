@@ -48,7 +48,7 @@ function init() {
     // find the halfway point of the initial viewport height
     // (it changes on mobile, but by just using the initial value
     // you remove jumpiness on scroll direction change)
-    var midpoint = Math.floor(window.innerHeight * 0.5) + "px";
+    var midpoint = Math.floor(window.innerHeight * 0.1) + "px";
     // 1. setup the scroller with the bare-bones options
     // 		this will also initialize trigger observations
     // 2. bind scrollama event handlers (this can be chained like below)
