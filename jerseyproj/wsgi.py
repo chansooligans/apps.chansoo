@@ -15,5 +15,6 @@ sys.path.append('/home/bitnami/projects/jerseystuff')
 sys.path.append('/home/bitnami/projects/jerseystuff/jerseyproj')
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'jerseyproj.settings')
+os.environ.setdefault('devmode', 'prod')
 
 application = get_wsgi_application()

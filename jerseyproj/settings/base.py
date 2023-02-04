@@ -14,9 +14,10 @@ import os
 from pathlib import Path
 import yaml
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 HOME_DIR = Path.home()
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = BASE_DIR.joinpath("templates")
 STATIC_DIR = BASE_DIR.joinpath("static")
 
@@ -25,13 +26,8 @@ STATIC_DIR = BASE_DIR.joinpath("static")
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-with open(Path(__file__).resolve().parent.parent.joinpath("secrets.yaml"), "r") as file:
+with open(Path(__file__).resolve().parent.parent.parent.joinpath("secrets.yaml"), "r") as file:
     SECRET_KEY = yaml.load(file, Loader=yaml.FullLoader)["DJANGO_SECRET"]
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -124,8 +120,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-if not DEBUG:
-    STATIC_ROOT = HOME_DIR.joinpath("var/jerseystuff/static/")
 
 STATICFILES_DIRS = [
     BASE_DIR.joinpath("static"),
