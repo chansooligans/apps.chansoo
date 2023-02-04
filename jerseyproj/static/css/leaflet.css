@@ -16,6 +16,7 @@ body {
 
 #map {
     height: 600px;
+    width: 90%;
 }
 
 .site-header {
@@ -55,6 +56,10 @@ body {
         align-items: center;
         font-size: 1rem;
         width: 100%;
+    }
+
+    .barplot {
+        width: 40%;
     }
 }
 
@@ -109,10 +114,4 @@ article {
     float: left;
     margin-right: 8px;
     opacity: 0.7;
-}
-
-/* barplot */
-
-.barplot {
-    height: 800px;
 }

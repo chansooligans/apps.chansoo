@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- d3 -->
-    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
 
     <!-- Scrollama -->
     <script src="https://unpkg.com/scrollama"></script>
@@ -34,6 +34,7 @@
     <!-- js leaflet -->
     <script type="module" src="{% static 'js/leaflet.js' %}"></script>
     <script type="module" src="{% static 'js/leaflet-scroll.js' %}"></script>
+    <script type="module" src="{% static 'js/leaflet-barplot.js' %}"></script>
 
     <!-- Fonts -->
     <link
@@ -93,9 +94,7 @@
                     <div class="container description">
                         inputs
                     </div>
-                    <div class="mx-auto text-center">
-                        <img src="{% static 'images/barplot.png' %}" alt="" class="barplot">
-                    </div>
+                    <div id="my_dataviz" class="barplot"></div>
                 </div>
 
                 <div class="step" data-step="1" value="pob_foreign_born" map="/static/geojson/merged_tracts.geojson">
@@ -142,7 +141,7 @@
                 </div>
             </article>
             <figure>
-                <div id="map"></div>
+                <div id="map" class="mx-auto"></div>
             </figure>
         </section>
         <section id="outro"></section>

@@ -1,0 +1,33 @@
+feature,red=north
+"occu_Management, business, science, and arts occupations:",-2.7742963776704173
+"occu_Production, transportation, and material moving occupations:",-1.750913770095571
+asian_pop,-1.3438606817718237
+wawa_id,-0.9772060384992023
+"occu_Natural resources, construction, and maintenance occupations:",-0.8752672974538371
+occu_Service occupations:,-0.6912137629903593
+edu_less_than_hs,-0.6265468130235123
+income_150k+,-0.5039369878098904
+occu_Sales and office occupations:,-0.4896129623109807
+income_100k_to_$150k,-0.3909785540162697
+lang_only_english,-0.1419102195810998
+occu_Public administration,-0.11501674766936856
+income_150k_to_$200k,-0.10190618467810905
+edu_total,0.07066183336945495
+"occu_Agriculture, forestry, fishing and hunting, and mining",0.10093744763398262
+occu_Wholesale trade,0.10257979342070578
+income_200k_to_more,0.15251881819052432
+black_pop,0.16291891932575442
+dunkin_id,0.34873221104817287
+edu_hs_degree,0.46754526292695237
+edu_grad_degree,0.5358578526932818
+"occu_Other services, except public administration",0.5791482051798237
+occu_Retail trade,0.5817053073968378
+"occu_Finance and insurance, and real estate, and rental and leasing",0.6544793799887483
+"occu_Educational services, and health care and social assistance",0.7352564579042296
+occu_Information,0.7632398088020729
+edu_college,0.8915198763500661
+occu_Construction,0.9153470697805484
+occu_Manufacturing,0.9738717146004178
+"occu_Professional, scientific, and management, and administrative, and waste management services",1.038837149970026
+"occu_Transportation and warehousing, and utilities",1.225045335914233
+pob_foreign_born,3.6654067615571067

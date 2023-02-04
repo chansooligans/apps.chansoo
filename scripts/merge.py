@@ -30,7 +30,7 @@ df_county.fillna(0).to_file("../jerseyproj/static/geojson/merged_counties.geojso
 
 # %% [markdown]
 """
-# PCA
+# Predictions
 """
 
 # %%
@@ -109,15 +109,7 @@ df_features = pd.DataFrame({
 })
 
 # %%
-import matplotlib.pylab as plt
-sns.set(rc={'figure.figsize':(10,15)})
-g = sns.barplot(
-    y="feature",x="red=north",data=df_features.sort_values("red=north"),
-    orient="h",
-    palette="vlag"
-)
-plt.xticks(rotation=90)
-g.figure.savefig("../jerseyproj/static/images/barplot.png", bbox_inches='tight') 
+df_features.sort_values("red=north").to_csv("../jerseyproj/static/csv/summary.csv", index=False)
 
 # %%
 df_tracts_percents["loc"] = y_test[:,1]
