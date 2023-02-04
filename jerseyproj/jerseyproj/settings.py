@@ -22,7 +22,7 @@ STATIC_DIR = BASE_DIR.joinpath("static")
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-with open("../../secrets.yaml", "r") as file:
+with open("../secrets.yaml", "r") as file:
     SECRET_KEY = yaml.load(file, Loader=yaml.FullLoader)["DJANGO_SECRET"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
