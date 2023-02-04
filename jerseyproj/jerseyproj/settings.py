@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import yaml
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +22,8 @@ STATIC_DIR = BASE_DIR.joinpath("static")
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-w)=3aru!1_azyzaa31=hyu!r+%bwa^#%@&)8$u%5ok(4!2ny-m'
+with open("../../secrets.yaml", "r") as file:
+    SECRET_KEY = yaml.load(file, Loader=yaml.FullLoader)["DJANGO_SECRET"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

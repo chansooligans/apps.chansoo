@@ -39,8 +39,8 @@ class Foursquare(CensusCentroids):
     
     @cached_property
     def auth(self):
-        with open("../api.yaml", "r") as file:
-            return yaml.load(file, Loader=yaml.FullLoader)["authorization"]
+        with open("../secrets.yaml", "r") as file:
+            return yaml.load(file, Loader=yaml.FullLoader)["FOURSQUARE"]
         
     @property
     def headers(self):
