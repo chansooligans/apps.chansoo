@@ -1,17 +1,10 @@
-const carouselCells = document.querySelectorAll('.carousel-cell');
+var $carousel = $('.main-carousel');
 
-carouselCells.forEach(function (cell) {
-    cell.classList.append('testing')
-    cell.addEventListener('change', function () {
-        console.log(1)
-        if (cell.classList.contains('is-selected')) {
-            // run function when "is-selected" is added
-            console.log("added")
-            console.log(selectedCell)
-        } else {
-            // run function when "is-selected" is removed
-            console.log("removed")
-            console.log(selectedCell)
-        }
+$carousel.on('change.flickity', function (event, index) {
+    var steps = $(this).find('.step');
+    var stepsArray = [];
+    steps.each(function () {
+        stepsArray.push(this);
     });
+    console.log(stepsArray[index].getAttribute("value"))
 });
