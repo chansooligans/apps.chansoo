@@ -30,8 +30,7 @@ export const updateMap = function (column, geojson_url) {
         }
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            maxZoom: 19
         }).addTo(map);
 
         function style(feature) {
@@ -81,7 +80,7 @@ export const updateMap = function (column, geojson_url) {
 
         legend.onAdd = function (map) {
             var bucket_values = Object.values(buckets);
-            console.log(bucket_values)
+            // console.log(bucket_values)
             var div = L.DomUtil.create('div', 'info legend'),
                 grades = bucket_values,
                 labels = [];

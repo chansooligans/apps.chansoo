@@ -14,6 +14,10 @@ body {
     width: 100%;
 }
 
+.placeholder {
+    height: 600px;
+}
+
 #map {
     height: 600px;
     width: 90%;
@@ -32,6 +36,10 @@ body {
     font-family: "Oswald", sans-serif;
     font-size: 3rem;
     font-weight: 200;
+}
+
+.title-step {
+    padding: 20% 0;
 }
 
 .description {
@@ -63,6 +71,26 @@ body {
     }
 }
 
+/* CAROUSEL */
+.carousel-cell {
+    width: 90%;
+    height: 800px;
+    margin-right: 10px;
+    border-radius: 5px;
+    counter-increment: carousel-cell;
+}
+
+/* cell number */
+/* .carousel-cell:before {
+    display: block;
+    text-align: center;
+    content: counter(carousel-cell);
+    line-height: 200px;
+    font-size: 80px;
+    color: white;
+}
+ */
+
 /* SCROLLY */
 
 .subtitle {
@@ -84,7 +112,7 @@ article {
 }
 
 .step {
-    margin: auto;
+    margin: 50px 0 0 0;
 }
 
 /* map */
