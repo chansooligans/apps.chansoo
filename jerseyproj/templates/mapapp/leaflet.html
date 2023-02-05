@@ -17,41 +17,41 @@
         </div>
         <div class="main-carousel" data-flickity='{ "wrapAround": true }'>
             <div class="carousel-cell">
-                <div class="step" data-step="4" value="wawa_id" map="/static/geojson/merged_counties.geojson">
+                <div class="step" value="wawa_id" map="/static/geojson/merged_counties.geojson">
                     <p class="subtitle">WAWAs</p>
                     <div class="container description">
                         Per 100,000 residents
                     </div>
-                    <div class="map-container-4"></div>
+                    <div class="map-container" value="wawa_id"></div>
                 </div>
             </div>
             <div class="carousel-cell">
-                <div class="step" data-step="5" value="giants_or_jets" map="/static/geojson/merged_counties.geojson">
+                <div class="step" value="giants_or_jets" map="/static/geojson/merged_counties.geojson">
                     <p class="subtitle">NFL: GIANTS/JETS FANS</p>
                     <div class="container description">
                         As a percentage of Giants, Jets, Eagles fans (NJ.com poll)
                     </div>
-                    <div class="map-container-5"></div>
+                    <div class="map-container" value="giants_or_jets"></div>
                 </div>
             </div>
             <div class="carousel-cell">
-                <div class="step" data-step="6" value="pork_roll" map="/static/geojson/merged_counties.geojson">
+                <div class="step" value="pork_roll" map="/static/geojson/merged_counties.geojson">
                     <p class="subtitle">PORK ROLL</p>
                     <div class="container description">
                         Percentage of people who say Por Roll instead of Taylor Ham (NJ.com poll)
                     </div>
-                    <div class="map-container-6"></div>
+                    <div class="map-container" value="pork_roll"></div>
                 </div>
             </div>
         </div>
 
-        <div class="step" data-step="8" value="loc" map="/static/geojson/merged_tracts.geojson">
+        <div class="step"  map="/static/geojson/merged_tracts.geojson">
             <p class="subtitle">Prediction</p>
             <div class="container description">
                 prediction
             </div>
             <div class="placeholder"></div>
-            <div class="map-container-8"></div>
+            <div class="map-container"></div>
         </div>
 
         <div class="container">
@@ -61,57 +61,78 @@
             </div>
             <div id="my_dataviz" class="barplot"></div>
         </div>
+        
+        <div class="main-carousel-demographics" data-flickity='{ "wrapAround": true }'>
+            <div class="carousel-cell">
+                <div class="step" value="pob_foreign_born" map="/static/geojson/merged_tracts.geojson">
+                    <p class="subtitle">FOREIGN BORN POPULATION</p>
+                    <div class="container description">
+                        Percentage of the population that was born outside of the United States.
+                    </div>
+                    <div class="placeholder"></div>
+                    <div class="map-container" value="pob_foreign_born"></div>
+                </div>
+            </div>
+            <div class="carousel-cell">
+                <div class="step" value="asian_pop" map="/static/geojson/merged_tracts.geojson">
+                    <p class="subtitle">ASIAN POPULATION</p>
+                    <div class="container description">
+                        Percentage of the population that is Asian.
+                    </div>
+                    <div class="placeholder"></div>
+                    <div class="map-container" value="asian_pop"></div>
+                </div>
+            </div>
+            <div class="carousel-cell">
+                <div class="step" value="edu_college" map="/static/geojson/merged_tracts.geojson">
+                    <p class="subtitle">COLLEGE EDUCATED</p>
+                    <div class="container description">
+                        Percentage of the population with college degrees.
+                    </div>
+                    <div class="placeholder"></div>
+                    <div class="map-container" value="edu_college"></div>
+                </div>
+            </div>
+        </div>
 
-        <div class="step" data-step="1" value="pob_foreign_born" map="/static/geojson/merged_tracts.geojson">
-            <p class="subtitle">FOREIGN BORN POPULATION</p>
-            <div class="container description">
-                Percentage of the population that was born outside of the United States.
+        <div class="main-carousel-occupations" data-flickity='{ "wrapAround": true }'>
+            
+            <div class="carousel-cell">
+                <div class="step" value='occu_Management, business, science, and arts occupations:'
+                    map="/static/geojson/merged_tracts.geojson">
+                    <p class="subtitle">Management, Business, Science</p>
+                    <div class="container description">
+                        Percentage of the population that works in Management, Business, Science
+                    </div>
+                    <div class="placeholder"></div>
+                    <div class="map-container" value="occu_Management, business, science, and arts occupations:"></div>
+                </div>
             </div>
-            <div class="placeholder"></div>
-            <div class="map-container-1"></div>
-        </div>
-        <div class="step" data-step="2" value="asian_pop" map="/static/geojson/merged_tracts.geojson">
-            <p class="subtitle">ASIAN POPULATION</p>
-            <div class="container description">
-                Percentage of the population that is Asian.
+
+            <div class="carousel-cell">
+                <div class="step" value='occu_Production, transportation, and material moving occupations:'
+                    map="/static/geojson/merged_tracts.geojson">
+                    <p class="subtitle">Production, Transportation, Material Moving</p>
+                    <div class="container description">
+                        Percentage of the population that works in Production, Transportation, Material Moving
+                    </div>
+                    <div class="placeholder"></div>
+                    <div class="map-container" value="occu_Production, transportation, and material moving occupations:"></div>
+                </div>
             </div>
-            <div class="placeholder"></div>
-            <div class="map-container-2"></div>
-        </div>
-        <div class="step" data-step="3" value="edu_college" map="/static/geojson/merged_tracts.geojson">
-            <p class="subtitle">COLLEGE EDUCATED</p>
-            <div class="container description">
-                Percentage of the population with college degrees.
+
+            <div class="carousel-cell">
+                <div class="step" value='occu_Transportation and warehousing, and utilities'
+                    map="/static/geojson/merged_tracts.geojson">
+                    <p class="subtitle">Transportation, Warehousing, Utilities</p>
+                    <div class="container description">
+                        Percentage of the population that works in Transportation, Warehousing, Utilities
+                    </div>
+                    <div class="placeholder"></div>
+                    <div class="map-container" value="occu_Transportation and warehousing, and utilities"></div>
+                </div>
             </div>
-            <div class="placeholder"></div>
-            <div class="map-container-3"></div>
-        </div>
-        <div class="step" data-step="7" value='occu_Management, business, science, and arts occupations:'
-            map="/static/geojson/merged_tracts.geojson">
-            <p class="subtitle">Management, Business, Science</p>
-            <div class="container description">
-                Percentage of the population that works in Management, Business, Science
-            </div>
-            <div class="placeholder"></div>
-            <div class="map-container-7"></div>
-        </div>
-        <div class="step" data-step="9" value='occu_Production, transportation, and material moving occupations:'
-            map="/static/geojson/merged_tracts.geojson">
-            <p class="subtitle">Production, Transportation, Material Moving</p>
-            <div class="container description">
-                Percentage of the population that works in Production, Transportation, Material Moving
-            </div>
-            <div class="placeholder"></div>
-            <div class="map-container-9"></div>
-        </div>
-        <div class="step" data-step="10" value='occu_Transportation and warehousing, and utilities'
-            map="/static/geojson/merged_tracts.geojson">
-            <p class="subtitle">Transportation, Warehousing, Utilities</p>
-            <div class="container description">
-                Percentage of the population that works in Transportation, Warehousing, Utilities
-            </div>
-            <div class="placeholder"></div>
-            <div class="map-container-10"></div>
+
         </div>
     </article>
     <figure>
@@ -122,6 +143,16 @@
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 <script>
+    var mapObject = document.querySelector("#map");
+    var mapContainers = {};
+    document.querySelectorAll(".step").forEach(function (step){
+        if (step.hasAttribute("value")){
+            var i = step.getAttribute('value')
+            console.log(i)
+            mapContainers[i] = document.querySelectorAll(`.map-container[value="${i}"]`)[0]
+        }
+    });
+
     var geojson_url = "/static/geojson/merged_counties.geojson";
 
     const dropdownItems = document.querySelectorAll(".dropdown-item");

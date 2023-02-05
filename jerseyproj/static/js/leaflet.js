@@ -8,8 +8,6 @@ var colors = [
     '#c2c2c2'
 ]
 var geojson;
-var values = [];
-var buckets = {};
 
 export const updateMap = function (column, geojson_url) {
     var percentile = 25;
@@ -17,6 +15,7 @@ export const updateMap = function (column, geojson_url) {
     var buckets = {}
 
     d3.json(geojson_url, function (error, data) {
+        console.log("updateMap")
         if (error) throw error;
 
         geojson = data;
