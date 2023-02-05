@@ -10,15 +10,13 @@ var step;
 // scrollama event handlers
 function handleStepEnter(response) {
     // response = { element, direction, index }
-    // console.log(response.element);
+    console.log("scrollama-enter");
     var step = $(response.element).find('.carousel-cell.is-selected').find('.step')[0]
     console.log(step)
     if (step.hasAttribute("value")) {
         mapContainers[step.getAttribute("value")].appendChild(mapObject);
         updateMap(step.getAttribute("value"), step.getAttribute("map"));
     }
-    // add to color to current step
-    step.classList.add("is-active");
 }
 
 function handleStepExit(response) {
@@ -26,7 +24,6 @@ function handleStepExit(response) {
     console.log("scrollama-exit")
     // remove color from current step
     clearMap();
-    step.classList.remove("is-active");
 }
 
 function init() {
