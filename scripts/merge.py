@@ -83,9 +83,6 @@ exclude = [
        'income_25k_to_$35k', 'income_35k_to_$50k', 'income_50k_to_$75k',
        'income_75k_to_$100k',  'edu_some_college',
     
-    'occu_Arts, entertainment, and recreation, and accommodation and food services',
-
-
     'occu_Estimate!!Total:',
 
 ]
