@@ -3,33 +3,30 @@ import { clearMap } from './leaflet.js';
 
 var scrolly = document.querySelector("#scrolly");
 var article = scrolly.querySelector("article");
-
 // initialize the scrollama
 var scroller = scrollama();
+var step;
 
 // scrollama event handlers
 function handleStepEnter(response) {
     // response = { element, direction, index }
     // console.log(response.element);
-    d3.select(response.element)
-        .select(".placeholder")
-        .style("display", "none")
-    if (response.element.hasAttribute("value")) {
-        mapContainers[response.element.getAttribute("value")].appendChild(mapObject);
-        updateMap(response.element.getAttribute("value"), response.element.getAttribute("map"));
+    var step = $(response.element).find('.carousel-cell.is-selected').find('.step')[0]
+    console.log(step)
+    if (step.hasAttribute("value")) {
+        mapContainers[step.getAttribute("value")].appendChild(mapObject);
+        updateMap(step.getAttribute("value"), step.getAttribute("map"));
     }
     // add to color to current step
-    response.element.classList.add("is-active");
+    step.classList.add("is-active");
 }
 
 function handleStepExit(response) {
     // response = { element, direction, index }
-    d3.select(response.element)
-        .select(".placeholder")
-        .style("display", "")
+    console.log("scrollama-exit")
     // remove color from current step
     clearMap();
-    response.element.classList.remove("is-active");
+    step.classList.remove("is-active");
 }
 
 function init() {
@@ -42,7 +39,7 @@ function init() {
     // 2. bind scrollama event handlers (this can be chained like below)
     scroller
         .setup({
-            step: "#scrolly article .step",
+            step: "#scrolly article .carousel",
             debug: false,
             offset: midpoint
         })

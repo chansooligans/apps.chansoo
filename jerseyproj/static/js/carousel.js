@@ -11,9 +11,8 @@ $carousel.on('change.flickity', function (event, index) {
     steps.each(function () {
         stepsArray.push(this);
     });
-    console.log(stepsArray[index].getAttribute("value"))
-    console.log(stepsArray[index].getAttribute("map"))
     mapContainers[stepsArray[index].getAttribute("value")].appendChild(mapObject);
+    console.log("carousel-update-map")
     clearMap();
     updateMap(stepsArray[index].getAttribute("value"), stepsArray[index].getAttribute("map"));
 });
@@ -28,26 +27,24 @@ $carousel_demographics.on('change.flickity', function (event, index) {
     steps.each(function () {
         stepsArray.push(this);
     });
-    console.log(stepsArray[index].getAttribute("value"))
-    console.log(stepsArray[index].getAttribute("map"))
     mapContainers[stepsArray[index].getAttribute("value")].appendChild(mapObject);
+    console.log("carousel-update-map")
     clearMap();
     updateMap(stepsArray[index].getAttribute("value"), stepsArray[index].getAttribute("map"));
 });
 
 // OCCUPATIONS
 
-var $carousel_demographics = $('.main-carousel-occupations');
+var $carousel_occupations = $('.main-carousel-occupations');
 
-$carousel_demographics.on('change.flickity', function (event, index) {
+$carousel_occupations.on('change.flickity', function (event, index) {
     var steps = $(this).find('.step');
     var stepsArray = [];
     steps.each(function () {
         stepsArray.push(this);
     });
-    console.log(stepsArray[index].getAttribute("value"))
-    console.log(stepsArray[index].getAttribute("map"))
     mapContainers[stepsArray[index].getAttribute("value")].appendChild(mapObject);
+    console.log("carousel-update-map")
     clearMap();
     updateMap(stepsArray[index].getAttribute("value"), stepsArray[index].getAttribute("map"));
 });

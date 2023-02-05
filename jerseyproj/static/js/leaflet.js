@@ -7,18 +7,28 @@ var colors = [
     '#0153A7',
     '#c2c2c2'
 ]
-var geojson;
+let geojson = {};
 
 export const updateMap = function (column, geojson_url) {
+    console.log("updateMap")
     var percentile = 25;
     var values = []
     var buckets = {}
 
-    d3.json(geojson_url, function (error, data) {
-        console.log("updateMap")
-        if (error) throw error;
+    if (geojson[geojson_url]) {
+        console.log("use cached data")
+        processData(geojson[geojson_url]);
+    } else {
+        d3.json(geojson_url, function (error, data) {
+            console.log("load data")
+            if (error) throw error;
 
-        geojson = data;
+            geojson[geojson_url] = data;
+            processData(geojson[geojson_url]);
+        });
+    }
+
+    function processData(geojson) {
         geojson.features.forEach(feature => {
             values.push(parseFloat(feature.properties[column]));
         });
@@ -95,7 +105,7 @@ export const updateMap = function (column, geojson_url) {
         };
 
         legend.addTo(map);
-    });
+    };
 }
 
 export const clearMap = function () {
@@ -104,4 +114,3 @@ export const clearMap = function () {
     });
     map.removeControl(legend);
 }
-

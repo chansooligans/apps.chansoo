@@ -15,7 +15,7 @@
                 perspiciatis accusamus eum, in nostrum, neque incidunt qui?
             </div>
         </div>
-        <div class="main-carousel" data-flickity='{ "wrapAround": true }'>
+        <div class="carousel main-carousel" data-flickity='{ "wrapAround": true }'>
             <div class="carousel-cell">
                 <div class="step" value="wawa_id" map="/static/geojson/merged_counties.geojson">
                     <p class="subtitle">WAWAs</p>
@@ -45,13 +45,16 @@
             </div>
         </div>
 
-        <div class="step"  map="/static/geojson/merged_tracts.geojson">
-            <p class="subtitle">Prediction</p>
-            <div class="container description">
-                prediction
+        <div class="carousel main-carousel-prediction-solo" data-flickity='{ "wrapAround": true }'>
+            <div class="carousel-cell">
+                <div class="step" value="loc" map="/static/geojson/merged_tracts.geojson">
+                    <p class="subtitle">Prediction</p>
+                    <div class="container description">
+                        prediction
+                    </div>
+                    <div class="map-container" value="loc"></div>
+                </div>
             </div>
-            <div class="placeholder"></div>
-            <div class="map-container"></div>
         </div>
 
         <div class="container">
@@ -62,14 +65,13 @@
             <div id="my_dataviz" class="barplot"></div>
         </div>
         
-        <div class="main-carousel-demographics" data-flickity='{ "wrapAround": true }'>
+        <div class="carousel main-carousel-demographics" data-flickity='{ "wrapAround": true }'>
             <div class="carousel-cell">
                 <div class="step" value="pob_foreign_born" map="/static/geojson/merged_tracts.geojson">
                     <p class="subtitle">FOREIGN BORN POPULATION</p>
                     <div class="container description">
                         Percentage of the population that was born outside of the United States.
                     </div>
-                    <div class="placeholder"></div>
                     <div class="map-container" value="pob_foreign_born"></div>
                 </div>
             </div>
@@ -79,7 +81,6 @@
                     <div class="container description">
                         Percentage of the population that is Asian.
                     </div>
-                    <div class="placeholder"></div>
                     <div class="map-container" value="asian_pop"></div>
                 </div>
             </div>
@@ -89,7 +90,6 @@
                     <div class="container description">
                         Percentage of the population with college degrees.
                     </div>
-                    <div class="placeholder"></div>
                     <div class="map-container" value="edu_college"></div>
                 </div>
             </div>
@@ -104,7 +104,6 @@
                     <div class="container description">
                         Percentage of the population that works in Management, Business, Science
                     </div>
-                    <div class="placeholder"></div>
                     <div class="map-container" value="occu_Management, business, science, and arts occupations:"></div>
                 </div>
             </div>
@@ -116,7 +115,6 @@
                     <div class="container description">
                         Percentage of the population that works in Production, Transportation, Material Moving
                     </div>
-                    <div class="placeholder"></div>
                     <div class="map-container" value="occu_Production, transportation, and material moving occupations:"></div>
                 </div>
             </div>
@@ -128,7 +126,6 @@
                     <div class="container description">
                         Percentage of the population that works in Transportation, Warehousing, Utilities
                     </div>
-                    <div class="placeholder"></div>
                     <div class="map-container" value="occu_Transportation and warehousing, and utilities"></div>
                 </div>
             </div>
@@ -148,7 +145,6 @@
     document.querySelectorAll(".step").forEach(function (step){
         if (step.hasAttribute("value")){
             var i = step.getAttribute('value')
-            console.log(i)
             mapContainers[i] = document.querySelectorAll(`.map-container[value="${i}"]`)[0]
         }
     });
