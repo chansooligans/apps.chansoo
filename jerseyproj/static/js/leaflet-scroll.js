@@ -11,19 +11,13 @@ var step;
 function handleStepEnter(response) {
     // response = { element, direction, index }
     console.log("scrollama-enter");
+    clearMap();
     var step = $(response.element).find('.carousel-cell.is-selected').find('.step')[0]
     console.log(step)
     if (step.hasAttribute("value")) {
         mapContainers[step.getAttribute("value")].appendChild(mapObject);
         updateMap(step.getAttribute("value"), step.getAttribute("map"));
     }
-}
-
-function handleStepExit(response) {
-    // response = { element, direction, index }
-    console.log("scrollama-exit")
-    // remove color from current step
-    clearMap();
 }
 
 function init() {
@@ -40,8 +34,7 @@ function init() {
             debug: false,
             offset: midpoint
         })
-        .onStepEnter(handleStepEnter)
-        .onStepExit(handleStepExit);
+        .onStepEnter(handleStepEnter);
 }
 
 // kick things off
