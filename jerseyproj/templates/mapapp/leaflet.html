@@ -26,6 +26,15 @@
                 </div>
             </div>
             <div class="carousel-cell">
+                <div class="step" value="dunkin_id" map="/static/geojson/merged_counties.geojson">
+                    <p class="subtitle">Dunkins</p>
+                    <div class="container description">
+                        Per 100,000 residents
+                    </div>
+                    <div class="map-container" value="dunkin_id"></div>
+                </div>
+            </div>
+            <div class="carousel-cell">
                 <div class="step" value="giants_or_jets" map="/static/geojson/merged_counties.geojson">
                     <p class="subtitle">NFL: GIANTS/JETS FANS</p>
                     <div class="container description">
@@ -126,35 +135,46 @@
         <div class="carousel main-carousel-occupations" data-flickity='{ "wrapAround": true, "draggable": false }'>
             
             <div class="carousel-cell">
-                <div class="step" value='occu_management, business'
+                <div class="step" value='occu_Manufacturing'
                     map="/static/geojson/merged_tracts.geojson">
-                    <p class="subtitle">Management, Business, Science</p>
+                    <p class="subtitle">Manufacturing</p>
                     <div class="container description">
-                        Percentage of the population that works in Management, Business, Science
+                        Percentage of the population that works in Manufacturing
                     </div>
-                    <div class="map-container" value="occu_management, business"></div>
+                    <div class="map-container" value="occu_Manufacturing"></div>
+                </div>
+        </div>
+
+            <div class="carousel-cell">
+                <div class="step" value='occu_educational/healthcare/social'
+                    map="/static/geojson/merged_tracts.geojson">
+                    <p class="subtitle">Health Care and Social Assistance, Educational Services</p>
+                    <div class="container description">
+                        Percentage of the population that works in Health Care and Social Assistance, Educational Services
+                    </div>
+                    <div class="map-container" value="occu_educational/healthcare/social"></div>
                 </div>
             </div>
 
             <div class="carousel-cell">
-                <div class="step" value='occu_production/transport/materials'
+                <div class="step" value='occu_Wholesale trade'
                     map="/static/geojson/merged_tracts.geojson">
-                    <p class="subtitle">Production, Transportation, Material Moving</p>
+                    <p class="subtitle">Wholesale Trade</p>
                     <div class="container description">
-                        Percentage of the population that works in Production, Transportation, Material Moving
+                        Percentage of the population that works in Wholesale Trade
                     </div>
-                    <div class="map-container" value="occu_production/transport/materials"></div>
+                    <div class="map-container" value="occu_Wholesale trade"></div>
                 </div>
             </div>
 
             <div class="carousel-cell">
-                <div class="step" value='occu_transport/warehouse/utils'
+                <div class="step" value='occu_Service occupations:'
                     map="/static/geojson/merged_tracts.geojson">
-                    <p class="subtitle">Transportation, Warehousing, Utilities</p>
+                    <p class="subtitle">Service</p>
                     <div class="container description">
-                        Percentage of the population that works in Transportation, Warehousing, Utilities
+                        Percentage of the population that works in Service
                     </div>
-                    <div class="map-container" value="occu_transport/warehouse/utils"></div>
+                    <div class="map-container" value="occu_Service occupations:"></div>
                 </div>
             </div>
 

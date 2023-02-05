@@ -10,15 +10,19 @@ from centraljersey.load import (
 from centraljersey import merge
 import numpy as np
 import pandas as pd
+from sklearn.model_selection import cross_val_predict, cross_val_score
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
 import seaborn as sns
 
 # %%
 merger = merge.Merge()
+df_county = merger.df_counties
+df_tracts = merger.df_tracts
+
 
 # %%
-df_county = merger.df_counties
 
 # %% [markdown]
 """
@@ -26,14 +30,7 @@ df_county = merger.df_counties
 """
 
 # %%
-
-
-for col in ["wawa_id", "dunkin_id"]:
-    df_county[col] = (df_county[col] / df_county["total_pop"])* 100_000
-
-df_county["giants_or_jets"] = df_county[["nfl_giants","nfl_jets"]].sum(axis=1) / df_county[["nfl_giants","nfl_jets","nfl_eagles"]].sum(axis=1)
-df_county["pork_roll"] = df_county["pork_pork_roll"] / df_county[["pork_pork_roll","pork_taylor_ham"]].sum(axis=1)
-df_county.fillna(0).to_file("../jerseyproj/static/geojson/merged_counties.geojson", driver='GeoJSON')
+# df_county.fillna(0).to_file("../jerseyproj/static/geojson/merged_counties.geojson", driver='GeoJSON')
 
 # %% [markdown]
 """
@@ -41,88 +38,75 @@ df_county.fillna(0).to_file("../jerseyproj/static/geojson/merged_counties.geojso
 """
 
 # %%
-df_tracts_percents = merger.df_tracts_percents
-df_tracts = merger.df_tracts
+df_tracts = df_tracts.merge(
+    df_county[[
+        "COUNTYFP",'dunkin_id','wawa_id','giants_or_jets','pork_roll','calm-no-l', 
+        'almond-no-l', 'forward-no-r', 'drawer', 'gone-don'
+    ]],
+    how="left",
+)
 
-NORTHJERSEY = [
-    "Bergen",
-    "Union",
-    "Essex",
-    "Hudson",
-    "Morris",
-    "Passaic",
-    "Sussex",
-    "Warren",
+INCLUDE = [
+    'dunkin_id','wawa_id','giants_or_jets','pork_roll','calm-no-l', 
+    'almond-no-l', 'forward-no-r', 'drawer', 'gone-don',
+
+    'occu_Agricul/fish/mining/forest',
+    'occu_Construction', 'occu_Manufacturing', 'occu_Wholesale trade',
+    'occu_Retail trade', 'occu_transport/warehouse/utils',
+    'occu_Information', 'occu_finance/insurance/realestate',
+    'occu_administrative', 'occu_educational/healthcare/social',
+    'occu_arts/entertainment/foodservices', 'occu_public administration',
+    'occu_management, business', 'occu_Service occupations:',
+    'occu_Sales and office occupations:',
+    'occu_Natural resources, construction',
+    'occu_production/transport/materials',
+
+    'income_150k+', "pob_foreign_born", "edu_college"
 ]
 
-SOUTHJERSEY = [
-    "Atlantic",
-    "Burlington",
-    "Camden",
-    "Cape May",
-    "Cumberland",
-    "Gloucester",
-    "Salem",
-]
-
-df_tracts["loc"] = None
-df_tracts.loc[df_tracts["county_name"].isin(NORTHJERSEY),"loc"] = "1"
-df_tracts.loc[df_tracts["county_name"].isin(SOUTHJERSEY),"loc"] = "0"
-
-
-# %%
-exclude = [
-    'STATEFP', 'COUNTYFP', 'TRACTCE', 'GEOID', 'NAME', 'NAMELSAD', 'MTFCC',
-    'FUNCSTAT', 'ALAND', 'AWATER', 'INTPTLAT', 'INTPTLON', 'geometry',
-    'county_name','tract_name', 'tract', 'county', 'dunkin_county', 'dunkin_tract',
-    'wawa_county','wawa_tract', 'loc',
-
-    'total_pop',"white_pop","pob_total",'native_pop','pob_native','pob_native_jeresy',
-
-    'income_total','income_less_10k', 'income_10k_to_$15k', 'income_15k_to_$25k',
-       'income_25k_to_$35k', 'income_35k_to_$50k', 'income_50k_to_$75k',
-       'income_75k_to_$100k',  'edu_some_college',
-    
-    'occu_Estimate!!Total:',
-
-]
 X = df_tracts.loc[
     df_tracts["loc"].notnull(),
-    [x for x in df_tracts.columns if x not in exclude]
+    INCLUDE
 ].fillna(0)
 features = X.columns
 y = df_tracts.loc[df_tracts["loc"].notnull(),"loc"]
-
-
-X_test = df_tracts[[x for x in df_tracts.columns if x not in exclude]].fillna(0)
-
-sc = StandardScaler()
-X = sc.fit_transform(X)
-X_test = sc.fit_transform(X_test)
+X_test = df_tracts[INCLUDE].fillna(0)
 
 # %%
-from sklearn.linear_model import LogisticRegression
+sc = StandardScaler()
+X = sc.fit_transform(X)
+X_test = sc.transform(X_test)
+
 m = LogisticRegression(random_state=0)
 clf = m.fit(X, y)
 
-y_test = clf.predict_proba(X_test)
+# Use cross_val_predict to perform cross-validation
+y_pred = cross_val_predict(clf, X, y, cv=5)
+
+# Use cross_val_score to calculate cross-validated performance scores
+scores = cross_val_score(clf, X, y, cv=5)
+print("Cross-validated scores:", scores)
 
 df_features = pd.DataFrame({
     "feature":features,
-    "red=north":np.std(X_test, 0)*m.coef_[0]
+    "blue=north":m.coef_[0]
 })
 
-# %%
-df_features.sort_values("red=north").to_csv("../jerseyproj/static/csv/summary.csv", index=False)
+y_test = clf.predict_proba(X_test)
 
 # %%
-df_tracts_percents["loc"] = y_test[:,1]
+df_features.sort_values("blue=north").to_csv("../jerseyproj/static/csv/summary.csv", index=False)
+
+# %%
+df_tracts["loc"] = y_test[:,1]
 
 # %% [markdown]
 """
 # Export
 """
 # %%
-df_tracts_percents.fillna(0).to_file("../jerseyproj/static/geojson/merged_tracts.geojson", driver='GeoJSON')
+df_tracts.fillna(0).to_file("../jerseyproj/static/geojson/merged_tracts.geojson", driver='GeoJSON')
+
+
 
 # %%

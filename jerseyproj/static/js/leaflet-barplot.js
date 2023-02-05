@@ -2,11 +2,11 @@ var widthMultiplier;
 if (window.innerWidth < 500) {
     widthMultiplier = 0.9;
 } else {
-    widthMultiplier = 0.5;
+    widthMultiplier = 0.6;
 }
 
 // set the dimensions and margins of the graph
-var margin = { top: 20, right: 30, bottom: 40, left: 120 },
+var margin = { top: 20, right: 30, bottom: 40, left: 200 },
     width = window.innerWidth * widthMultiplier - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
@@ -23,10 +23,26 @@ var svg = d3.select("#my_dataviz")
 // Parse the Data
 d3.csv("/static/csv/summary.csv", function (data) {
 
+    var maxValue = d3.max(data, function (d) {
+        return Math.abs(d["blue-north"]);
+    });
+
     // Add X axis
     var x = d3.scaleLinear()
-        .domain([-3, 4])
+        .domain([-3, 3])
         .range([0, width]);
+
+    var colorScale = d3.scaleLinear()
+        .domain([
+            -1,
+            0,
+            1,
+        ])
+        .range([
+            "#F13D16",
+            "#ffffff",
+            "#0153A7"
+        ]);
 
     svg.append("g")
         .attr("transform", "translate(0," + height + ")")
@@ -48,18 +64,11 @@ d3.csv("/static/csv/summary.csv", function (data) {
         .data(data)
         .enter()
         .append("rect")
-        .attr("x", function (d) { return d["red=north"] >= 0 ? x(0) : x(d["red=north"]); })
+        .attr("x", function (d) { return d["blue=north"] >= 0 ? x(0) : x(d["blue=north"]); })
         .attr("y", function (d) { return y(d["feature"]); })
-        .attr("width", function (d) { return x(Math.abs(d["red=north"])) - x(0); })
+        .attr("width", function (d) { return x(Math.abs(d["blue=north"])) - x(0); })
         .attr("height", y.bandwidth())
-        .attr("fill", "#69b3a2")
-
-
-    // .attr("x", function(d) { return x(d.Country); })
-    // .attr("y", function(d) { return y(d.Value); })
-    // .attr("width", x.bandwidth())
-    // .attr("height", function(d) { return height - y(d.Value); })
-    // .attr("fill", "#69b3a2")
+        .attr("fill", function (d) { return colorScale(d["blue=north"]) })
 
 })
 

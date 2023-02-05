@@ -1,33 +1,30 @@
-feature,red=north
-occu_arts/entertainment/foodservices,-1.4448711344214102
-asian_pop,-1.3846085047487748
-wawa_id,-0.9940894104742145
-occu_public administration,-0.7187402418483484
-edu_less_than_hs,-0.6434409705781925
-occu_educational/healthcare/social,-0.5936179861041109
-income_150k+,-0.4919304667879264
-income_100k_to_$150k,-0.38632220359532055
-occu_production/transport/materials,-0.345222435985825
-occu_finance/insurance/realestate,-0.33922661686105476
-occu_Wholesale trade,-0.33779595034707
-occu_Retail trade,-0.22146544705972337
-occu_Agricul/fish/mining/forest,-0.14861716041789155
-income_150k_to_$200k,-0.0917530268464445
-lang_only_english,-0.05113528374391616
-edu_total,-0.027497595837879238
-"occu_Natural resources, construction",0.0016069861263291508
-occu_administrative,0.022828444205204947
-"occu_management, business",0.03082983318855738
-black_pop,0.059104674897302804
-occu_Construction,0.15715629808157078
-income_200k_to_more,0.18234678916091612
-occu_Manufacturing,0.1960578890771239
-dunkin_id,0.3683944281851561
-occu_Information,0.40786644225349883
-occu_transport/warehouse/utils,0.412002705537805
-edu_hs_degree,0.46630819564318693
-occu_Sales and office occupations:,0.5594065896465128
-edu_grad_degree,0.597925239210657
-edu_college,1.0769075580458
-occu_Service occupations:,1.2028807653652225
-pob_foreign_born,3.917281403800564
+feature,blue=north
+pork_roll,-2.357768817092941
+wawa_id,-1.6499792755521354
+drawer,-0.7748934489708444
+occu_educational/healthcare/social,-0.2885413916942051
+dunkin_id,-0.2880019815166231
+occu_Wholesale trade,-0.2534110483504235
+calm-no-l,-0.20251771346058048
+occu_transport/warehouse/utils,-0.15254548801080023
+occu_production/transport/materials,-0.13335933467799974
+almond-no-l,-0.08469113797535735
+occu_public administration,-0.0783389756973594
+occu_finance/insurance/realestate,-0.05276640863799019
+occu_Agricul/fish/mining/forest,-0.04190654163724701
+occu_arts/entertainment/foodservices,-0.019555295828361637
+"occu_management, business",-0.006958857271028864
+income_150k+,0.006956187619321517
+"occu_Natural resources, construction",0.012108071408534246
+occu_Retail trade,0.07675571971031221
+occu_Sales and office occupations:,0.09162681070515218
+occu_Construction,0.10664805640719989
+occu_Information,0.14742298820709818
+occu_administrative,0.15755618786321704
+occu_Service occupations:,0.17600132151866418
+edu_college,0.2386823207874747
+pob_foreign_born,0.27894040309880885
+occu_Manufacturing,0.29556133915075394
+forward-no-r,0.5358426332783645
+gone-don,0.8249978027792323
+giants_or_jets,1.5123420363786266

@@ -17,7 +17,15 @@ var reverseColors = [
 var reverseColumns = [
     "wawa_id",
     "pork_roll",
-    "drawer"
+    "drawer",
+    "occu_Service occupations:"
+]
+var predcolors = [
+    '#F13D16',
+    '#ebd58d',
+    '#b9f0ea',
+    '#0153A7',
+    '#c2c2c2'
 ]
 let geojson = {};
 
@@ -47,7 +55,12 @@ export const updateMap = function (column, geojson_url) {
         const sortedValues = values.sort(function (a, b) { return a - b });
         for (let i = 0; i <= 100; i += percentile) {
             const index = Math.floor((sortedValues.length - 1) * i / 100);
-            buckets[i + "%"] = Math.round(sortedValues[index] * 100) / 100;
+
+            if (column != "loc") {
+                buckets[i + "%"] = Math.round(sortedValues[index] * 10000) / 10000;
+            } else {
+                buckets[i + "%"] = i / 100;
+            }
         }
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -57,7 +70,12 @@ export const updateMap = function (column, geojson_url) {
         function style(feature) {
             var value = feature.properties[column];
 
-            var tempcolors = (reverseColumns.includes(column)) ? reverseColors : colors;
+            if (column != "loc") {
+                var tempcolors = (reverseColumns.includes(column)) ? reverseColors : colors;
+            } else {
+                var tempcolors = predcolors;
+            }
+
 
             // Define the fill color based on the value
             var fillColor;
@@ -104,15 +122,14 @@ export const updateMap = function (column, geojson_url) {
             var bucket_values = Object.values(buckets);
             // console.log(bucket_values)
             var div = L.DomUtil.create('div', 'info legend'),
-                grades = bucket_values,
                 labels = [];
 
             var tempcolors = (reverseColumns.includes(column)) ? reverseColors : colors;
             // loop through our density intervals and generate a label with a colored square for each interval
-            for (var i = 0; i < grades.length; i++) {
+            for (var i = 0; i < bucket_values.length; i++) {
                 div.innerHTML +=
                     '<i style="background:' + tempcolors[i] + '"></i> ' +
-                    grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+                    bucket_values[i] + (bucket_values[i + 1] ? '&ndash;' + bucket_values[i + 1] + '<br>' : '+');
             }
 
             return div;
