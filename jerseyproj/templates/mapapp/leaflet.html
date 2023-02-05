@@ -9,7 +9,7 @@
             <div class="container site-header">
                 <h1 id="title">Is Central Jersey Real?</h1>
             </div>
-            <div class="container description">
+            <div class="container narrative">
                 For many years, the question of the existence of a "Central Jersey" 
                 has been a subject of much contention among Garden State residents. 
                 And as a non-native New Jerseyan who's never eaten "pork roll" 
@@ -17,13 +17,15 @@
                 this debate -- but I can certainly share some data.
                 <br><br>
                 The analysis below uses data on dialects, demographics, 
-                occupations, income, education, and NFL-allegiances and 
-                a statistical model to try identifying a third, central region. 
-                While in my research I haven't come across a clear and distinct 
-                cultural identify that defines a Central Jersey, is the boundary 
-                between the North and South fuzzy enough and large enough that 
-                there could be a Jersey that is neither too New York nor 
-                too Philadelphia -- but perhaps .. just right?
+                occupations, income, education, and NFL-allegiances. Using 
+                a statistical model, I test for a third, central region. 
+                <br><br>
+                The question is not necessarily whether a clear and distinct 
+                cultural identity uniquely defines a Central Jersey. Rather, 
+                it may be better to ask whether the boundary between the North and South 
+                is fuzzy enough and large enough that there could be a Jersey 
+                that is neither too New York nor too Philadelphia -- but perhaps.. 
+                just right?
                 <br><br>
                 I'll start with some of the underlying data then show the 
                 model's predictions. A good place to kick off the debate would 
@@ -70,7 +72,7 @@
         </div>
         
         <div class="step narrative-step">
-            <div class="container description">
+            <div class="container narrative">
                 Next, we look at dialects... do you say "calm" with the "l" or 
                 "cahm"? Do you say "forward" with the "r" or is it "fohwud"?
                 Do you put clothes in a "draw" or a "drawer"?
@@ -129,7 +131,7 @@
         </div>
 
         <div class="step narrative-step">
-            <div class="container description">
+            <div class="container narrative">
                 And of course demographics: who are the people that live in these 
                 regions? Are they American? Are they Asian? Did they graduate 
                 college? 
@@ -176,7 +178,7 @@
         </div>
 
         <div class="step narrative-step">
-            <div class="container description">
+            <div class="container narrative">
                 What industry do they work in? There are 18 categories but I've 
                 plotted just 4 below:
             </div>
@@ -230,7 +232,7 @@
         </div>
 
         <div class="step narrative-step">
-            <div class="container description">
+            <div class="container narrative">
                 Using a simple logistic regression, I trained the model using the 
                 following as "NORTH Jersey": Bergen, Union, Essex, Hudson, 
                 Morris, Passaic, Sussex, and Warren. And used the following as 
@@ -255,7 +257,7 @@
         </div>
 
         <div class="step narrative-step">
-            <div class="container description">
+            <div class="container narrative">
                 The barplot below shows the features that were used in the model 
                 on the y-axis and coefficients on the x-axis. The red bars 
                 indicate variables that suggest a tract belongs to South Jersey 
