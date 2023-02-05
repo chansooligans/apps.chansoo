@@ -7,6 +7,18 @@ var colors = [
     '#0153A7',
     '#c2c2c2'
 ]
+var reverseColors = [
+    '#0153A7',
+    '#8BBDF0',
+    '#F09D8B',
+    '#F13D16',
+    '#c2c2c2'
+]
+var reverseColumns = [
+    "wawa_id",
+    "pork_roll",
+    "drawer"
+]
 let geojson = {};
 
 export const updateMap = function (column, geojson_url) {
@@ -45,19 +57,20 @@ export const updateMap = function (column, geojson_url) {
         function style(feature) {
             var value = feature.properties[column];
 
+            var tempcolors = (reverseColumns.includes(column)) ? reverseColors : colors;
 
             // Define the fill color based on the value
             var fillColor;
             if (value >= 0 && value < buckets['25%']) {
-                fillColor = colors[0];
+                fillColor = tempcolors[0];
             } else if (value >= buckets['25%'] && value < buckets['50%']) {
-                fillColor = colors[1];
+                fillColor = tempcolors[1];
             } else if (value >= buckets['50%'] && value < buckets['75%']) {
-                fillColor = colors[2];
+                fillColor = tempcolors[2];
             } else if (value >= buckets['75%']) {
-                fillColor = colors[3];
+                fillColor = tempcolors[3];
             } else {
-                fillColor = colors[4];
+                fillColor = tempcolors[4];
             }
 
             return {
@@ -94,10 +107,11 @@ export const updateMap = function (column, geojson_url) {
                 grades = bucket_values,
                 labels = [];
 
+            var tempcolors = (reverseColumns.includes(column)) ? reverseColors : colors;
             // loop through our density intervals and generate a label with a colored square for each interval
             for (var i = 0; i < grades.length; i++) {
                 div.innerHTML +=
-                    '<i style="background:' + colors[i] + '"></i> ' +
+                    '<i style="background:' + tempcolors[i] + '"></i> ' +
                     grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
             }
 

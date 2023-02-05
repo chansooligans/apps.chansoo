@@ -2,8 +2,11 @@
 if get_ipython() is not None:
     get_ipython().run_line_magic("load_ext", "autoreload")
     get_ipython().run_line_magic("autoreload", "2")
-from centraljersey.load import census
-from centraljersey.load import foursquare
+from centraljersey.load import (
+    census,
+    foursquare,
+    dialects
+)
 from centraljersey import merge
 import numpy as np
 import pandas as pd
@@ -14,13 +17,17 @@ import seaborn as sns
 # %%
 merger = merge.Merge()
 
+# %%
+df_county = merger.df_counties
+
 # %% [markdown]
 """
 # Export Geojson
 """
 
 # %%
-df_county = merger.df_counties
+
+
 for col in ["wawa_id", "dunkin_id"]:
     df_county[col] = (df_county[col] / df_county["total_pop"])* 100_000
 

@@ -45,25 +45,51 @@
             </div>
         </div>
 
-        <div class="carousel main-carousel-prediction-solo" data-flickity='{ "wrapAround": true, "draggable": false }'>
+        <div class="carousel main-carousel-dialects" data-flickity='{ "wrapAround": true, "draggable": false }'>
             <div class="carousel-cell">
-                <div class="step" value="loc" map="/static/geojson/merged_tracts.geojson">
-                    <p class="subtitle">Prediction</p>
+                <div class="step" value="calm-no-l" map="/static/geojson/merged_counties.geojson">
+                    <p class="subtitle">"Calm" without the L</p>
                     <div class="container description">
-                        prediction
+                        Percentage of the population that drops the "l" in "calm".
                     </div>
-                    <div class="map-container" value="loc"></div>
+                    <div class="map-container" value="calm-no-l"></div>
                 </div>
             </div>
-        </div>
-
-        <div class="step model-barplot-step">
-            <div class="container">
-                <p class="subtitle">Model Inputs</p>
-                <div class="container description">
-                    inputs
+            <div class="carousel-cell">
+                <div class="step" value="almond-no-l" map="/static/geojson/merged_counties.geojson">
+                    <p class="subtitle">"Almond" without the L</p>
+                    <div class="container description">
+                        Percentage of the population that drops the "l" in "almond".
+                    </div>
+                    <div class="map-container" value="almond-no-l"></div>
                 </div>
-                <div id="my_dataviz" class="barplot"></div>
+            </div>
+            <div class="carousel-cell">
+                <div class="step" value="forward-no-r" map="/static/geojson/merged_counties.geojson">
+                    <p class="subtitle">"Forward" without the R</p>
+                    <div class="container description">
+                        Percentage of the population that drops the "r" in "forward".
+                    </div>
+                    <div class="map-container" value="forward-no-r"></div>
+                </div>
+            </div>
+            <div class="carousel-cell">
+                <div class="step" value="drawer" map="/static/geojson/merged_counties.geojson">
+                    <p class="subtitle">"Drawer" not "Draw"</p>
+                    <div class="container description">
+                        Percentage of the population that says "drawer" instead of "draw".
+                    </div>
+                    <div class="map-container" value="drawer"></div>
+                </div>
+            </div>
+            <div class="carousel-cell">
+                <div class="step" value="gone-don" map="/static/geojson/merged_counties.geojson">
+                    <p class="subtitle">"Gone" like "don" not "dawn"</p>
+                    <div class="container description">
+                        Percentage of the population that says "gone" like "don" instead of "dawn".
+                    </div>
+                    <div class="map-container" value="gone-don"></div>
+                </div>
             </div>
         </div>
         
@@ -133,6 +159,30 @@
             </div>
 
         </div>
+
+        <div class="carousel main-carousel-prediction-solo" data-flickity='{ "wrapAround": true, "draggable": false }'>
+            <div class="carousel-cell">
+                <div class="step" value="loc" map="/static/geojson/merged_tracts.geojson">
+                    <p class="subtitle">Prediction</p>
+                    <div class="container description">
+                        prediction
+                    </div>
+                    <div class="map-container" value="loc"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="step model-barplot-step">
+            <div class="container">
+                <p class="subtitle">Model Inputs</p>
+                <div class="container description">
+                    inputs
+                </div>
+                <div id="my_dataviz" class="barplot"></div>
+            </div>
+        </div>
+
+
     </article>
     <figure>
         <div id="map" class="mx-auto"></div>
