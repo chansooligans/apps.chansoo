@@ -1,22 +1,21 @@
-body {
-    padding: 0;
-    margin: 0;
+.description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1rem;
+    width: 40%;
 }
 
-html,
-body {
-    height: 100%;
-    width: 100%;
-}
+/* ------------------------------------ */
+/* title step */
+/* ------------------------------------ */
 
-#map-container {
-    height: 50%;
-    width: 100%;
-}
-
-#map {
-    height: 600px;
-    width: 90%;
+.step.title-step {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .site-header {
@@ -34,60 +33,19 @@ body {
     font-weight: 200;
 }
 
-.description {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 1rem;
-    width: 40%;
-}
-
-@media (max-width: 480px) {
-    #title {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-        font-size: 2rem;
-        font-weight: 200;
-    }
-
-    .description {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        font-size: 1rem;
-        width: 100%;
-    }
-
-    .barplot {
-        width: 40%;
-    }
-}
-
-/* SCROLLY */
-
-.subtitle {
-    text-align: center;
-    padding: 1rem;
-    font-family: "Oswald", sans-serif;
-    font-size: 1.5rem;
-    font-weight: 200;
-}
-
-#scrolly {
-    position: relative;
-}
-
-article {
-    position: relative;
-    padding: 0 1rem;
-    margin: 0 auto;
-}
-
-.step {
-    margin: auto;
-}
-
+/* ------------------------------------ */
 /* map */
+/* ------------------------------------ */
+
+#map-container {
+    height: 50%;
+    width: 100%;
+}
+
+#map {
+    height: 600px;
+    width: 90%;
+}
 
 .info {
     padding: 6px 8px;
@@ -114,4 +72,57 @@ article {
     float: left;
     margin-right: 8px;
     opacity: 0.7;
+}
+
+/* ------------------------------------ */
+/* CAROUSEL */
+/* ------------------------------------ */
+
+.carousel-cell {
+    width: 90%;
+    height: 800px;
+    margin-right: 10px;
+    border-radius: 5px;
+    counter-increment: carousel-cell;
+}
+
+/* ------------------------------------ */
+/* SCROLLY */
+/* ------------------------------------ */
+
+.step {
+    margin: 100px 0;
+}
+
+.subtitle {
+    text-align: center;
+    padding: 1rem;
+    font-family: "Oswald", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 200;
+}
+
+/* ------------------------------------ */
+/* mobile */
+/* ------------------------------------ */
+
+@media (max-width: 480px) {
+    #title {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        font-size: 2rem;
+        font-weight: 200;
+    }
+
+    .description {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 1rem;
+        width: 100%;
+    }
+
+    .barplot {
+        width: 40%;
+    }
 }

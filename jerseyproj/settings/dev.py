@@ -30,7 +30,7 @@ with open(Path(__file__).resolve().parent.parent.parent.joinpath("secrets.yaml")
     SECRET_KEY = yaml.load(file, Loader=yaml.FullLoader)["DJANGO_SECRET"]
 
 DEBUG = True
-ALLOWED_HOSTS = ['54.210.64.57']
+ALLOWED_HOSTS = ['54.210.64.57', '127.0.0.1']
 
 # Application definition
 

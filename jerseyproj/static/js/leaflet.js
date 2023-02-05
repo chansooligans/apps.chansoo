@@ -7,19 +7,28 @@ var colors = [
     '#0153A7',
     '#c2c2c2'
 ]
-var geojson;
-var values = [];
-var buckets = {};
+let geojson = {};
 
 export const updateMap = function (column, geojson_url) {
+    console.log("updateMap")
     var percentile = 25;
     var values = []
     var buckets = {}
 
-    d3.json(geojson_url, function (error, data) {
-        if (error) throw error;
+    if (geojson[geojson_url]) {
+        console.log("use cached data")
+        processData(geojson[geojson_url]);
+    } else {
+        d3.json(geojson_url, function (error, data) {
+            console.log("load data")
+            if (error) throw error;
 
-        geojson = data;
+            geojson[geojson_url] = data;
+            processData(geojson[geojson_url]);
+        });
+    }
+
+    function processData(geojson) {
         geojson.features.forEach(feature => {
             values.push(parseFloat(feature.properties[column]));
         });
@@ -30,8 +39,7 @@ export const updateMap = function (column, geojson_url) {
         }
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            maxZoom: 19
         }).addTo(map);
 
         function style(feature) {
@@ -81,7 +89,7 @@ export const updateMap = function (column, geojson_url) {
 
         legend.onAdd = function (map) {
             var bucket_values = Object.values(buckets);
-            console.log(bucket_values)
+            // console.log(bucket_values)
             var div = L.DomUtil.create('div', 'info legend'),
                 grades = bucket_values,
                 labels = [];
@@ -97,7 +105,7 @@ export const updateMap = function (column, geojson_url) {
         };
 
         legend.addTo(map);
-    });
+    };
 }
 
 export const clearMap = function () {
@@ -106,4 +114,3 @@ export const clearMap = function () {
     });
     map.removeControl(legend);
 }
-

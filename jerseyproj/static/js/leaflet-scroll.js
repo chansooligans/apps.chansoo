@@ -1,65 +1,40 @@
 import { updateMap } from './leaflet.js';
 import { clearMap } from './leaflet.js';
 
-var mapObject = document.querySelector("#map");
 var scrolly = document.querySelector("#scrolly");
 var article = scrolly.querySelector("article");
-var step = article.querySelectorAll(".step");
-
-var mapContainers = {};
-for (var i = 1; i <= 20; i++) {
-    mapContainers[i] = document.querySelector(".map-container-" + i);
-}
 // initialize the scrollama
 var scroller = scrollama();
+var step;
 
 // scrollama event handlers
 function handleStepEnter(response) {
     // response = { element, direction, index }
-    console.log(response.element);
-    if (response.element.hasAttribute("data-step")) {
-        mapContainers[response.element.getAttribute("data-step")].appendChild(mapObject);
-        updateMap(response.element.getAttribute("value"), response.element.getAttribute("map"));
-    }
-    // add to color to current step
-    response.element.classList.add("is-active");
-}
-
-function handleStepExit(response) {
-    // response = { element, direction, index }
-    console.log(response);
-    // remove color from current step
+    console.log("scrollama-enter");
     clearMap();
-    response.element.classList.remove("is-active");
+    var step = $(response.element).find('.carousel-cell.is-selected').find('.step')[0]
+    console.log(step)
+    if (step.hasAttribute("value")) {
+        mapContainers[step.getAttribute("value")].appendChild(mapObject);
+        updateMap(step.getAttribute("value"), step.getAttribute("map"));
+    }
 }
 
 function init() {
-    // set random padding for different step heights (not required)
-    step.forEach(function (step) {
-        if (step.getAttribute("data-step") == 1) {
-            var v = Math.floor((window.innerHeight) / 7);
-            step.style.padding = v + "px 0px";
-        } else {
-            var v = 100 + Math.floor((window.innerHeight) / 5);
-            step.style.padding = v + "px 0px";
-        }
-    });
-
     // find the halfway point of the initial viewport height
     // (it changes on mobile, but by just using the initial value
     // you remove jumpiness on scroll direction change)
-    var midpoint = Math.floor(window.innerHeight * 0.1) + "px";
+    var midpoint = Math.floor(window.innerHeight * 0.5) + "px";
     // 1. setup the scroller with the bare-bones options
     // 		this will also initialize trigger observations
     // 2. bind scrollama event handlers (this can be chained like below)
     scroller
         .setup({
-            step: "#scrolly article .step",
+            step: "#scrolly article .carousel",
             debug: false,
             offset: midpoint
         })
-        .onStepEnter(handleStepEnter)
-        .onStepExit(handleStepExit);
+        .onStepEnter(handleStepEnter);
 }
 
 // kick things off
