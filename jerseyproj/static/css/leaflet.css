@@ -1,12 +1,21 @@
-body {
-    padding: 0;
-    margin: 0;
+.description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1rem;
+    width: 40%;
 }
 
-html,
-body {
-    height: 100%;
-    width: 100%;
+/* ------------------------------------ */
+/* title step */
+/* ------------------------------------ */
+
+.step.title-step {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .site-header {
@@ -23,45 +32,6 @@ body {
     font-size: 3rem;
     font-weight: 200;
 }
-
-.title-step {
-    padding: 20% 0;
-}
-
-.description {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 1rem;
-    width: 40%;
-}
-
-
-/* ------------------------------------ */
-/* mobile */
-/* ------------------------------------ */
-
-@media (max-width: 480px) {
-    #title {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-        font-size: 2rem;
-        font-weight: 200;
-    }
-
-    .description {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        font-size: 1rem;
-        width: 100%;
-    }
-
-    .barplot {
-        width: 40%;
-    }
-}
-
 
 /* ------------------------------------ */
 /* map */
@@ -120,6 +90,10 @@ body {
 /* SCROLLY */
 /* ------------------------------------ */
 
+.step {
+    margin: 100px 0;
+}
+
 .subtitle {
     text-align: center;
     padding: 1rem;
@@ -128,16 +102,27 @@ body {
     font-weight: 200;
 }
 
-#scrolly {
-    position: relative;
-}
+/* ------------------------------------ */
+/* mobile */
+/* ------------------------------------ */
 
-article {
-    position: relative;
-    padding: 0 1rem;
-    margin: 0 auto;
-}
+@media (max-width: 480px) {
+    #title {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        font-size: 2rem;
+        font-weight: 200;
+    }
 
-.step {
-    margin: 50px 0 0 0;
+    .description {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 1rem;
+        width: 100%;
+    }
+
+    .barplot {
+        width: 40%;
+    }
 }
