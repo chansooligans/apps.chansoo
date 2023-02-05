@@ -9,4 +9,4 @@ django-dev:
 
 collect-static:
 	cd jerseyproj \
-	&& python manage.py collectstatic --noinput
+	&& python manage.py collectstatic --settings=settings.prod --no-input
