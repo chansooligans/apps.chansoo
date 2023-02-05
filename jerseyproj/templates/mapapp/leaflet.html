@@ -10,9 +10,24 @@
                 <h1 id="title">Is Central Jersey Real?</h1>
             </div>
             <div class="container description">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusamus provident dolores quas
-                consectetur sequi quisquam possimus repellendus. Excepturi porro nesciunt distinctio eos
-                perspiciatis accusamus eum, in nostrum, neque incidunt qui?
+                For many years, the question of the existence of a "Central Jersey" 
+                has been a subject of much contention among Garden State residents. 
+                And as a non-native New Jerseyan who's never eaten "pork roll" 
+                or "taylor ham", I wouldn't dare feign the hubris to settle 
+                this debate -- but I can certainly share some data.
+                <br><br>
+                The analysis below uses data on dialects, demographics, 
+                occupations, income, education, and NFL-allegiances and 
+                a statistical model to try identifying a third, central region. 
+                While in my research I haven't come across a clear and distinct 
+                cultural identify that defines a Central Jersey, is the boundary 
+                between the North and South fuzzy enough and large enough that 
+                there could be a Jersey that is neither too New York nor 
+                too Philadelphia -- but perhaps .. just right?
+                <br><br>
+                I'll start with some of the underlying data then show the 
+                model's predictions. A good place to kick off the debate would 
+                be Wawas or Dunkin? Pork Roll or Taylor Ham? Eagles or Giants/Jets?
             </div>
         </div>
         <div class="carousel main-carousel" data-flickity='{ "wrapAround": true, "draggable": false}'>
@@ -51,6 +66,17 @@
                     </div>
                     <div class="map-container" value="pork_roll"></div>
                 </div>
+            </div>
+        </div>
+        
+        <div class="step narrative-step">
+            <div class="container description">
+                Next, we look at dialects... do you say "calm" with the "l" or 
+                "cahm"? Do you say "forward" with the "r" or is it "fohwud"?
+                Do you put clothes in a "draw" or a "drawer"?
+                <br><br>
+                (Thanks to Dale F. Coye of Thomas Edison State College for this 
+                data in his paper "Dialect Boundaries in New Jersey" (2009))
             </div>
         </div>
 
@@ -101,6 +127,14 @@
                 </div>
             </div>
         </div>
+
+        <div class="step narrative-step">
+            <div class="container description">
+                And of course demographics: who are the people that live in these 
+                regions? Are they American? Are they Asian? Did they graduate 
+                college? 
+            </div>
+        </div>
         
         <div class="carousel main-carousel-demographics" data-flickity='{ "wrapAround": true, "draggable": false }'>
             <div class="carousel-cell">
@@ -110,6 +144,15 @@
                         Percentage of the population that was born outside of the United States.
                     </div>
                     <div class="map-container" value="pob_foreign_born"></div>
+                </div>
+            </div>
+            <div class="carousel-cell">
+                <div class="step" value="white_pop" map="/static/geojson/merged_tracts.geojson">
+                    <p class="subtitle">WHITE POPULATION</p>
+                    <div class="container description">
+                        Percentage of the population that is White.
+                    </div>
+                    <div class="map-container" value="white_pop"></div>
                 </div>
             </div>
             <div class="carousel-cell">
@@ -129,6 +172,13 @@
                     </div>
                     <div class="map-container" value="edu_college"></div>
                 </div>
+            </div>
+        </div>
+
+        <div class="step narrative-step">
+            <div class="container description">
+                What industry do they work in? There are 18 categories but I've 
+                plotted just 4 below:
             </div>
         </div>
 
@@ -177,7 +227,19 @@
                     <div class="map-container" value="occu_Service occupations:"></div>
                 </div>
             </div>
+        </div>
 
+        <div class="step narrative-step">
+            <div class="container description">
+                Using a simple logistic regression, I trained the model using the 
+                following as "NORTH Jersey": Bergen, Union, Essex, Hudson, 
+                Morris, Passaic, Sussex, and Warren. And used the following as 
+                "SOUTH Jersey": Atlantic, Burlington, Camden, Cape May, 
+                Gloucester, and Salem. For each of these counties, the Census 
+                tracts were given the labels "North" or "South". Then, I asked 
+                the model to make predictions on all Census tracts. The results 
+                are plotted below. 
+            </div>
         </div>
 
         <div class="carousel main-carousel-prediction-solo" data-flickity='{ "wrapAround": true, "draggable": false }'>
@@ -189,6 +251,21 @@
                     </div>
                     <div class="map-container" value="loc"></div>
                 </div>
+            </div>
+        </div>
+
+        <div class="step narrative-step">
+            <div class="container description">
+                The barplot below shows the features that were used in the model 
+                on the y-axis and coefficients on the x-axis. The red bars 
+                indicate variables that suggest a tract belongs to South Jersey 
+                and blue bars indicate variables that suggest a tract belongs 
+                to the North.
+                <br><br>
+                It does appear that there is a clear region that is neither 
+                not North enough nor South enough (the strip of light blue 
+                to light orange stretching from Hunterdon to Ocean). But is 
+                it large enough? 
             </div>
         </div>
 
