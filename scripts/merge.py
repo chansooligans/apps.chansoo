@@ -29,7 +29,14 @@ df_tracts = merger.df_tracts
 """
 
 # %%
-df_county.fillna(0).to_file("../jerseyproj/static/geojson/merged_counties.geojson", driver='GeoJSON')
+county_cols = [
+    'COUNTY', 'COUNTYFP', 'geometry',
+    'wawa_id','giants_or_jets','pork_roll','calm-no-l',
+    'almond-no-l', 'forward-no-r', 'drawer', 'gone-don'
+
+]
+df_county[county_cols].fillna(0).to_file(
+    "../jerseyproj/static/geojson/merged_counties.geojson", driver='GeoJSON')
 
 # %% [markdown]
 """
@@ -45,7 +52,6 @@ df_tracts = df_tracts.merge(
     how="left",
 )
 
-df_tracts.columns
 INCLUDE = [
     'dunkin_id','wawa_id','giants_or_jets','pork_roll','calm-no-l', 
     'almond-no-l', 'forward-no-r', 'drawer', 'gone-don',
@@ -106,8 +112,9 @@ df_tracts["loc"] = y_test[:,1]
 # Export
 """
 # %%
-df_tracts.fillna(0).to_file("../jerseyproj/static/geojson/merged_tracts.geojson", driver='GeoJSON')
+df_tracts.columns
+df_tracts[
+    ['geometry'] + INCLUDE
+].fillna(0).to_file("../jerseyproj/static/geojson/merged_tracts.geojson", driver='GeoJSON')
 
 
-
-# %%
