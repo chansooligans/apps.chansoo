@@ -79,9 +79,9 @@ class Merge:
 
         df["county_name"] = df["tract_name"].str.split(", ").str[1].str.split("County").str[0].str.strip()
 
-        df["loc"] = None
-        df.loc[df["county_name"].isin(NORTHJERSEY),"loc"] = "1"
-        df.loc[df["county_name"].isin(SOUTHJERSEY),"loc"] = "0"
+        df["label"] = None
+        df.loc[df["county_name"].isin(NORTHJERSEY),"label"] = "1"
+        df.loc[df["county_name"].isin(SOUTHJERSEY),"label"] = "0"
 
         return df
 

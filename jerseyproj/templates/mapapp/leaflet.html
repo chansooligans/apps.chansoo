@@ -242,42 +242,76 @@
 
         <div class="step narrative-step">
             <div class="container narrative">
-                Using a simple logistic regression, I trained the model using the
-                following as North Jersey: Bergen, Essex, Hudson,
+                Using a few machine learning models, I trained each model using 
+                the following as North Jersey: Bergen, Essex, Hudson,
                 Morris, Passaic, Sussex, and Warren. And used the following as
                 South Jersey: Atlantic, Burlington, Camden, Cape May,
                 Gloucester, and Salem. For each of these counties, the Census
                 tracts were given the labels "North" or "South". Then, I asked
                 the model to make predictions on all Census tracts. The results
                 are plotted below.
+                <br><br>
+
             </div>
         </div>
 
-        <div class="carousel main-carousel-prediction-solo" data-flickity='{ "wrapAround": true, "draggable": false }'>
+        <div class="carousel main-carousel-predictions" data-flickity='{ "wrapAround": true, "draggable": false }'>
             <div class="carousel-cell">
-                <div class="step" value="loc" map="/static/geojson/merged_tracts.geojson">
-                    <p class="subtitle">Prediction</p>
+                <div class="step" value="_loc" map="/static/geojson/merged_tracts.geojson">
+                    <p class="subtitle">Logistic Regression Prediction</p>
                     <div class="container description">
-                        prediction
+                        Map colors indicate probability that the Census tract 
+                        should be classified as "North".
                     </div>
-                    <div class="map-container" value="loc"></div>
+                    <div class="map-container" value="_loc"></div>
+                </div>
+            </div>
+            <div class="carousel-cell">
+                <div class="step" value="svc_loc" map="/static/geojson/merged_tracts.geojson">
+                    <p class="subtitle">Radial SVM Prediction</p>
+                    <div class="container description">
+                        Map colors indicate pr("North"); C=1, gamma=2
+                    </div>
+                    <div class="map-container" value="svc_loc"></div>
+                </div>
+            </div>
+            <div class="carousel-cell">
+                <div class="step" value="knn_loc" map="/static/geojson/merged_tracts.geojson">
+                    <p class="subtitle">KNN Prediction</p>
+                    <div class="container description">
+                        Map colors indicate pr("North"); k=3
+                    </div>
+                    <div class="map-container" value="knn_loc"></div>
+                </div>
+            </div>
+            <div class="carousel-cell">
+                <div class="step" value="rf_loc" map="/static/geojson/merged_tracts.geojson">
+                    <p class="subtitle">Random Forest Prediction</p>
+                    <div class="container description">
+                        Map colors indicate pr("North");
+                        max_depth=3, max_leaf_nodes=3
+                    </div>
+                    <div class="map-container" value="rf_loc"></div>
+                </div>
+            </div>
+            <div class="carousel-cell">
+                <div class="step" value="ada_loc" map="/static/geojson/merged_tracts.geojson">
+                    <p class="subtitle">AdaBoost Prediction</p>
+                    <div class="container description">
+                        Map colors indicate pr("North")
+                    </div>
+                    <div class="map-container" value="ada_loc"></div>
                 </div>
             </div>
         </div>
 
         <div class="step narrative-step">
             <div class="container narrative">
-                The barplot below shows the features that were used in the model
-                on the y-axis and coefficients on the x-axis. The red bars
-                indicate variables that suggest a tract belongs to South Jersey
+                The barplot below shows the features that were used in the 
+                logistic regression model on the y-axis and coefficients on the 
+                x-axis. The red bars indicate variables that suggest a tract belongs to South Jersey
                 and blue bars indicate variables that suggest a tract belongs
                 to the North.
-                <br><br>
-                It does appear that there is a clear region that is neither
-                not North enough nor South enough. But is the strip of light blue
-                to light orange stretching from Hunterdon to Ocean substantial
-                enough to be an independent entity? Or is it just a footnote
-                in the battle between North and South?
             </div>
         </div>
 
@@ -291,7 +325,20 @@
             </div>
         </div>
 
-
+        <div class="step narrative-step">
+            <div class="container narrative">
+                It does appear that in several models, there is a clear region 
+                that is neither not North enough nor South enough. But is the 
+                strip of light blue to light orange stretching from Hunterdon 
+                to Ocean substantial enough to be an independent entity?
+                And in some of the models, there is a thin boundary and no 
+                suggestion of a Central Jersey whatsoever. 
+                <br><br>
+                And so after all that, I'm not sure. But perhaps this itself 
+                could be a takeaway -- even with a data-driven analysis, the 
+                existence of a Central Jersey continues to be an enigma.
+            </div>
+        </div>
     </article>
     <figure>
         <div id="map" class="mx-auto"></div>

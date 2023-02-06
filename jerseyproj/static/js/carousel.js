@@ -64,3 +64,19 @@ $carousel_dialects.on('change.flickity', function (event, index) {
     clearMap();
     updateMap(stepsArray[index].getAttribute("value"), stepsArray[index].getAttribute("map"));
 });
+
+// PREDICTIONS
+
+var $carousel_predictions = $('.main-carousel-predictions');
+
+$carousel_predictions.on('change.flickity', function (event, index) {
+    var steps = $(this).find('.step');
+    var stepsArray = [];
+    steps.each(function () {
+        stepsArray.push(this);
+    });
+    mapContainers[stepsArray[index].getAttribute("value")].appendChild(mapObject);
+    console.log("carousel-update-map")
+    clearMap();
+    updateMap(stepsArray[index].getAttribute("value"), stepsArray[index].getAttribute("map"));
+});

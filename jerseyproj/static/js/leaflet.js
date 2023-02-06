@@ -3,6 +3,7 @@ if (window.innerWidth < 500) {
 } else {
     var map = L.map('map', { zoomSnap: 0.5 }).setView([40.19699338909772, -74.29685434135924], 8);
 }
+
 var legend = L.control({ position: 'bottomright' });
 var colors = [
     '#F13D16',
@@ -84,7 +85,7 @@ export const updateMap = function (column, geojson_url) {
         for (let i = 0; i <= 100; i += percentile) {
             const index = Math.floor((sortedValues.length - 1) * i / 100);
 
-            if (column != "loc") {
+            if (!column.includes("_loc")) {
                 buckets[i + "%"] = Math.round(sortedValues[index] * 10000) / 10000;
             } else {
                 buckets[i + "%"] = i / 100;
@@ -98,7 +99,7 @@ export const updateMap = function (column, geojson_url) {
         function style(feature) {
             var value = feature.properties[column];
 
-            if (column != "loc") {
+            if (!column.includes("_loc")) {
                 var tempcolors = (reverseColumns.includes(column)) ? reverseColors : colors;
             } else {
                 var tempcolors = predcolors;
@@ -153,7 +154,7 @@ export const updateMap = function (column, geojson_url) {
 
             var tempcolors = (reverseColumns.includes(column)) ? reverseColors : colors;
 
-            if (column != "loc") {
+            if (!column.includes("_loc")) {
                 var templabels = (reverseColumns.includes(column)) ? reverse_labels : labels;
             } else {
                 var templabels = predict_labels
