@@ -80,5 +80,6 @@ cache/*
 scratch/*
 
 *.geojson
+*.csv
 
 *.sqlite3
