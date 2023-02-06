@@ -112,6 +112,10 @@
     counter-increment: carousel-cell;
 }
 
+.flickity-button {
+    background: rgb(61, 60, 60)
+}
+
 /* ------------------------------------ */
 /* SCROLLY */
 /* ------------------------------------ */
