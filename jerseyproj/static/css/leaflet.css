@@ -15,6 +15,12 @@
     color: rgb(173, 173, 173);
 }
 
+
+footer {
+    text-align: center;
+}
+
+
 /* ------------------------------------ */
 /* title step */
 /* ------------------------------------ */
@@ -114,6 +120,19 @@
 
 .flickity-button {
     background: rgb(61, 60, 60)
+}
+
+.flickity-page-dots .dot {
+    background: none !important;
+}
+
+.flickity-page-dots {
+    counter-reset: a;
+}
+
+.flickity-page-dots .dot::after {
+    content: counter(a);
+    counter-increment: a;
 }
 
 /* ------------------------------------ */
