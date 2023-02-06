@@ -13,13 +13,13 @@ import geopandas as gpd
 
 NORTHJERSEY = [
     "Bergen",
-    "Union",
     "Essex",
     "Hudson",
     "Morris",
     "Passaic",
     "Sussex",
     "Warren",
+    # "Union",
 ]
 
 SOUTHJERSEY = [
