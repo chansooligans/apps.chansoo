@@ -1,4 +1,8 @@
-var map = L.map('map').setView([40.11851, -74.671826], 8);
+if (window.innerWidth < 500) {
+    var map = L.map('map', { zoomSnap: 0.5 }).setView([39.960349997613395, -74.65969244237529], 7.5);
+} else {
+    var map = L.map('map', { zoomSnap: 0.5 }).setView([40.19699338909772, -74.29685434135924], 8);
+}
 var legend = L.control({ position: 'bottomright' });
 var colors = [
     '#F13D16',

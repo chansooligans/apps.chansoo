@@ -165,4 +165,15 @@
     .barplot {
         width: 40%;
     }
+
+    #map-container {
+        height: 50%;
+        width: 100%;
+    }
+
+    #map {
+        height: 600px;
+        width: 80%;
+    }
+
 }
