@@ -21,5 +21,5 @@ from mapapp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('favicon.ico', RedirectView.as_view(url='/static/favicon.ico')),
-    path('', include('mapapp.urls'))
+    path('centraljersey', include('mapapp.urls'))
 ]
