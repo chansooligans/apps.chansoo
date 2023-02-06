@@ -131,7 +131,7 @@ export const updateMap = function (column, geojson_url) {
 
         function onEachFeature(feature, layer) {
             layer.bindTooltip(
-                "Value: " + Math.round(feature.properties[column] * 1000) / 1000,
+                "Value: " + Math.round(feature.properties[column] * 1000) / 1000 + "%",
                 { permanent: false, direction: 'center', className: 'myCSSClass' }
             );
             layer.on({
