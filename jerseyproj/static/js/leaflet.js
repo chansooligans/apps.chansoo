@@ -23,7 +23,6 @@ var reverseColumns = [
     "pork_roll",
     "drawer",
     "occu_Service occupations:",
-    "white_pop"
 ]
 var predcolors = [
     '#F13D16',
