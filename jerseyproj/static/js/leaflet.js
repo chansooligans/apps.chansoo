@@ -32,6 +32,30 @@ var predcolors = [
     '#0153A7',
     '#c2c2c2'
 ]
+var labels = [
+    "0-25 Percentile",
+    "25-50 Percentile",
+    "50-75 Percentile",
+    "75-100 Percentile",
+    "N/A"
+];
+
+var reverse_labels = [
+    "75-100 Percentile",
+    "50-75 Percentile",
+    "25-50 Percentile",
+    "0-25 Percentile",
+    "N/A"
+];
+
+var predict_labels = [
+    "0-25%",
+    "25-50%",
+    "50-75%",
+    "75-100%",
+    "N/A"
+];
+
 let geojson = {};
 
 export const updateMap = function (column, geojson_url) {
@@ -126,15 +150,21 @@ export const updateMap = function (column, geojson_url) {
         legend.onAdd = function (map) {
             var bucket_values = Object.values(buckets);
             // console.log(bucket_values)
-            var div = L.DomUtil.create('div', 'info legend'),
-                labels = [];
+            var div = L.DomUtil.create('div', 'info legend')
 
             var tempcolors = (reverseColumns.includes(column)) ? reverseColors : colors;
+
+            if (column != "loc") {
+                var templabels = (reverseColumns.includes(column)) ? reverse_labels : labels;
+            } else {
+                var templabels = predict_labels
+            }
             // loop through our density intervals and generate a label with a colored square for each interval
             for (var i = 0; i < bucket_values.length; i++) {
                 div.innerHTML +=
                     '<i style="background:' + tempcolors[i] + '"></i> ' +
-                    bucket_values[i] + (bucket_values[i + 1] ? '&ndash;' + bucket_values[i + 1] + '<br>' : '+');
+                    templabels[i] + '<br>'
+                // bucket_values[i] + (bucket_values[i + 1] ? '&ndash;' + bucket_values[i + 1] + '<br>' : '+');
             }
 
             return div;
