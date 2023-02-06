@@ -61,6 +61,14 @@ footer {
     align-items: center;
 }
 
+.step.ending-step {
+    margin: 0 0 10% 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 /* ------------------------------------ */
 /* map */
 /* ------------------------------------ */
