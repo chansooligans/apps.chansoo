@@ -1,30 +1,33 @@
 feature,blue=north
-pork_roll,-2.394017636370307
-wawa_id,-1.6703640719245265
-drawer,-0.5581654665561891
-occu_educational/healthcare/social,-0.29271795556276975
-dunkin_id,-0.2605885874590973
-occu_Wholesale trade,-0.25854400233748875
-calm-no-l,-0.20525404376959
-occu_transport/warehouse/utils,-0.1529789686170109
-occu_production/transport/materials,-0.1382749269795884
-almond-no-l,-0.11869068872431529
-occu_public administration,-0.07654801171638684
-occu_finance/insurance/realestate,-0.05589066406658898
-occu_Agricul/fish/mining/forest,-0.04144213919704626
-occu_arts/entertainment/foodservices,-0.007940259163228424
-"occu_management, business",-0.0069128275418520015
-income_150k+,0.006447977850138116
-"occu_Natural resources, construction",0.013420582327978763
-occu_Retail trade,0.07651098389791623
-occu_Sales and office occupations:,0.0944550417436302
-occu_Construction,0.1075420829487036
-occu_Information,0.1472345729002534
-occu_administrative,0.1550888116548548
-occu_Service occupations:,0.18124178616485345
-edu_college,0.24228133085497044
-pob_foreign_born,0.27891033843881413
-occu_Manufacturing,0.29586485027330084
-forward-no-r,0.5958210668078957
-gone-don,0.8524500758259179
-giants_or_jets,1.5402172835367245
+pork_roll,-2.3690921632805755
+wawa_id,-1.638076580453222
+drawer,-0.56031583794653
+occu_educational/healthcare/social,-0.28576396801623327
+occu_Wholesale trade,-0.25698126240581814
+dunkin_id,-0.2568802800392255
+calm-no-l,-0.16676444450646677
+black_pop,-0.15282775221652792
+occu_transport/warehouse/utils,-0.13125560054912203
+occu_production/transport/materials,-0.10314060393594089
+almond-no-l,-0.07819678037387413
+occu_public administration,-0.07726474077097789
+asian_pop,-0.07494026348035882
+occu_finance/insurance/realestate,-0.054384033948263286
+"occu_management, business",-0.052189207549713915
+occu_Agricul/fish/mining/forest,-0.04738218074830539
+"occu_Natural resources, construction",-0.024466749711086463
+occu_arts/entertainment/foodservices,-0.010859688123768089
+income_150k+,0.006298767563910499
+occu_Construction,0.06996700851421651
+occu_Retail trade,0.07575484753254312
+occu_Sales and office occupations:,0.08892884480651438
+occu_Information,0.14542976436917282
+occu_administrative,0.14782366730098118
+edu_college,0.20382760662975954
+occu_Service occupations:,0.21351296191842656
+white_pop,0.2394798573796804
+occu_Manufacturing,0.26008441634477775
+pob_foreign_born,0.3416477867931518
+forward-no-r,0.6343276197308665
+gone-don,0.8629497617732393
+giants_or_jets,1.5392024723605564
