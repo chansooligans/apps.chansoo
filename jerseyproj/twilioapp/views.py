@@ -9,7 +9,7 @@ from twilio.rest import Client
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 import yaml
-import datetime
+from datetime import datetime
 import json
 
 with open('/home/bitnami/projects/jerseystuff/api.yaml', 'r') as config_file:
@@ -33,7 +33,7 @@ def get_gpt4_response(prompt):
             {"role": "system", "content": "You are an AI assistant that helps with scheduling and reminders."},
             {"role": "user", "content": prompt},
             {"role": "system", "content": "Default timeZone is America/New_York unless otherwise specified."},
-            {"role": "system", "content": f"Assume year is {datetime.datetime.now().year} unless otherwise specified."},
+            {"role": "system", "content": f"Assume year is {datetime.now().year} unless otherwise specified."},
             {"role": "system", "content": """
                 Do not include any explanations, only provide a  RFC8259 compliant JSON response following this format without deviation:
                 ```
@@ -88,11 +88,10 @@ def receive_sms(request):
     # Start our TwiML response
     resp = MessagingResponse()
     
-    
     dt = datetime.fromisoformat(parsed_event["start"]["dateTime"])
     start_time = dt.strftime('%Y-%m-%d at %-I%p')
 
     # Determine the right reply for this message
-    resp.message(f"""Your have scheduled the event '{parsed_event["summary"]}' on {start_time}""")
+    resp.message(f"""Your event '{parsed_event["summary"]}' on {start_time} is scheduled""")
     
     return HttpResponse(str(resp))
