@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class MapappConfig(AppConfig):
+class centraljerseyConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'mapapp'
+    name = 'centraljersey'

@@ -1,7 +1,7 @@
 # %%
 import censusdata
 from functools import cached_property
-from centraljersey import cache
+from src import cache
 import geopandas as gpd
 import requests
 import yaml

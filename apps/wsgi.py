@@ -1,5 +1,5 @@
 """
-WSGI config for jerseyproj project.
+WSGI config for apps project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -12,8 +12,8 @@ import sys
 from django.core.wsgi import get_wsgi_application
 
 sys.path.append('/home/bitnami/projects/jerseystuff')
-sys.path.append('/home/bitnami/projects/jerseystuff/jerseyproj')
+sys.path.append('/home/bitnami/projects/jerseystuff/apps')
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'jerseyproj.settings.prod')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'apps.settings.prod')
 
 application = get_wsgi_application()

@@ -4,4 +4,4 @@ from django.http import HttpResponse
 
 # Create your views here.
 def leaflet(request):
-    return render(request, 'mapapp/leaflet.html')
+    return render(request, 'centraljersey/leaflet.html')

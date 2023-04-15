@@ -58,9 +58,9 @@ for col in cols:
     smooth_factor=0
     )
 
-    m.save(f"../jerseyproj/templates/maps/{col}.html")
+    m.save(f"../apps/templates/maps/{col}.html")
 
 # %%
 df
 # %%
-# cp * ../../central_jersey/jerseyproj/templates/maps
+# cp * ../../central_jersey/apps/templates/maps

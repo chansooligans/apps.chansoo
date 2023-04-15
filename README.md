@@ -9,6 +9,7 @@ See app on https://apps.chansoos.com/centraljersey
 To run:
 
 ```
-python manage.py collectstatic --settings=settings.prod --no-input
+cd apps && python manage.py collectstatic --settings=settings.prod --no-input
+cd apps && python manage.py runserver --settings=settings.prod
 sudo /opt/bitnami/ctlscript.sh restart apache
 ```

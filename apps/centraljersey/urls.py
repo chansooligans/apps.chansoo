@@ -1,4 +1,4 @@
-from mapapp import views
+from centraljersey import views
 from django.urls import path
 
 urlpatterns = [

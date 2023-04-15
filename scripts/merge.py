@@ -2,12 +2,12 @@
 if get_ipython() is not None:
     get_ipython().run_line_magic("load_ext", "autoreload")
     get_ipython().run_line_magic("autoreload", "2")
-from centraljersey.load import (
+from src.load import (
     census,
     foursquare,
     dialects
 )
-from centraljersey import merge
+from src import merge
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import cross_val_predict, cross_val_score
@@ -37,7 +37,7 @@ county_cols = [
 
 ]
 df_county[county_cols].fillna(0).to_file(
-    "../jerseyproj/static/geojson/merged_counties.geojson", driver='GeoJSON')
+    "../apps/static/geojson/merged_counties.geojson", driver='GeoJSON')
 
 # %% [markdown]
 """
@@ -112,7 +112,7 @@ df_features = pd.DataFrame({
 
 y_test = clf.predict_proba(X_test)
 
-df_features.sort_values("blue=north").to_csv("../jerseyproj/static/csv/summary.csv", index=False)
+df_features.sort_values("blue=north").to_csv("../apps/static/csv/summary.csv", index=False)
 df_tracts["_loc"] = y_test[:,1]
 
 # %% [markdown]
@@ -196,5 +196,5 @@ df_tracts["ada_loc"] = y_test[:,1]
 # %%
 df_tracts[
     ['geometry', '_loc', 'svc_loc', 'knn_loc', 'rf_loc', 'ada_loc'] + INCLUDE
-].fillna(0).to_file("../jerseyproj/static/geojson/merged_tracts.geojson", driver='GeoJSON')
+].fillna(0).to_file("../apps/static/geojson/merged_tracts.geojson", driver='GeoJSON')
 

@@ -1,10 +1,10 @@
-from centraljersey.load import (
+from src.load import (
     census, 
     foursquare,
     njdotcom,
     dialects
 )
-from centraljersey.load import foursquare
+from src.load import foursquare
 import pandas as pd
 import glob
 import json

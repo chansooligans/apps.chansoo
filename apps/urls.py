@@ -1,4 +1,4 @@
-"""jerseyproj URL Configuration
+"""apps URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
@@ -16,12 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.views.generic import RedirectView
 from django.urls import path, include
-from mapapp import views
+from centraljersey import views
 from twilioapp import views as twilioviews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('favicon.ico', RedirectView.as_view(url='/static/favicon.ico')),
-    path('centraljersey', include('mapapp.urls')),
+    path('centraljersey', include('centraljersey.urls')),
     path('sms', twilioviews.receive_sms),
 ]

@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from twilio.twiml.messaging_response import MessagingResponse
 
 import openai
-import os
+from pathlib import Path
 from twilio.rest import Client
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
@@ -12,16 +12,16 @@ import yaml
 from datetime import datetime
 import json
 
-from remindme import calendar
+from src.remindme import calendar
 
-with open('/home/bitnami/projects/jerseystuff/api.yaml', 'r') as config_file:
+with open(Path.home() / 'projects/jerseystuff/api.yaml', 'r') as config_file:
     config = yaml.safe_load(config_file)
 
 OPENAI_API_KEY = config['openai']['api_key']
 TWILIO_ACCOUNT_SID = config['twilio']['account_sid']
 TWILIO_AUTH_TOKEN = config['twilio']['auth_token']
 TWILIO_PHONE_NUMBER = config['twilio']['phone_number']
-GOOGLE_SERVICE_ACCOUNT_FILE = config['google']['service_account_file']
+GOOGLE_SERVICE_ACCOUNT_FILE = Path.home() / f'projects/jerseystuff/credentials.json'
 
 openai.api_key = OPENAI_API_KEY
 twilio_client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)

@@ -1,7 +1,7 @@
 # %%
 import censusdata
 from functools import cached_property
-from centraljersey import cache
+from src import cache
 
 VARIABLES = { 
     'B02001_001E':'total_pop', 

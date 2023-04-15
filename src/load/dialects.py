@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from functools import cached_property
-from centraljersey import cache
+from src import cache
 import tabula
 
 COUNTIES = [
