@@ -14,7 +14,7 @@ import json
 
 from src.remindme import calendar
 
-with open(Path.home() / 'projects/jerseystuff/api.yaml', 'r') as config_file:
+with open(Path.home() / 'projects/apps.chansoo/api.yaml', 'r') as config_file:
     config = yaml.safe_load(config_file)
 
 OPENAI_API_KEY = config['openai']['api_key']
