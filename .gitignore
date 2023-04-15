@@ -84,3 +84,7 @@ scratch/*
 *.csv
 
 *.sqlite3
+*.bak
+*.dat
+*.dir
+*.rdb

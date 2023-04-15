@@ -1,4 +1,4 @@
-from celery import shared_task
+from apps._celery import shared_task
 from .models import ScheduledEvent
 from datetime import datetime, timedelta
 from src.remindme import sms

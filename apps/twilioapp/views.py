@@ -15,7 +15,7 @@ import json
 from src.remindme import calendar
 
 try:
-    with open('api.yaml', 'r') as config_file:
+    with open('/home/chansoo/projects/apps.chansoo/apps/twilioapp/api.yaml', 'r') as config_file:
         config = yaml.safe_load(config_file)
 except:
     with open('/home/bitnami/projects/apps.chansoo/apps/twilioapp/api.yaml', 'r') as config_file:
@@ -30,7 +30,7 @@ openai.api_key = OPENAI_API_KEY
 twilio_client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
 
 try:
-    GOOGLE_SERVICE_ACCOUNT_FILE = f'credentials.json'
+    GOOGLE_SERVICE_ACCOUNT_FILE = f'/home/chansoo/projects/apps.chansoo/apps/twilioapp/credentials.json'
     google_credentials = service_account.Credentials.from_service_account_file(GOOGLE_SERVICE_ACCOUNT_FILE)
     calendar_service = build('calendar', 'v3', credentials=google_credentials)
 except:
