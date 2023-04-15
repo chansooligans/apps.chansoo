@@ -1,4 +1,4 @@
-.PHONY: restart-apache-server django-dev collect-static
+.PHONY: restart-apache-server django-dev collect-static celery-redis
 
 restart-apache-server:
 	sudo /opt/bitnami/ctlscript.sh restart apache
@@ -10,3 +10,6 @@ django-dev:
 collect-static:
 	cd apps \
 	&& python manage.py collectstatic --settings=settings.prod --no-input
+
+celery-redis:
+	docker-compose up
