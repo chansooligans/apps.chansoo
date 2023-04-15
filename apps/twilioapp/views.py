@@ -12,10 +12,11 @@ import yaml
 from datetime import datetime
 import json
 
-from src.remindme import calendar
+from src.remindme import calendar, gpt
+from twilioapp.models import ScheduledEvent
 
 try:
-    with open('api.yaml', 'r') as config_file:
+    with open('/home/chansoo/projects/apps.chansoo/apps/twilioapp/api.yaml', 'r') as config_file:
         config = yaml.safe_load(config_file)
 except:
     with open('/home/bitnami/projects/apps.chansoo/apps/twilioapp/api.yaml', 'r') as config_file:
@@ -30,7 +31,7 @@ openai.api_key = OPENAI_API_KEY
 twilio_client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
 
 try:
-    GOOGLE_SERVICE_ACCOUNT_FILE = f'credentials.json'
+    GOOGLE_SERVICE_ACCOUNT_FILE = f'/home/chansoo/projects/apps.chansoo/apps/twilioapp/credentials.json'
     google_credentials = service_account.Credentials.from_service_account_file(GOOGLE_SERVICE_ACCOUNT_FILE)
     calendar_service = build('calendar', 'v3', credentials=google_credentials)
 except:
@@ -45,17 +46,43 @@ def receive_sms(request):
     message_body = request.POST.get('Body')
     sender_phone_number = request.POST.get('From')
 
-    openai_response = calendar.get_gpt4_response(message_body)
-    parsed_event = json.loads(openai_response["choices"][0]["message"]["content"])
-    scheduled_event = calendar.schedule_event(calendar_service, parsed_event)
+    parsed_event = gpt.get_gpt4_response(message_body)
+    print(parsed_event)
 
-    # Start our TwiML response
-    resp = MessagingResponse()
+    if parsed_event["classification"] == "schedule":
     
-    dt = datetime.fromisoformat(parsed_event["start"]["dateTime"])
-    start_time = dt.strftime('%Y-%m-%d at %-I%p')
+        scheduled_event = calendar.schedule_event(calendar_service, parsed_event)
 
-    # Determine the right reply for this message
-    resp.message(f"""Your event '{parsed_event["summary"]}' on {start_time} is scheduled""")
-    
-    return HttpResponse(str(resp))
+        # Start our TwiML response
+        resp = MessagingResponse()
+        
+        dt = datetime.fromisoformat(parsed_event["start"]["dateTime"])
+        start_time = dt.strftime('%Y-%m-%d at %-I%p')
+
+        # Determine the right reply for this message
+        resp.message(f"""Your event '{parsed_event["summary"]}' on {start_time} is scheduled""")
+        
+        return HttpResponse(str(resp))
+
+    elif parsed_event["classification"] == "reminder":
+        print(parsed_event.keys())
+        event = ScheduledEvent(
+            summary=parsed_event["summary"],
+            location=parsed_event["location"],
+            description=parsed_event["description"],
+            start_time=parsed_event["start"]["dateTime"],
+            end_time=parsed_event["end"]["dateTime"],
+            phone_number=sender_phone_number,
+        )
+        event.save()        
+
+        # Start our TwiML response
+        resp = MessagingResponse()
+        
+        dt = datetime.fromisoformat(parsed_event["start"]["dateTime"])
+        start_time = dt.strftime('%Y-%m-%d at %-I%p')
+
+        # Determine the right reply for this message
+        resp.message(f"""Your reminder '{parsed_event["summary"]}' on {start_time} is scheduled""")
+
+        return HttpResponse(str(resp))
