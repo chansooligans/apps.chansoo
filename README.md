@@ -4,7 +4,7 @@ Testing AWS Lightsail + Django while attempting to resolve a heated dispute
 among friends and family centered on the question: does "Central Jersey" 
 exist???
 
-See app on apps.chansoos.com
+See app on https://apps.chansoos.com/centraljersey
 
 To run:
 
