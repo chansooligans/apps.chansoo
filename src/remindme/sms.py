@@ -3,7 +3,7 @@ from twilio.rest import Client
 from googleapiclient.discovery import build
 import yaml
 
-with open(Path.home() / 'projects/jerseystuff/api.yaml', 'r') as config_file:
+with open(Path.home() / 'projects/apps.chansoo/api.yaml', 'r') as config_file:
     config = yaml.safe_load(config_file)
 
 TWILIO_ACCOUNT_SID = config['twilio']['account_sid']

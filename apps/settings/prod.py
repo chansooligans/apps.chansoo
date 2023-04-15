@@ -20,7 +20,7 @@ HOME_DIR = Path.home()
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = BASE_DIR.joinpath("templates")
 STATIC_DIR = BASE_DIR.joinpath("static")
-STATIC_ROOT = HOME_DIR.joinpath("var/jerseystuff/static/")
+STATIC_ROOT = HOME_DIR.joinpath("var/apps.chansoo/static/")
 
 
 # Quick-start development settings - unsuitable for production

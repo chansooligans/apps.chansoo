@@ -11,8 +11,8 @@ import os
 import sys
 from django.core.wsgi import get_wsgi_application
 
-sys.path.append('/home/bitnami/projects/jerseystuff')
-sys.path.append('/home/bitnami/projects/jerseystuff/apps')
+sys.path.append('/home/bitnami/projects/apps.chansoo')
+sys.path.append('/home/bitnami/projects/apps.chansoo/apps')
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'apps.settings.prod')
 
