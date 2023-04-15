@@ -14,19 +14,29 @@ import json
 
 from src.remindme import calendar
 
-with open('api.yaml', 'r') as config_file:
-    config = yaml.safe_load(config_file)
+try:
+    with open('api.yaml', 'r') as config_file:
+        config = yaml.safe_load(config_file)
+except:
+    with open('/home/bitnami/projects/apps.chansoo/apps/twilioapp/api.yaml', 'r') as config_file:
+        config = yaml.safe_load(config_file)
 
 OPENAI_API_KEY = config['openai']['api_key']
 TWILIO_ACCOUNT_SID = config['twilio']['account_sid']
 TWILIO_AUTH_TOKEN = config['twilio']['auth_token']
 TWILIO_PHONE_NUMBER = config['twilio']['phone_number']
-GOOGLE_SERVICE_ACCOUNT_FILE = f'credentials.json'
 
 openai.api_key = OPENAI_API_KEY
 twilio_client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
-google_credentials = service_account.Credentials.from_service_account_file(GOOGLE_SERVICE_ACCOUNT_FILE)
-calendar_service = build('calendar', 'v3', credentials=google_credentials)
+
+try:
+    GOOGLE_SERVICE_ACCOUNT_FILE = f'credentials.json'
+    google_credentials = service_account.Credentials.from_service_account_file(GOOGLE_SERVICE_ACCOUNT_FILE)
+    calendar_service = build('calendar', 'v3', credentials=google_credentials)
+except:
+    GOOGLE_SERVICE_ACCOUNT_FILE = f'/home/bitnami/projects/apps.chansoo/apps/twilioapp/credentials.json'
+    google_credentials = service_account.Credentials.from_service_account_file(GOOGLE_SERVICE_ACCOUNT_FILE)
+    calendar_service = build('calendar', 'v3', credentials=google_credentials)
 
 @csrf_exempt
 def receive_sms(request):
