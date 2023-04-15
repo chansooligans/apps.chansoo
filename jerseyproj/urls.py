@@ -17,9 +17,11 @@ from django.contrib import admin
 from django.views.generic import RedirectView
 from django.urls import path, include
 from mapapp import views
+from twilioapp import views as twilioviews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('favicon.ico', RedirectView.as_view(url='/static/favicon.ico')),
-    path('centraljersey', include('mapapp.urls'))
+    path('centraljersey', include('mapapp.urls')),
+    path('sms', twilioviews.receive_sms),
 ]
