@@ -7,7 +7,7 @@ from django.conf import settings
 # Set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'apps.settings.dev')
 
-app = Celery('apps', broker="redis://localhost:6379/0", backend="redis://localhost:6379/0")
+app = Celery('apps', broker="redis://0.0.0.0:6379/0", backend="redis://0.0.0.0:6379/0")
 
 # Using a string here means the worker doesn't have to serialize
 # the configuration object to child processes.
@@ -18,10 +18,10 @@ app.autodiscover_tasks()
 
 app.conf.beat_schedule = {
     #Scheduler Name
-    'send_event_reminders-1min': {
+    'send_event_reminders-15min': {
         # Task Name (Name Specified in Decorator)
         'task': 'send_event_reminders',  
         # Schedule      
-        'schedule': 30.0
+        'schedule': 60.0
     }
 }

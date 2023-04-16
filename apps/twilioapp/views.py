@@ -46,7 +46,13 @@ def receive_sms(request):
     message_body = request.POST.get('Body')
     sender_phone_number = request.POST.get('From')
 
-    parsed_event = gpt.get_gpt4_response(message_body)
+    if message_body[:6] == "openai":
+        response = gpt.get_gpt_standard_response(message_body)
+        resp = MessagingResponse()
+        resp.messsage(response)
+        return HttpResponse(str(resp))
+
+    parsed_event = gpt.get_gpt4_schedule_response(message_body)
     print(parsed_event)
 
     if parsed_event["classification"] == "schedule":
@@ -75,6 +81,7 @@ def receive_sms(request):
             phone_number=sender_phone_number,
         )
         event.save()        
+        print('saved')
 
         # Start our TwiML response
         resp = MessagingResponse()

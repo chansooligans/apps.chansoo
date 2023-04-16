@@ -21,7 +21,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 TEMPLATE_DIR = BASE_DIR.joinpath("templates")
 STATIC_DIR = BASE_DIR.joinpath("static")
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -41,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     'centraljersey',
     'twilioapp'
 ]
@@ -143,13 +143,3 @@ CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
-
-# from celery.schedules import crontab
-# from datetime import timedelta
-
-# CELERY_BEAT_SCHEDULE = {
-#     'send_event_reminders': {
-#         'task': 'twilioapp.tasks.send_event_reminders',
-#         'schedule': timedelta(seconds=60),
-#     },
-# }

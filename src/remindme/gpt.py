@@ -12,7 +12,7 @@ import yaml
 from datetime import datetime
 import json
 
-def get_gpt4_response(prompt):
+def get_gpt4_schedule_response(prompt):
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
@@ -56,3 +56,14 @@ def get_gpt4_response(prompt):
             response[k] = ""
 
     return response
+
+def get_gpt_standard_response(prompt):
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant. Please ensure your response is less than 320 characters."},
+            {"role": "user", "content": prompt},
+        ]
+    )
+    
+    return response["choices"][0]["message"]["content"]
