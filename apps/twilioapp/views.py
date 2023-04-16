@@ -48,15 +48,15 @@ def receive_sms(request):
     sender_phone_number = request.POST.get('From')
 
     if message_body.startswith("openai, email"):
-        response = gpt.get_gpt_email_response(message_body)
+        response = gpt.get_gpt_email_response(message_body.split("openai, email")[-1])
         send_mail(
             response["subject_line"], 
             response["body"], 
             'chansoosong@gmail.com', ['chansoosong@gmail.com'], fail_silently=False)
         return HttpResponse("email has been delivered")
     
-    elif message_body.startswith("openai"):
-        response = gpt.get_gpt_standard_response(message_body)
+    elif message_body.startswith("openai,"):
+        response = gpt.get_gpt_standard_response(message_body.split("openai,")[-1])
         resp = MessagingResponse()
         resp.message(response)
         return HttpResponse(str(resp))
