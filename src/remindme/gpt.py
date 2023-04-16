@@ -67,3 +67,33 @@ def get_gpt_standard_response(prompt):
     )
     
     return response["choices"][0]["message"]["content"]
+
+def get_gpt_email_response(prompt):
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant. You will be responding to a user prompt with a title and body."},
+            {"role": "user", "content": prompt},
+            {"role": "system", "content": """
+                Do not include any explanations, only provide a  RFC8259 compliant JSON object following this format without deviation
+                and make sure all keys are included in the object:
+                ```
+                {
+                    "subject_line": "[title here]",
+                    "body": "[body here]",
+                }
+                ```
+                The JSON object:
+            """}
+        ]
+    )
+    
+    print(response)
+
+    response =  json.loads(response["choices"][0]["message"]["content"])
+
+    for k in ["subject_line", "body"]:
+        if k not in response.keys():
+            response[k] = ""
+    
+    return response

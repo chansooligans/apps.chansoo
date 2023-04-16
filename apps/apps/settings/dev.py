@@ -26,7 +26,9 @@ STATIC_DIR = BASE_DIR.joinpath("static")
 
 # SECURITY WARNING: keep the secret key used in production secret!
 with open(Path(__file__).resolve().parent.parent.parent.parent.joinpath("secrets.yaml"), "r") as file:
-    SECRET_KEY = yaml.load(file, Loader=yaml.FullLoader)["DJANGO_SECRET"]
+    secrest_file = yaml.load(file, Loader=yaml.FullLoader)
+    SECRET_KEY = secrest_file["DJANGO_SECRET"]
+    SENDGRID_API_KEY = secrest_file["SENDGRID_SECRET"]
 
 DEBUG = True
 ALLOWED_HOSTS = ['54.210.64.57', '127.0.0.1']
@@ -143,3 +145,10 @@ CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+
+# EMAIL
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
+EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

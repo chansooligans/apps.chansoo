@@ -87,4 +87,4 @@ scratch/*
 *.bak
 *.dat
 *.dir
-*.rdb
+*.rdbsendgrid.env

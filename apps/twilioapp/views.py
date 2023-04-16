@@ -11,6 +11,7 @@ from google.oauth2 import service_account
 from googleapiclient.discovery import build
 import yaml
 from datetime import datetime
+from django.core.mail import send_mail
 import json
 
 from src.remindme import calendar, gpt
@@ -46,7 +47,15 @@ def receive_sms(request):
     message_body = request.POST.get('Body')
     sender_phone_number = request.POST.get('From')
 
-    if message_body[:6] == "openai":
+    if message_body.startswith("openai, email"):
+        response = gpt.get_gpt_email_response(message_body)
+        send_mail(
+            response["subject_line"], 
+            response["body"], 
+            'chansoosong@gmail.com', ['chansoosong@gmail.com'], fail_silently=False)
+        return HttpResponse("email has been delivered")
+    
+    elif message_body.startswith("openai"):
         response = gpt.get_gpt_standard_response(message_body)
         resp = MessagingResponse()
         resp.message(response)
