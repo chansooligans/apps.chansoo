@@ -17,21 +17,20 @@ import yaml
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 HOME_DIR = Path.home()
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 TEMPLATE_DIR = BASE_DIR.joinpath("templates")
 STATIC_DIR = BASE_DIR.joinpath("static")
-STATIC_ROOT = HOME_DIR.joinpath("var/apps.chansoo/static/")
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-with open(Path(__file__).resolve().parent.parent.parent.joinpath("secrets.yaml"), "r") as file:
+with open(Path(__file__).resolve().parent.parent.parent.parent.joinpath("secrets.yaml"), "r") as file:
     SECRET_KEY = yaml.load(file, Loader=yaml.FullLoader)["DJANGO_SECRET"]
 
-DEBUG = False
-ALLOWED_HOSTS = ['*']
+DEBUG = True
+ALLOWED_HOSTS = ['54.210.64.57', '127.0.0.1']
 
 # Application definition
 
@@ -42,8 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.centraljersey',
-    'apps.twilioapp'
+    'centraljersey',
+    'twilioapp'
 ]
 
 MIDDLEWARE = [
@@ -138,7 +137,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
-
 # Celery / Redis Configs
 CELERY_BROKER_URL = 'redis://localhost:6379'
 CELERY_RESULT_BACKEND = 'redis://localhost:6379'
@@ -146,11 +144,12 @@ CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 
-from celery.schedules import crontab
+# from celery.schedules import crontab
+# from datetime import timedelta
 
-CELERY_BEAT_SCHEDULE = {
-    'send_event_reminders': {
-        'task': 'yourapp.tasks.send_event_reminders',
-        'schedule': crontab(minute='*/15'),  # Adjust the interval as needed
-    },
-}
+# CELERY_BEAT_SCHEDULE = {
+#     'send_event_reminders': {
+#         'task': 'twilioapp.tasks.send_event_reminders',
+#         'schedule': timedelta(seconds=60),
+#     },
+# }

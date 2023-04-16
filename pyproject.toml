@@ -26,6 +26,7 @@ google-api-python-client = "^2.85.0"
 google-auth-httplib2 = "^0.1.0"
 google-auth-oauthlib = "^1.0.0"
 celery = {extras = ["redis"], version = "^5.2.7"}
+flower = "^1.2.0"
 
 [tool.poetry.dev-dependencies]
 ipykernel = "^6.20.2"
