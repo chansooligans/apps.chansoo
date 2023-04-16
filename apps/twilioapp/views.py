@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from twilio.twiml.messaging_response import MessagingResponse
+from twilioapp.models import ScheduledEvent
 
 import openai
 from pathlib import Path
@@ -13,7 +14,6 @@ from datetime import datetime
 import json
 
 from src.remindme import calendar, gpt
-from twilioapp.models import ScheduledEvent
 
 try:
     with open('/home/chansoo/projects/apps.chansoo/apps/twilioapp/api.yaml', 'r') as config_file:
@@ -49,7 +49,8 @@ def receive_sms(request):
     if message_body[:6] == "openai":
         response = gpt.get_gpt_standard_response(message_body)
         resp = MessagingResponse()
-        resp.messsage(response)
+        type(response[:20])
+        resp.message(response[:20])
         return HttpResponse(str(resp))
 
     parsed_event = gpt.get_gpt4_schedule_response(message_body)
