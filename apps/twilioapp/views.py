@@ -49,8 +49,7 @@ def receive_sms(request):
     if message_body[:6] == "openai":
         response = gpt.get_gpt_standard_response(message_body)
         resp = MessagingResponse()
-        type(response[:20])
-        resp.message(response[:20])
+        resp.message(response)
         return HttpResponse(str(resp))
 
     parsed_event = gpt.get_gpt4_schedule_response(message_body)
