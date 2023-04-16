@@ -22,6 +22,6 @@ app.conf.beat_schedule = {
         # Task Name (Name Specified in Decorator)
         'task': 'send_event_reminders',  
         # Schedule      
-        'schedule': 60.0 * 15
+        'schedule': 60.0 * 5
     }
 }
