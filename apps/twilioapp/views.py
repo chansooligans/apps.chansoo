@@ -40,13 +40,7 @@ except:
     google_credentials = service_account.Credentials.from_service_account_file(GOOGLE_SERVICE_ACCOUNT_FILE)
     calendar_service = build('calendar', 'v3', credentials=google_credentials)
 
-@csrf_exempt
-def receive_sms(request):
-
-    # Parse incoming message data
-    message_body = request.POST.get('Body')
-    sender_phone_number = request.POST.get('From')
-
+def openai_standard(message_body):
     if message_body.startswith("openai, email"):
         response = gpt.get_gpt_email_response(message_body.split("openai, email")[-1])
         send_mail(
@@ -55,14 +49,23 @@ def receive_sms(request):
             'chansoosong@gmail.com', ['chansoosong@gmail.com'], fail_silently=False)
         return HttpResponse("email has been delivered")
     
-    elif message_body.startswith("openai,"):
+    else: # otherwise text message
         response = gpt.get_gpt_standard_response(message_body.split("openai,")[-1])
         resp = MessagingResponse()
         resp.message(response)
         return HttpResponse(str(resp))
 
+@csrf_exempt
+def receive_sms(request):
+
+    # Parse incoming message data
+    message_body = request.POST.get('Body')
+    sender_phone_number = request.POST.get('From')
+
+    if message_body.startswith("openai"):
+        return openai_standard(message_body)
+
     parsed_event = gpt.get_gpt4_schedule_response(message_body)
-    print(parsed_event)
 
     if parsed_event["classification"] == "schedule":
     

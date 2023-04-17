@@ -11,15 +11,14 @@ from googleapiclient.discovery import build
 import yaml
 from datetime import datetime
 import json
+import pytz
 
 def get_gpt4_schedule_response(prompt):
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[
+
+    messages = [
             {"role": "system", "content": "You are an AI assistant that helps with scheduling and reminders."},
             {"role": "user", "content": prompt},
-            {"role": "system", "content": "Default timeZone is America/New_York unless otherwise specified."},
-            {"role": "system", "content": f"Today's date is {datetime.now()} unless otherwise specified."},
+            {"role": "system", "content": f"The current date and time is {datetime.now(pytz.timezone('US/Eastern'))}."},
             {"role": "system", "content": f"""
                 Classify the request as one of the following:
                 - schedule
@@ -27,33 +26,41 @@ def get_gpt4_schedule_response(prompt):
             """},
             {"role": "system", "content": """
                 Do not include any explanations, only provide a  RFC8259 compliant JSON response following this format without deviation
-                and make sure all keys are included in the object:
+                and make sure all keys are included in the object. 
                 ```
                 {
                     "summary": "Google I/O 2015",
                     "location": "800 Howard St., San Francisco, CA 94103",
                     "description": "A chance to hear more about Google\'s developer products.",
                     "start": {
-                        "dateTime": "2023-04-16T09:00:00-07:00",
-                        "timeZone": "America/New_York",
+                        "dateTime": "2023-04-16T09:00:00-05:00"
                     },
                     "end": {
-                        "dateTime": "2023-04-16T17:00:00-07:00",
-                        "timeZone": "America/New_York",
+                        "dateTime": "2023-04-16T17:00:00-05:00"
                     },
-                    "classification": ["schedule" or "reminder"]
+                    "classification": "schedule" or "reminder"
                 }
                 ```
                 The JSON response:
             """}
         ]
+    
+    print(messages)
+
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=messages
     )
     
+    print(response)
     response =  json.loads(response["choices"][0]["message"]["content"])
+    print("parsed:", response)
 
     for k in ["summary", "location", "description", "start", "end", "classification"]:
         if k not in response.keys():
             response[k] = ""
+    if isinstance(response["classification"],list):
+        response["classification"] = response["classification"][0]
 
     return response
 
