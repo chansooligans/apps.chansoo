@@ -14,13 +14,17 @@ def send_event_reminders():
 
     for event in upcoming_events:
 
-        edt_time = pytz.utc.localize(
+        print(event.start_time)
+        edt_time = (
             event.start_time
-        ).astimezone(pytz.timezone('US/Eastern')).strftime('%Y-%m-%d %I:%M %p')
+            .astimezone(pytz.timezone('US/Eastern'))
+            .strftime('%Y-%m-%d %I:%M %p')
+        )
+        print(edt_time)
 
         sms.send_reminder(
             event.phone_number, 
-            f"Reminder: {event.summary} starts at {edt_time}"
+            f"Reminder: {event.summary} starts at {edt_time}; {event.description}"
         )
         event.sent = True
         event.save()

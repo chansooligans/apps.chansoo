@@ -75,7 +75,7 @@ def receive_sms(request):
         resp = MessagingResponse()
         
         dt = datetime.fromisoformat(parsed_event["start"]["dateTime"])
-        start_time = dt.strftime('%Y-%m-%d at %-I%p')
+        start_time = dt.strftime('%Y-%m-%d at %-I:%M%p')
 
         # Determine the right reply for this message
         resp.message(f"""Your event '{parsed_event["summary"]}' on {start_time} is scheduled""")
@@ -99,7 +99,7 @@ def receive_sms(request):
         resp = MessagingResponse()
         
         dt = datetime.fromisoformat(parsed_event["start"]["dateTime"])
-        start_time = dt.strftime('%Y-%m-%d at %-I%p')
+        start_time = dt.strftime('%Y-%m-%d at %-I:%M%p')
 
         # Determine the right reply for this message
         resp.message(f"""Your reminder '{parsed_event["summary"]}' on {start_time} is scheduled""")
