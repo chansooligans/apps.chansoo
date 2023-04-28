@@ -40,16 +40,7 @@ except:
     google_credentials = service_account.Credentials.from_service_account_file(GOOGLE_SERVICE_ACCOUNT_FILE)
     calendar_service = build('calendar', 'v3', credentials=google_credentials)
 
-@csrf_exempt
-def receive_sms(request):
-
-    # Parse incoming message data
-    message_body = request.POST.get('Body')
-    sender_phone_number = request.POST.get('From')
-
-    if sender_phone_number != 6502355273:
-        return
-
+def openai_standard(message_body):
     if message_body.startswith("openai, email"):
         response = gpt.get_gpt_email_response(message_body.split("openai, email")[-1])
         send_mail(
@@ -58,14 +49,26 @@ def receive_sms(request):
             'chansoosong@gmail.com', ['chansoosong@gmail.com'], fail_silently=False)
         return HttpResponse("email has been delivered")
     
-    elif message_body.startswith("openai,"):
+    else: # otherwise text message
         response = gpt.get_gpt_standard_response(message_body.split("openai,")[-1])
         resp = MessagingResponse()
         resp.message(response)
         return HttpResponse(str(resp))
 
+@csrf_exempt
+def receive_sms(request):
+
+    # Parse incoming message data
+    message_body = request.POST.get('Body')
+    sender_phone_number = request.POST.get('From')
+
+    if str(sender_phone_number) != "+16502355273":
+        return
+
+    if message_body.startswith("openai"):
+        return openai_standard(message_body)
+
     parsed_event = gpt.get_gpt4_schedule_response(message_body)
-    print(parsed_event)
 
     if parsed_event["classification"] == "schedule":
     
@@ -75,7 +78,7 @@ def receive_sms(request):
         resp = MessagingResponse()
         
         dt = datetime.fromisoformat(parsed_event["start"]["dateTime"])
-        start_time = dt.strftime('%Y-%m-%d at %-I%p')
+        start_time = dt.strftime('%Y-%m-%d at %-I:%M%p')
 
         # Determine the right reply for this message
         resp.message(f"""Your event '{parsed_event["summary"]}' on {start_time} is scheduled""")
@@ -99,7 +102,7 @@ def receive_sms(request):
         resp = MessagingResponse()
         
         dt = datetime.fromisoformat(parsed_event["start"]["dateTime"])
-        start_time = dt.strftime('%Y-%m-%d at %-I%p')
+        start_time = dt.strftime('%Y-%m-%d at %-I:%M%p')
 
         # Determine the right reply for this message
         resp.message(f"""Your reminder '{parsed_event["summary"]}' on {start_time} is scheduled""")

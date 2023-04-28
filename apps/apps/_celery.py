@@ -5,7 +5,7 @@ from celery import Celery
 from django.conf import settings
 
 # Set the default Django settings module for the 'celery' program.
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'apps.settings.dev')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'apps.settings.prod')
 
 app = Celery('apps', broker="redis://0.0.0.0:6379/0", backend="redis://0.0.0.0:6379/0")
 
@@ -22,6 +22,6 @@ app.conf.beat_schedule = {
         # Task Name (Name Specified in Decorator)
         'task': 'send_event_reminders',  
         # Schedule      
-        'schedule': 60.0 * 5
+        'schedule': 30.0 
     }
 }
