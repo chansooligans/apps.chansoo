@@ -47,6 +47,9 @@ def receive_sms(request):
     message_body = request.POST.get('Body')
     sender_phone_number = request.POST.get('From')
 
+    if sender_phone_number != 6502355273:
+        return
+
     if message_body.startswith("openai, email"):
         response = gpt.get_gpt_email_response(message_body.split("openai, email")[-1])
         send_mail(

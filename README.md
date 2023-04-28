@@ -1,10 +1,10 @@
-# Is Central Jersey Real?
+# apps.chansoos.com
 
-Testing AWS Lightsail + Django while attempting to resolve a heated dispute 
-among friends and family centered on the question: does "Central Jersey" 
-exist???
+Hosts:
 
-See app on https://apps.chansoos.com/centraljersey
+- https://apps.chansoos.com/centraljersey
+    - does "Central Jersey" exist???
+- api for personal reminder tool endpoint
 
 To run:
 
