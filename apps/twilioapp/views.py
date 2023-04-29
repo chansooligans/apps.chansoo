@@ -14,7 +14,7 @@ from datetime import datetime
 from django.core.mail import send_mail
 import json
 
-from src.remindme import calendar, gpt
+from remindme import calendar, gpt
 
 try:
     with open('/home/chansoo/projects/apps.chansoo/apps/twilioapp/api.yaml', 'r') as config_file:
@@ -40,21 +40,6 @@ except:
     google_credentials = service_account.Credentials.from_service_account_file(GOOGLE_SERVICE_ACCOUNT_FILE)
     calendar_service = build('calendar', 'v3', credentials=google_credentials)
 
-def openai_standard(message_body):
-    if message_body.startswith("openai, email"):
-        response = gpt.get_gpt_email_response(message_body.split("openai, email")[-1])
-        send_mail(
-            response["subject_line"], 
-            response["body"], 
-            'chansoosong@gmail.com', ['chansoosong@gmail.com'], fail_silently=False)
-        return HttpResponse("email has been delivered")
-    
-    else: # otherwise text message
-        response = gpt.get_gpt_standard_response(message_body.split("openai,")[-1])
-        resp = MessagingResponse()
-        resp.message(response)
-        return HttpResponse(str(resp))
-
 @csrf_exempt
 def receive_sms(request):
 
@@ -66,13 +51,13 @@ def receive_sms(request):
         return
 
     if message_body.startswith("openai"):
-        return openai_standard(message_body)
+        return gpt.openai_standard(message_body)
 
     parsed_event = gpt.get_gpt4_schedule_response(message_body)
 
     if parsed_event["classification"] == "schedule":
     
-        scheduled_event = calendar.schedule_event(calendar_service, parsed_event)
+        calendar.schedule_event(calendar_service, parsed_event)
 
         # Start our TwiML response
         resp = MessagingResponse()
