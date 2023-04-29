@@ -31,6 +31,7 @@ def receive_sms(request):
     
     parser = MessageParser(message_body=message_body)
     parsed_event = parser.parse_message()
+    print(parsed_event)
 
     if parser._type == "generic":
         return HttpResponse(str(parsed_event))
