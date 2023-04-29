@@ -18,10 +18,10 @@ app.autodiscover_tasks()
 
 app.conf.beat_schedule = {
     #Scheduler Name
-    'send_event_reminders-15min': {
+    'send_event_reminders-5min': {
         # Task Name (Name Specified in Decorator)
         'task': 'send_event_reminders',  
         # Schedule      
-        'schedule': 30.0 
+        'schedule': 60.0
     }
 }
