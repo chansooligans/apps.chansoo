@@ -1,8 +1,4 @@
-'''
-management >> commands >> script structure allows:
-`python manage.py send_daily_newsletter --settings=apps.settings.dev`
-'''
-from django.core.management.base import BaseCommand
+from celery import shared_task
 from tailoredscoop.news import api
 from tailoredscoop.documents import summarize
 from django.core.mail import send_mail
@@ -11,11 +7,9 @@ import openai
 from tailorscoop.models import NewsletterSubscription
 import hashlib
 import datetime
-
 from pymongo.errors import DuplicateKeyError
 
-class Command(BaseCommand):
-    help = 'Send daily newsletter to subscribed users'
+class NewsletterSender:
 
     def save_summary(self, news_downloader, date, hash, kw=None):
         if kw:
@@ -56,13 +50,15 @@ class Command(BaseCommand):
                 summary_hash = hashlib.sha256((user.keywords + now.strftime("%Y-%m-%d %H")).encode()).hexdigest()
             else:
                 summary_hash = hashlib.sha256((now.strftime("%Y-%m-%d %H")).encode()).hexdigest()
-                
+            
+            print("get summaries")
             if news_downloader.db.summaries.find_one({"summary_id": summary_hash}):
                 print('used cached summary')
                 summary = news_downloader.db.summaries.find_one({"summary_id": summary_hash})["summary"]
             else:
                 summary = self.save_summary(news_downloader, now, summary_hash, kw=user.keywords)
 
+            print("send emails")
             send_mail(
                 subject="Today's Tailored Scoop",
                 message=summary,
@@ -71,4 +67,10 @@ class Command(BaseCommand):
                 fail_silently=False,
             )
 
-        self.stdout.write(self.style.SUCCESS('Successfully sent daily newsletter'))
+        print('Successfully sent daily newsletter')
+
+
+@shared_task(name="send_daily_newsletter")
+def send_daily_newsletter():
+    command = NewsletterSender()
+    command.handle()
