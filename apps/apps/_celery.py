@@ -25,8 +25,8 @@ app.conf.beat_schedule = {
         # Schedule      
         'schedule': 60.0
     },
-    'send_daily_newsletter': {
-        'task': 'send_daily_newsletter',
-        'schedule': crontab(hour=10, minute=0),
-    },
+    # 'send_daily_newsletter': {
+    #     'task': 'send_daily_newsletter',
+    #     'schedule': crontab(hour=10, minute=0),
+    # },
 }
