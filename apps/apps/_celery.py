@@ -6,7 +6,7 @@ from celery.schedules import crontab
 from django.conf import settings
 
 # Set the default Django settings module for the 'celery' program.
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'apps.settings.dev')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'apps.settings.prod')
 
 app = Celery('apps', broker="redis://0.0.0.0:6379/0", backend="redis://0.0.0.0:6379/0")
 
@@ -27,6 +27,6 @@ app.conf.beat_schedule = {
     },
     'send_daily_newsletter': {
         'task': 'send_daily_newsletter',
-        'schedule': crontab(hour=12, minute=38),
+        'schedule': crontab(hour=10, minute=0),
     },
 }
