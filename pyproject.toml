@@ -32,6 +32,7 @@ sendgrid = "^6.10.0"
 remindme = {path = "../remindme", develop = true}
 tailoredscoop = {path = "../tailoredscoop", develop = true}
 ipython = "8.12"
+jupyter = "^1.0.0"
 
 [tool.poetry.dev-dependencies]
 ipykernel = "^6.20.2"

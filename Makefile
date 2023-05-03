@@ -13,3 +13,7 @@ collect-static:
 
 celery-redis:
 	docker-compose up
+
+shell_plus:
+	cd apps \
+	&& ./manage.py shell_plus --ipython --settings=apps.settings.dev

@@ -1,0 +1,187 @@
+.
+├── Makefile
+├── README.md
+├── apps
+│   ├── __pycache__
+│   ├── apps
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   ├── _celery.py
+│   │   ├── asgi.py
+│   │   ├── db.sqlite3
+│   │   ├── settings
+│   │   │   ├── __init__.py
+│   │   │   ├── __pycache__
+│   │   │   ├── dev.py
+│   │   │   └── prod.py
+│   │   ├── urls.py
+│   │   └── wsgi.py
+│   ├── celerybeat-schedule.bak
+│   ├── celerybeat-schedule.dat
+│   ├── celerybeat-schedule.dir
+│   ├── centraljersey
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── migrations
+│   │   │   ├── __init__.py
+│   │   │   └── __pycache__
+│   │   ├── models.py
+│   │   ├── tests.py
+│   │   ├── urls.py
+│   │   └── views.py
+│   ├── db.sqlite3
+│   ├── manage.py
+│   ├── static
+│   │   ├── css
+│   │   │   ├── leaflet.css
+│   │   │   └── tscoop.css
+│   │   ├── csv
+│   │   │   ├── summary.csv
+│   │   │   └── svc_summary.csv
+│   │   ├── favicon.ico
+│   │   ├── geojson
+│   │   │   ├── merged_counties.geojson
+│   │   │   └── merged_tracts.geojson
+│   │   ├── images
+│   │   │   ├── barplot.png
+│   │   │   ├── ice-cream-scoops.png
+│   │   │   └── scoops2.png
+│   │   └── js
+│   │       ├── carousel.js
+│   │       ├── leaflet-barplot.js
+│   │       ├── leaflet-scroll.js
+│   │       ├── leaflet.js
+│   │       └── tscoop-scripts.js
+│   ├── tailorscoop
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── forms.py
+│   │   ├── management
+│   │   │   ├── __init__.py
+│   │   │   ├── __pycache__
+│   │   │   └── commands
+│   │   │       ├── __init__.py
+│   │   │       ├── __pycache__
+│   │   │       └── send_daily_newsletter.py
+│   │   ├── migrations
+│   │   │   ├── 0001_initial.py
+│   │   │   ├── __init__.py
+│   │   │   └── __pycache__
+│   │   ├── models.py
+│   │   ├── tests.py
+│   │   ├── urls.py
+│   │   └── views.py
+│   ├── templates
+│   │   ├── centraljersey
+│   │   │   ├── base.html
+│   │   │   ├── culture.html
+│   │   │   └── leaflet.html
+│   │   └── tailorscoop
+│   │       └── home.html
+│   └── twilioapp
+│       ├── __init__.py
+│       ├── __pycache__
+│       ├── admin.py
+│       ├── api.yaml
+│       ├── apps.py
+│       ├── migrations
+│       │   ├── 0001_initial.py
+│       │   ├── __init__.py
+│       │   └── __pycache__
+│       ├── models.py
+│       ├── tasks.py
+│       ├── tests.py
+│       └── views.py
+├── cache
+│   ├── archive
+│   │   ├── calm.csv
+│   │   ├── draw.csv
+│   │   ├── forward.csv
+│   │   ├── gone.csv
+│   │   └── nj_data.csv
+│   ├── calm.csv
+│   ├── df_dunkins.csv
+│   ├── df_wawas.csv
+│   ├── draw.csv
+│   ├── forward.csv
+│   ├── gone.csv
+│   └── nj_data.csv
+├── celerybeat-schedule.bak
+├── celerybeat-schedule.dat
+├── celerybeat-schedule.dir
+├── data
+│   ├── NJ_dialects_coye2009.pdf
+│   ├── censustracts.csv
+│   ├── county_boundaries
+│   │   ├── County_Boundaries_of_NJ.cpg
+│   │   ├── County_Boundaries_of_NJ.dbf
+│   │   ├── County_Boundaries_of_NJ.prj
+│   │   ├── County_Boundaries_of_NJ.shp
+│   │   ├── County_Boundaries_of_NJ.shx
+│   │   └── County_Boundaries_of_NJ.xml
+│   ├── dunkin
+│   ├── maps.nosync
+│   │   ├── dunkin.html
+│   │   ├── edu_college.html
+│   │   ├── nfl_eagles.html
+│   │   ├── nfl_giants_jets.html
+│   │   ├── pob_foreign_born.html
+│   │   ├── pob_native_jeresy.html
+│   │   ├── pork_pork_roll.html
+│   │   ├── pork_taylor_ham.html
+│   │   └── wawa.html
+│   ├── merged.csv
+│   ├── nfl.csv
+│   ├── pork_ham.csv
+│   ├── summary.csv
+│   ├── wawa
+│   └── wawa.csv
+├── docs
+│   ├── celery-redis.md
+│   └── mysql.md
+├── dump.rdb
+├── poetry.lock
+├── poetry.toml
+├── pyproject.toml
+├── research
+│   ├── articles.md
+│   ├── culture.md
+│   └── papers.md
+├── scratch
+│   ├── __pycache__
+│   ├── sandbox.py
+│   └── tabula_test.py
+├── scripts
+│   ├── census_variables
+│   │   └── variables.py
+│   ├── folium_map.py
+│   ├── folium_map_tracts.py
+│   ├── merge.py
+│   ├── tscoop
+│   │   └── sandbox.py
+│   └── tweets.py
+├── secrets.yaml
+├── src
+│   ├── __init__.py
+│   ├── __pycache__
+│   ├── cache.py
+│   ├── load
+│   │   ├── __pycache__
+│   │   ├── census.py
+│   │   ├── dialects.py
+│   │   ├── foursquare.py
+│   │   └── njdotcom.py
+│   ├── merge.py
+│   └── remindme
+│       ├── __init__.py
+│       ├── __pycache__
+│       ├── calendar.py
+│       ├── gpt.py
+│       └── sms.py
+└── tree.txt
+
+51 directories, 133 files
