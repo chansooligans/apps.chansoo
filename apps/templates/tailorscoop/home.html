@@ -1,0 +1,63 @@
+<!-- subscribe.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tailored Scoop - Subscribe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/tscoop.css' %}">
+
+    <!-- Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <!-- Select2 JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/tscoop-scripts.js' %}"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h1 class="text-center mt-5">Tailored Scoop</h1>
+                <h3 class="text-center mb-5">Subscribe to our AI-generated daily newsletter</h3>
+                <div class="text-center my-5">
+                    <img src="{% static 'images/scoops2.png' %}" alt="Three ice cream scoops" class="img-fluid">
+                </div>
+                <form method="post" class="p-5">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="keyword-input" placeholder="Enter keyword" />
+                        </div>
+                        <div id="keywords-wrapper" class="mt-3">
+                            <!-- Keywords will be added dynamically here -->
+                        </div>
+                        <p class="optional-label">(Optional: Add any keywords)</p>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md">
+                                <div class="input-group">
+                                    <input type="email" class="form-control" id="email-input" name="email" placeholder="Enter your email address" />
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <button type="submit" class="btn btn-primary btn-block">Subscribe</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {{ form.keywords.as_hidden }}
+                </form>
+                              
+            </div>
+        </div>
+    </div>
+</body>
+</html>

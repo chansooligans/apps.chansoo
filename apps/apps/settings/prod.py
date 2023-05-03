@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'centraljersey',
-    'twilioapp'
+    'twilioapp',
+    'tailorscoop'
 ]
 
 MIDDLEWARE = [
