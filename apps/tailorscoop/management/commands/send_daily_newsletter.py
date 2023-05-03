@@ -13,7 +13,11 @@ from pymongo.errors import DuplicateKeyError
 class Command(BaseCommand):
     help = 'Send daily newsletter to subscribed users'
 
-    def save_summary(self, news_downloader, date, hash, articles):
+    def save_summary(self, news_downloader, date, hash, kw=None):
+        if kw:
+            articles = news_downloader.query_news_by_topic(kw)
+        else:
+            articles = news_downloader.get_top_news()
         res = news_downloader.process(articles, summarizer=summarize.summarizer)
         summary = summarize.get_openai_summary(res)
         summary_obj = {
@@ -43,18 +47,16 @@ class Command(BaseCommand):
         for user in subscribed_users:
             
             if user.keywords != "":
-                # Fetch articles based on user's keywords
                 summary_hash = hashlib.sha256((user.keywords + now.strftime("%Y-%m-%d %H")).encode()).hexdigest()
-                articles = news_downloader.query_news_by_topic(user.keywords)
+                
             else:
-                # Use the cached summary for users without keywords
                 summary_hash = hashlib.sha256((now.strftime("%Y-%m-%d %H")).encode()).hexdigest()
-                articles = news_downloader.get_top_news()
-            
+                
             if news_downloader.db.summaries.find_one({"summary_id": summary_hash}):
+                print('used cached summary')
                 summary = news_downloader.db.summaries.find_one({"summary_id": summary_hash})["summary"]
             else:
-                summary = self.save_summary(news_downloader, now, summary_hash, articles)
+                summary = self.save_summary(news_downloader, now, summary_hash, kw=user.keywords)
 
             send_mail(
                 subject="Today's Tailored Scoop",
