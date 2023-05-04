@@ -17,6 +17,7 @@ $(document).ready(function () {
                 });
                 keywordInput.val('');
                 updateHiddenKeywords();
+                $('#keywords-wrapper').removeClass('d-none'); // Show the keywords wrapper
             }
         }
     });
@@ -29,6 +30,9 @@ $(document).ready(function () {
         }
         $(this).parent().remove();
         updateHiddenKeywords();
+        if (keywords.length === 0) {
+            $('#keywords-wrapper').addClass('d-none'); // Hide the keywords wrapper when all keywords are removed
+        }
     });
 
     function updateHiddenKeywords() {
