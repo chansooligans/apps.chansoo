@@ -103,3 +103,17 @@ input[type="email"] {
 .text-center.explain {
     font-family: "Nunito";
 }
+
+#keyword-input::placeholder,
+#email-input::placeholder {
+    font-size: 12px;
+    /* Adjust the font size as per your preference */
+}
+
+
+/* Media Query for Desktop Devices */
+@media (min-width: 767px) {
+    form.py-5 {
+        padding: 3rem;
+    }
+}
