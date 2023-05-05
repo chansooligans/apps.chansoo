@@ -26,8 +26,5 @@ def home(request):
 
 def today_story(request):
 
-    # today_objects = Today.objects.order_by('-timestamp')
-    # today_df = pd.DataFrame.from_records(today_objects.values())
-
     context = {'story_text': "testing"}
     return render(request, 'tailorscoop/today.html', context)
