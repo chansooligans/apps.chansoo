@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from .forms import NewsletterSubscriptionForm
 from .models import NewsletterSubscription
-import pandas as pd
 
 def home(request):
     if request.method == 'POST':
