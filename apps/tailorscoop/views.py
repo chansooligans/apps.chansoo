@@ -25,6 +25,12 @@ def home(request):
     return render(request, 'tailorscoop/home.html', {'form': form})
 
 def today_story(request):
+    from src import config
+    secrets = config.setup()
+    user = secrets['mysql']['username']
+    password = secrets['mysql']['password']
+    host = secrets['mysql']['host']
+    database = secrets['mysql']['database']
     summary = "blashdfklsdj;flksdjf;ksdfj dsfk;sdjfkdsjfs"
     context = {'story_text': summary}
     return render(request, 'tailorscoop/today.html', context)
