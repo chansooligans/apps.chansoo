@@ -24,5 +24,5 @@ app.conf.beat_schedule = {
         'task': 'send_event_reminders',  
         # Schedule      
         'schedule': 60.0
-    },
+    }
 }

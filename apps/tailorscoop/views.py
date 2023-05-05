@@ -25,6 +25,7 @@ def home(request):
     return render(request, 'tailorscoop/home.html', {'form': form})
 
 def today_story(request):
+
     today_objects = Today.objects.order_by('-timestamp')
     first_today_object = today_objects.first()
 
@@ -34,4 +35,5 @@ def today_story(request):
         content = None  
 
     context = {'story_text': content}
+
     return render(request, 'tailorscoop/today.html', context)
