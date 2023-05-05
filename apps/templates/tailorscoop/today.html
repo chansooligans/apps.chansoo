@@ -1,0 +1,18 @@
+<!-- subscribe.html -->
+{% extends 'tailorscoop/base.html' %}
+{% block body_block %}
+{% load static %}
+    <link rel="stylesheet" href="{% static 'css/tscoop_story.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h1 class="text-center my-5">Today's Scoops</h1>
+                {% comment %} <h3 class="text-center explain my-5">Subscribe to our AI-generated daily newsletter</h3> {% endcomment %}
+                <p class="story-text">{{ story_text|linebreaks }}</p>       
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

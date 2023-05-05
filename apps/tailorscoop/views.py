@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .forms import NewsletterSubscriptionForm
 from .models import NewsletterSubscription
+from sqlalchemy import create_engine, text
+import pandas as pd
 
 def home(request):
     if request.method == 'POST':
@@ -23,3 +25,18 @@ def home(request):
         form = NewsletterSubscriptionForm()
 
     return render(request, 'tailorscoop/home.html', {'form': form})
+
+def today_story(request):
+    from src import config
+    secrets = config.setup()
+    user = secrets['mysql']['username']
+    password = secrets['mysql']['password']
+    host = secrets['mysql']['host']
+    database = secrets['mysql']['database']
+    engine = create_engine(f'mysql+mysqlconnector://{user}:{password}@{host}/{database}?charset=utf8mb4')
+    with engine.begin() as conn:
+        query = text("SELECT * FROM today ORDER BY timestamp desc")
+        df = pd.read_sql_query(query, conn)
+    summary = df.iloc[0]["content"]
+    context = {'story_text': summary}
+    return render(request, 'tailorscoop/today.html', context)

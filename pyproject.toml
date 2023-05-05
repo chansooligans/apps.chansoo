@@ -33,6 +33,8 @@ remindme = {path = "../remindme", develop = true}
 tailoredscoop = {path = "../tailoredscoop", develop = true}
 ipython = "8.12"
 jupyter = "^1.0.0"
+sqlalchemy = "^2.0.12"
+mysql-connector-python = "^8.0.33"
 
 [tool.poetry.dev-dependencies]
 ipykernel = "^6.20.2"
