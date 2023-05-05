@@ -34,9 +34,9 @@ def today_story(request):
     host = secrets['mysql']['host']
     database = secrets['mysql']['database']
     engine = create_engine(f'mysql+mysqlconnector://{user}:{password}@{host}/{database}?charset=utf8mb4')
-    with engine.begin() as conn:
-        query = text("SELECT * FROM today ORDER BY timestamp desc")
-        df = pd.read_sql_query(query, conn)
+    
+    query = text("SELECT * FROM today ORDER BY timestamp desc")
+    df = pd.read_sql(query, con=engine)
     print(df)
     summary = "blashdfklsdj;flksdjf;ksdfj dsfk;sdjfkdsjfs"
     context = {'story_text': summary}
