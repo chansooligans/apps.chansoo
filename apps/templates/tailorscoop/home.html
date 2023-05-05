@@ -26,6 +26,7 @@
             <div class="col-md-6 offset-md-3">
                 <h1 class="text-center my-5">Tailored Scoop</h1>
                 {% comment %} <h3 class="text-center explain my-5">Subscribe to our AI-generated daily newsletter</h3> {% endcomment %}
+                <h5 class="text-center explain my-5">Your personalized news sundae, delivered daily!</h3>
                 <div class="text-center mt-5">
                     <img src="{% static 'images/scoops2.png' %}" alt="Three ice cream scoops" class="img-fluid">
                 </div>
@@ -33,9 +34,9 @@
                     {% csrf_token %}
                     <div class="form-group">
                         <div class="input-group">
-                            <input type="text" class="form-control" id="keyword-input" placeholder="Cherry-pick news flavors! Enter your favorite topics." />
+                            <input type="text" class="form-control" id="keyword-input" placeholder="Cherry-pick news flavors! Enter your favorite toppings." />
                         </div>
-                        <p class="optional-label">Leave blank to get yesterday's top headlines.</p>
+                        <p class="optional-label">Leave blank to get general top headlines.</p>
                         <div id="keywords-wrapper" class="mt-3 d-none">
                             <!-- Keywords will be added dynamically here -->
                         </div>

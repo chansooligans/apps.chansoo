@@ -14,14 +14,14 @@ body {
 }
 
 h1,
-h3 {
+h5 {
     font-size: 2.5rem;
     color: #4a4a4a;
     font-family: 'Pacifico', cursive;
 }
 
-h3 {
-    font-size: 1.5rem;
+h5 {
+    font-size: 1.25rem;
     margin-bottom: 30px;
 }
 
