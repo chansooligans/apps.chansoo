@@ -88,3 +88,5 @@ scratch/*
 *.dat
 *.dir
 *.rdbsendgrid.env
+
+*/celerybeat*
