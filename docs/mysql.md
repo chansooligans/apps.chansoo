@@ -14,4 +14,3 @@ GRANT ALL PRIVILEGES ON apps.* TO csong@'108.53.41.178' IDENTIFIED BY '[password
 
 # then from local:
 mysql -u csong -p -h 54.210.64.57
-
