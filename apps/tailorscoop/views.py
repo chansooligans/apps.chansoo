@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .forms import NewsletterSubscriptionForm
-from .models import NewsletterSubscription, Today
+from .models import NewsletterSubscription
 import pandas as pd
 
 def home(request):
@@ -26,9 +26,6 @@ def home(request):
     return render(request, 'tailorscoop/home.html', {'form': form})
 
 def today_story(request):
-
-    today_objects = Today.objects.order_by('-timestamp')
-    today_df = pd.DataFrame.from_records(today_objects.values())
 
     context = {'story_text': "testing"}
     return render(request, 'tailorscoop/today.html', context)
