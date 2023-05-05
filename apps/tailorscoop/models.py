@@ -7,3 +7,11 @@ class NewsletterSubscription(models.Model):
 
     def __str__(self):
         return self.email
+    
+class Today(models.Model):
+    content = models.CharField(max_length=4096)
+    timestamp = models.DateTimeField()
+
+    class Meta:
+        db_table = 'today'
+        ordering = ['timestamp']
