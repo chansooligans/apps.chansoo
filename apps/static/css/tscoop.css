@@ -117,3 +117,18 @@ input[type="email"] {
         padding: 3rem;
     }
 }
+
+.todays-scoops-link {
+    /* position: fixed; */
+    bottom: 0px;
+    width: 100%;
+}
+
+.todays-scoops-link a {
+    color: #f5a623;
+    text-decoration: none;
+}
+
+.todays-scoops-link a:hover {
+    text-decoration: underline;
+}
