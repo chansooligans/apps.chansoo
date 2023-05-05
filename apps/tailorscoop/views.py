@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .forms import NewsletterSubscriptionForm
 from .models import NewsletterSubscription
+from sqlalchemy import create_engine, text
 
 def home(request):
     if request.method == 'POST':
@@ -31,6 +32,7 @@ def today_story(request):
     password = secrets['mysql']['password']
     host = secrets['mysql']['host']
     database = secrets['mysql']['database']
+    engine = create_engine(f'mysql+mysqlconnector://{user}:{password}@{host}/{database}?charset=utf8mb4')
     summary = "blashdfklsdj;flksdjf;ksdfj dsfk;sdjfkdsjfs"
     context = {'story_text': summary}
     return render(request, 'tailorscoop/today.html', context)
