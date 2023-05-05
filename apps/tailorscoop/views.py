@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .forms import NewsletterSubscriptionForm
-from .models import NewsletterSubscription
+from .models import NewsletterSubscription, Today
 
 def home(request):
     if request.method == 'POST':
