@@ -23,3 +23,8 @@ def home(request):
         form = NewsletterSubscriptionForm()
 
     return render(request, 'tailorscoop/home.html', {'form': form})
+
+def today_story(request):
+    summary = "blashdfklsdj;flksdjf;ksdfj dsfk;sdjfkdsjfs"
+    context = {'story_text': summary}
+    return render(request, 'tailorscoop/today.html', context)
