@@ -8,8 +8,6 @@ body {
     background-size: cover;
     background-attachment: fixed;
     display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100vh;
 }
 
@@ -112,10 +110,16 @@ input[type="email"] {
 
 
 /* Media Query for Desktop Devices */
-@media (min-width: 767px) {
+@media (min-width: 1024px) {
     form.py-5 {
         padding: 3rem;
     }
+
+    body {
+        justify-content: center;
+        align-items: center;
+    }
+
 }
 
 .todays-scoops-link {
