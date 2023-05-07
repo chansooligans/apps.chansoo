@@ -3,6 +3,8 @@
 {% extends 'tailorscoop/base.html' %}
 {% block body_block %}
 {% load static %}
+<!-- Add Bootstrap 5 JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="{% static 'css/tscoop.css' %}">
 <body>
     <div class="container">
@@ -14,7 +16,7 @@
                 <div class="text-center mt-5">
                     <img src="{% static 'images/scoops2.png' %}" alt="Three ice cream scoops" class="img-fluid">
                 </div>
-                <form method="post" class="py-5">
+                <form method="post" class="py-5" id="subscription-form">
                     {% csrf_token %}
                     <div class="form-group">
                         <div class="input-group">
@@ -47,5 +49,24 @@
             <a href="{% url 'today' %}">Today's Scoops</a>
         </div>
     </div>
+
+    <!-- Thank You Modal -->
+    <div class="modal fade" id="thankYouModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Thank You!</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            Sweet! You've just subscribed to Tailored Scoop! 🍨 Keep an eye on your inbox tomorrow morning for a delightful serving of the latest news scoops!
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+        </div>
+    </div>
+  
 </body>
 {% endblock %}

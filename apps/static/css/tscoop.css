@@ -136,3 +136,56 @@ input[type="email"] {
 .todays-scoops-link a:hover {
     text-decoration: underline;
 }
+
+/* Thank You Modal Styling */
+#thankYouModal .modal-dialog {
+    max-width: 400px;
+}
+
+#thankYouModal .modal-content {
+    background-color: #fdf1e9;
+    border: none;
+}
+
+#thankYouModal .modal-header {
+    display: flex;
+    justify-content: center;
+}
+
+#thankYouModal .modal-title {
+    font-family: 'Pacifico', cursive;
+    font-size: 2rem;
+    color: #4a4a4a;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#thankYouModal .btn-close {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    color: #4a4a4a;
+}
+
+#thankYouModal .modal-body {
+    font-family: 'Arial', sans-serif;
+    font-size: 1.125rem;
+    color: #4a4a4a;
+    padding: 10px 15px;
+}
+
+#thankYouModal .modal-footer {
+    border-top: none;
+    padding: 10px 15px;
+}
+
+#thankYouModal .btn-primary {
+    background-color: #f5a623;
+    border: none;
+}
+
+#thankYouModal .btn-primary:hover,
+#thankYouModal .btn-primary:focus {
+    background-color: #d89219;
+    border: none;
+}

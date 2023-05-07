@@ -43,4 +43,15 @@ $(document).ready(function () {
     function updateHiddenKeywords() {
         $('input[name="keywords"]').val(keywords.join(','));
     }
+
+    // Listen for form submission
+    $('#subscription-form').on('submit', function (e) {
+        e.preventDefault();
+
+        // Perform any required validation or submission actions here
+
+        // Show the thank you modal
+        var thankYouModal = new bootstrap.Modal(document.getElementById('thankYouModal'), {});
+        thankYouModal.show();
+    });
 });
