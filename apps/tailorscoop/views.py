@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 from .forms import NewsletterSubscriptionForm
 from .models import NewsletterSubscription, Today
@@ -37,3 +38,14 @@ def today_story(request):
     context = {'story_text': content}
 
     return render(request, 'tailorscoop/today.html', context)
+
+def unsubscribe(request, email):
+    try:
+        subscription = NewsletterSubscription.objects.get(email=email)
+        subscription.delete()
+        message = "You have been unsubscribed from Tailored Scoop. We're sorry to see you go!"
+    except NewsletterSubscription.DoesNotExist:
+        message = "This email address is not subscribed to Tailored Scoop."
+
+    context = {'message': message}
+    return render(request, 'tailorscoop/unsubscribe.html', context)
