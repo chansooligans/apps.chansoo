@@ -10,6 +10,7 @@ GRANT ALL PRIVILEGES ON apps.* TO 'user'@'localhost';
 
 
 GRANT ALL PRIVILEGES ON apps.* TO csong@'108.53.41.178' IDENTIFIED BY '[password]';
+GRANT ALL PRIVILEGES ON apps.* TO csong@'%' IDENTIFIED BY '[password]';
 
 
 # then from local:
