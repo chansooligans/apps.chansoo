@@ -19,7 +19,7 @@ h5 {
 }
 
 h5 {
-    font-size: 1.25rem;
+    font-size: 1rem;
     margin-bottom: 30px;
 }
 
@@ -118,6 +118,10 @@ input[type="email"] {
     body {
         justify-content: center;
         align-items: center;
+    }
+
+    h5 {
+        font-size: 1.25rem;
     }
 
 }
