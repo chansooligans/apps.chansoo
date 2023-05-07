@@ -45,13 +45,29 @@ $(document).ready(function () {
     }
 
     // Listen for form submission
-    $('#subscription-form').on('submit', function (e) {
+    // Need to do this to make modal popup AND form validation with django
+    $('form').on('submit', function (e) {
         e.preventDefault();
 
         // Perform any required validation or submission actions here
 
-        // Show the thank you modal
-        var thankYouModal = new bootstrap.Modal(document.getElementById('thankYouModal'), {});
-        thankYouModal.show();
+        // AJAX form submission
+        $.ajax({
+            type: $(this).attr('method'),
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+            success: function (response) {
+                // Show the thank you modal
+                var thankYouModal = new bootstrap.Modal(document.getElementById('thankYouModal'), {});
+                thankYouModal.show();
+
+                // Clear the form fields
+                $('form').trigger('reset');
+            },
+            error: function (response) {
+                // Handle any errors here
+                console.log('Error:', response);
+            }
+        });
     });
 });
