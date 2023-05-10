@@ -51,6 +51,7 @@ $(document).ready(function () {
 
         // Perform any required validation or submission actions here
 
+
         // AJAX form submission
         $.ajax({
             type: $(this).attr('method'),
@@ -65,9 +66,11 @@ $(document).ready(function () {
                 $('form').trigger('reset');
             },
             error: function (response) {
+
                 // Handle any errors here
                 console.log('Error:', response);
             }
         });
+
     });
 });

@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.forms.utils import ErrorList
 from .forms import NewsletterSubscriptionForm
 from .models import NewsletterSubscription, Today
 import hashlib
@@ -7,12 +8,7 @@ import hashlib
 def home(request):
     if request.method == 'POST':
         form = NewsletterSubscriptionForm(request.POST)
-        print(form)
         if form.is_valid():
-            print("Form data:", form.cleaned_data) 
-            print(form.cleaned_data)
-            
-
             email = form.cleaned_data['email']
             existing_subscription = NewsletterSubscription.objects.filter(email=email).first()
             if existing_subscription:
@@ -20,7 +16,8 @@ def home(request):
             form.save()  # Save the new subscription
             # Add a success message or redirect to a success page
         else:
-            print("Form errors:", form.errors) 
+            # debug print the errors to console
+            print("Form errors:", form.errors)
     else:
         form = NewsletterSubscriptionForm()
 
