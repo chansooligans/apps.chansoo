@@ -9,23 +9,28 @@ body {
     background-attachment: fixed;
     display: flex;
     height: 100vh;
+    font-family: 'Nunito', cursive;
 }
 
-h1,
-h5 {
-    font-size: 2.5rem;
+h1 {
+    font-size: 3rem;
     color: #4a4a4a;
     font-family: 'Pacifico', cursive;
 }
 
 h5 {
-    font-size: 1rem;
+    font-size: 0.8rem;
+    color: #4a4a4a;
     margin-bottom: 30px;
+}
+
+.text-center.explain {
+    font-family: "Nunito";
 }
 
 form {
     background-color: rgba(255, 255, 255, 0);
-    padding: 0;
+    padding: 0.5rem;
     border: none;
 }
 
@@ -98,13 +103,9 @@ input[type="email"] {
     margin-top: 5px;
 }
 
-.text-center.explain {
-    font-family: "Nunito";
-}
-
 #keyword-input::placeholder,
 #email-input::placeholder {
-    font-size: 12px;
+    font-size: 10px;
     /* Adjust the font size as per your preference */
 }
 
@@ -120,10 +121,19 @@ input[type="email"] {
         align-items: center;
     }
 
+    h1 {
+        font-size: 3.5rem;
+    }
+
     h5 {
         font-size: 1.25rem;
     }
 
+    #keyword-input::placeholder,
+    #email-input::placeholder {
+        font-size: 12px;
+        /* Adjust the font size as per your preference */
+    }
 }
 
 .todays-scoops-link {
