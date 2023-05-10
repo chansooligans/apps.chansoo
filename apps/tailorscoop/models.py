@@ -3,6 +3,7 @@ from django.db import models
 
 class NewsletterSubscription(models.Model):
     email = models.EmailField(unique=True)
+    hashed_email = models.CharField(max_length=64, blank=True)
     keywords = models.TextField()
 
     def __str__(self):

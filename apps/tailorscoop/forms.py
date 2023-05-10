@@ -1,5 +1,6 @@
 from django import forms
 from .models import NewsletterSubscription
+import hashlib
 
 class NewsletterSubscriptionForm(forms.ModelForm):
     email = forms.EmailField()
@@ -14,6 +15,11 @@ class NewsletterSubscriptionForm(forms.ModelForm):
         existing_subscription = NewsletterSubscription.objects.filter(email=email).first()
         if existing_subscription:
             self.instance = existing_subscription  # Update the existing subscription
+
+        # Add SHA256 encrypted copy of email
+        hashed_email = hashlib.sha256(email.encode('utf-8')).hexdigest()
+        self.instance.hashed_email = hashed_email
+
         return email
 
     def clean_keywords(self):

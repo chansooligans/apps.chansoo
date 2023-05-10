@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from .forms import NewsletterSubscriptionForm
 from .models import NewsletterSubscription, Today
+import hashlib
 
 def home(request):
     if request.method == 'POST':
@@ -39,9 +40,9 @@ def today_story(request):
 
     return render(request, 'tailorscoop/today.html', context)
 
-def unsubscribe(request, email):
+def unsubscribe(request, hashed_email):
     try:
-        subscription = NewsletterSubscription.objects.get(email=email)
+        subscription = NewsletterSubscription.objects.get(hashed_email=hashed_email)
         subscription.delete()
         message = "You have been unsubscribed from Tailored Scoop. We're sorry to see you go!"
     except NewsletterSubscription.DoesNotExist:
