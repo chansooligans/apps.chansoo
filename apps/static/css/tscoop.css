@@ -134,6 +134,28 @@ input[type="email"] {
         font-size: 12px;
         /* Adjust the font size as per your preference */
     }
+
+    input[type="email"] {
+        width: 100%;
+        /* Set the width to 100% to occupy the entire available space */
+        max-width: 400px;
+        /* Optionally, set a maximum width to limit the width */
+    }
+}
+
+@media (max-width: 767px) {
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .col-md-auto {
+        margin-top: 10px;
+    }
+
+    .col-md-auto button[type="submit"] {
+        width: 100%;
+    }
 }
 
 .todays-scoops-link {
