@@ -187,7 +187,11 @@ input[type="email"] {
 }
 
 #thankYouModal .modal-content {
-    background-color: #fdf1e9;
+    background-color: #e0e2e5;
+    background-image: url("../images/transparent-icecream-cone.png");
+    /* background-size: 10%; */
+    /* background-repeat: repeat; */
+    /* background-attachment: fixed; */
     border: none;
 }
 
