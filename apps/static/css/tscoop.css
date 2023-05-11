@@ -2,14 +2,18 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #fdf1e9;
-    background-image: url("../images/ice-cream-scoops.png");
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color: #8bbdff2e;
+    background-image: url("../images/transparent-icecream-cone.png");
+    background-size: 10%;
+    background-repeat: repeat;
+    /* background-color: rgba(255, 255, 255, 0.5); */
+    /* background-size: cover; */
     background-attachment: fixed;
     display: flex;
     height: 100vh;
     font-family: 'Nunito', cursive;
+    justify-content: center;
+    align-items: center;
 }
 
 h1 {
@@ -36,6 +40,11 @@ form {
 
 .form-group {
     position: relative;
+}
+
+.row {
+    display: flex;
+    align-items: center;
 }
 
 .keyword-bubble {
