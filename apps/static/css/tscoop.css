@@ -109,6 +109,7 @@ input[type="email"] {
     color: #999;
     margin-top: 5px;
     margin-bottom: 5px;
+    padding-left: 5px;
 }
 
 #keyword-input::placeholder,
