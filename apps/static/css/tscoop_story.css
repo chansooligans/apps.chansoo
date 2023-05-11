@@ -3,8 +3,8 @@
 body {
     font-family: 'Arial', sans-serif;
     background-color: #8bbdff2e;
-    background-image: url("../images/transparent-icecream-cone-4percent.png");
-    background-size: 10%;
+    background-image: url("../images/transparent-icecream-cone-10percent.png");
+    background-size: 3rem;
     background-repeat: repeat;
     background-attachment: fixed;
     display: flex;
