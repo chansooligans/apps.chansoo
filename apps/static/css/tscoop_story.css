@@ -2,10 +2,10 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #fdf1e9;
-    background-image: url("../images/ice-cream-scoops.png");
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color: #8bbdff2e;
+    background-image: url("../images/transparent-icecream-cone.png");
+    background-size: 10%;
+    background-repeat: repeat;
     background-attachment: fixed;
     display: flex;
     height: 100vh;
