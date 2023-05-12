@@ -1,0 +1,5 @@
+/* Center the Unsubscribe button */
+.unsubscribe-button-container {
+    display: flex;
+    justify-content: center;
+}

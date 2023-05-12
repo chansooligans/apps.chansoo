@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+{% extends 'tailorscoop/base.html' %}
+{% block body_block %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/tscoop_story.css' %}">
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <p class="story-text">{{ message|linebreaks }}</p>       
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

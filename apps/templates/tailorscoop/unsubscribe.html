@@ -1,15 +1,87 @@
 <!DOCTYPE html>
+<!-- unsubscribe.html -->
 {% extends 'tailorscoop/base.html' %}
 {% block body_block %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/tscoop_story.css' %}">
+<!-- Add Bootstrap 5 JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="{% static 'css/tscoop.css' %}">
+<link rel="stylesheet" href="{% static 'css/tscoop-unsubscribe.css' %}">
 <body>
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3">
-                <p class="story-text">{{ message|linebreaks }}</p>       
+                <h1 class="text-center my-3 my-lg-5">Tailored Scoop</h1>
+                <h5 class="text-center my-3 my-lg-5">Unsubscribe from our AI-generated daily newsletter</h3>
+                <div class="text-center my-3 mt-lg-5">
+                    <img src="{% static 'images/scoops2.png' %}" alt="Three ice cream scoops" class="img-fluid">
+                </div>
+                <form method="post" id="unsubscribe-form" class="pb-3">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="hidden" name="hashed_email" id="hashed-email" value="{{ hashed_email }}" hidden>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="unsubscribe-button-container">
+                            <button type="submit" class="btn btn-danger btn-block">Unsubscribe</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+
+    <!-- Goodbye Modal -->
+    <div class="modal fade" id="thankYouModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Goodbye!</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            We're sad to see you go! You have successfully unsubscribed from Tailored Scoop.
+            <br><br>If you ever change your mind, you can always come back and subscribe again. 😊
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+        </div>
+    </div>
+  
 </body>
+
+<!-- Trigger Goodbye Modal on successful form submission -->
+<script>
+    $(document).ready(function () {
+        $('#unsubscribe-form').on('submit', function (e) {
+            e.preventDefault(); // Prevent the default form submission behavior
+
+            $.ajax({
+                type: 'POST',
+                url: '{% url "unsubscribe_confirm" hashed_email %}',
+                data: {
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                    hashed_email: $('#hashed-email').val()
+                },
+                success: function (response) {
+                    // Show the Goodbye modal
+                    var myModal = new bootstrap.Modal(document.getElementById('goodbyeModal'), {});
+                    myModal.show();
+                    
+                    // Update the modal content with the message
+                    $('.modal-body').html(response.message);
+                },
+                error: function () {
+                    // Handle error
+                }
+            });
+        });
+    });
+</script>
+
+
 {% endblock %}

@@ -37,13 +37,14 @@ def today_story(request):
 
     return render(request, 'tailorscoop/today.html', context)
 
-def unsubscribe(request, hashed_email):
+def unsubscribe_confirm(request, hashed_email):
     try:
         subscription = NewsletterSubscription.objects.get(hashed_email=hashed_email)
         subscription.delete()
-        message = "You have been unsubscribed from Tailored Scoop. We're sorry to see you go!"
     except NewsletterSubscription.DoesNotExist:
-        message = "This email address is not subscribed to Tailored Scoop."
+        pass        
 
-    context = {'message': message}
+
+def unsubscribe(request, hashed_email):
+    context = {'hashed_email': hashed_email}
     return render(request, 'tailorscoop/unsubscribe.html', context)
