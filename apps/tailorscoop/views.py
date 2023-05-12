@@ -1,9 +1,9 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.forms.utils import ErrorList
 from .forms import NewsletterSubscriptionForm
-from .models import NewsletterSubscription, Today
-import hashlib
+from .models import NewsletterSubscription, Today, ClickLog
+import base64
 
 def home(request):
     if request.method == 'POST':
@@ -43,8 +43,19 @@ def unsubscribe_confirm(request, hashed_email):
         subscription.delete()
     except NewsletterSubscription.DoesNotExist:
         pass        
+    return HttpResponse()
 
 
 def unsubscribe(request, hashed_email):
     context = {'hashed_email': hashed_email}
     return render(request, 'tailorscoop/unsubscribe.html', context)
+
+def log_click_and_redirect(request, encoded_url, hashed_email):
+    original_url = base64.urlsafe_b64decode(encoded_url).decode('utf-8')
+    
+    # Log the click in the database
+    click_log = ClickLog(url=original_url, hashed_email=hashed_email)
+    click_log.save()
+
+    # Redirect the user to the original source
+    return HttpResponseRedirect(original_url)

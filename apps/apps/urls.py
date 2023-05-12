@@ -23,5 +23,5 @@ urlpatterns = [
     path('favicon.ico', RedirectView.as_view(url='/static/favicon.ico')),
     path('centraljersey', include('centraljersey.urls')),
     path('sms', twilioviews.receive_sms),
-    path('tailoredscoop', include('tailorscoop.urls'))
+    path('tailoredscoop/', include('tailorscoop.urls'))
 ]
