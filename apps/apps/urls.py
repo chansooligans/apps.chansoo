@@ -25,5 +25,4 @@ urlpatterns = [
     path("centraljersey", include("centraljersey.urls")),
     path("sms", twilioviews.receive_sms),
     path("tailoredscoop/", include("tailorscoop.urls")),
-    path("", HttpResponseRedirect("/tailoredscoop/")),
 ]
