@@ -17,11 +17,13 @@ from django.contrib import admin
 from django.views.generic import RedirectView
 from django.urls import path, include
 from twilioapp import views as twilioviews
+from django.http import HttpResponseRedirect
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('favicon.ico', RedirectView.as_view(url='/static/favicon.ico')),
-    path('centraljersey', include('centraljersey.urls')),
-    path('sms', twilioviews.receive_sms),
-    path('tailoredscoop/', include('tailorscoop.urls'))
+    path("admin/", admin.site.urls),
+    path("favicon.ico", RedirectView.as_view(url="/static/favicon.ico")),
+    path("centraljersey", include("centraljersey.urls")),
+    path("sms", twilioviews.receive_sms),
+    path("tailoredscoop/", include("tailorscoop.urls")),
+    path("", HttpResponseRedirect("/tailoredscoop/")),
 ]
