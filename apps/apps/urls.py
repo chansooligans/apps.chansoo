@@ -18,6 +18,7 @@ from django.views.generic import RedirectView
 from django.urls import path, include
 from twilioapp import views as twilioviews
 from django.http import HttpResponseRedirect
+from . import views as apps_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -25,5 +26,6 @@ urlpatterns = [
     path("centraljersey", include("centraljersey.urls")),
     path("sms", twilioviews.receive_sms),
     path("tailoredscoop/", include("tailorscoop.urls")),
+    path("demo/", apps_views.demo, name='demo'),
     path("", RedirectView.as_view(url="/tailoredscoop/")),
 ]
