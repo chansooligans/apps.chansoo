@@ -13,9 +13,14 @@ $(document).ready(function () {
             const keywordArray = keywordValue.split(','); // Split the keywords by comma
             keywordArray.forEach(function (keyword) {
                 keyword = keyword.trim();
-                if (keyword && !keywords.includes(keyword)) {
+                if (keyword && !keywords.includes(keyword) && keywords.length < 3) {
                     keywords.push(keyword);
                     $('#keywords-wrapper').append(`<span class="keyword-bubble">${keyword}<span class="remove">x</span></span>`);
+                } else if (keyword && !keywords.includes(keyword) && keywords.length === 3) {
+                    // Show error when maximum number of keywords reached
+                    $('#keyword-input').addClass('is-invalid');
+                    keywordInput.val('');
+                    keywordInput.attr('placeholder', 'Maximum number of keywords reached (3)');
                 }
             });
             keywordInput.val('');
@@ -38,6 +43,10 @@ $(document).ready(function () {
         if (keywords.length === 0) {
             $('#keywords-wrapper').addClass('d-none'); // Hide the keywords wrapper when all keywords are removed
         }
+
+        // Clear the error message from the input box when keyword is removed
+        $('#keyword-input').removeClass('is-invalid');
+        $('#keyword-input').attr('placeholder', 'Cherry-pick news flavors! e.g. health, economy, AI, taylor swift...');
     });
 
     function updateHiddenKeywords() {
