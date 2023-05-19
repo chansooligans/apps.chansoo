@@ -13,7 +13,7 @@ class NewsletterSubscription(models.Model):
 
 
 class Today(models.Model):
-    content = models.CharField(max_length=8096)
+    content = models.CharField(max_length=30000)
     timestamp = models.DateTimeField()
 
     class Meta:
