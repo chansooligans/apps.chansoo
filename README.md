@@ -1,11 +1,12 @@
 # apps.chansoos.com
 
-Hosts:
+Uses:
 
 - https://apps.chansoos.com/centraljersey
     - does "Central Jersey" exist???
-- https://tailoredscoops.com
-- api for personal reminder tool endpoint
+- https://tailoredscoops.com (i.e. apps.chansoos.com/tailoredscoop)
+    - AI-personalized daily newsletter
+- api for reminder tool endpoint ("RemindMe", currently only for personal use)
 
 To run:
 
