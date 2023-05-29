@@ -1,36 +1,131 @@
 $(document).ready(function () {
+
+    validKeywords  = [
+        "economy", 
+        "health", 
+        "ai", 
+        "us",
+        "world",
+        "world",
+        "business",
+        "technology",
+        "entertainment",
+        "sports",
+        "science",
+        "health",
+        "economy",
+        "economics",
+        "markets",
+        "jobs",
+        "personal",
+        "entrepreneurship",
+        "mobile",
+        "gadgets",
+        "internet",
+        "vr",
+        "virtual",
+        "ai",
+        "artificial",
+        "computing",
+        "movies",
+        "music",
+        "tv",
+        "books",
+        "arts",
+        "design",
+        "celebrities",
+        "environment",
+        "space",
+        "physics",
+        "genetics",
+        "wildlife",
+        "healthcare",
+        "health",
+        "mental",
+        "nutrition",
+        "fitness",
+        "medication",
+        "politics",
+    ].map(keyword => keyword.toLowerCase());
+    
+    ///////////////////////
+    // AutoComplete
+    ///////////////////////
+
+    const autoCompleteJS = new autoComplete({
+        placeHolder: "Cherry-pick news flavors! e.g. health, economy, AI, politics...",
+        data: {
+            src: validKeywords ,
+            cache: true,
+        },
+        resultItem: {
+            highlight: true
+        },
+        events: {
+            input: {
+                selection: (event) => {
+                    const selection = event.detail.selection.value;
+                    autoCompleteJS.input.value = selection;
+                }
+            }
+        },
+        submit: true
+    });
+
+    // 
     const keywords = [];
 
-    // Create a function to handle adding keywords
+    ///////////////////////
+    // ADDING KEYWORDS
+    ///////////////////////
+
+    // Helper functions
+    function addKeyword(keyword) {
+        keywords.push(keyword);
+        $('#keywords-wrapper').append(`<span class="keyword-bubble">${keyword}<span class="remove">x</span></span>`);
+        $('#autoComplete').attr('placeholder', 'Cherry-pick news flavors! e.g. health, economy, AI, politics...');
+        updateHiddenKeywords();
+        $('#keywords-wrapper').removeClass('d-none');
+    }
+
+    function handleErrors(keyword, inputElement) {
+        inputElement.addClass('is-invalid');
+        if (keywords.length === 3) {
+            inputElement.val('').attr('placeholder', 'Maximum number of keywords reached (3)');
+        } else {
+            inputElement.val('').attr('placeholder', 'Invalid Keyword');
+        }
+    }
+
+    // Main function
     function addKeywords(e) {
         if (e.type === 'keypress' && e.which !== 13 && e.which !== 9) {
             return;
         }
         e.preventDefault();
-        const keywordInput = $('#keyword-input');
-        const keywordValue = keywordInput.val().trim();
+        const keywordInput = $('#autoComplete');
+        const keywordValue = keywordInput.val().trim().toLowerCase();
         if (keywordValue) {
-            const keywordArray = keywordValue.split(','); // Split the keywords by comma
+            const keywordArray = keywordValue.split(',');
             keywordArray.forEach(function (keyword) {
                 keyword = keyword.trim();
-                if (keyword && !keywords.includes(keyword) && keywords.length < 3) {
-                    keywords.push(keyword);
-                    $('#keywords-wrapper').append(`<span class="keyword-bubble">${keyword}<span class="remove">x</span></span>`);
-                } else if (keyword && !keywords.includes(keyword) && keywords.length === 3) {
-                    // Show error when maximum number of keywords reached
-                    $('#keyword-input').addClass('is-invalid');
+                if (validKeywords.includes(keyword) && !keywords.includes(keyword) && keywords.length < 3) {
+                    addKeyword(keyword);
                     keywordInput.val('');
-                    keywordInput.attr('placeholder', 'Maximum number of keywords reached (3)');
+                } else {
+                    handleErrors(keyword, keywordInput);
                 }
             });
-            keywordInput.val('');
-            updateHiddenKeywords();
-            $('#keywords-wrapper').removeClass('d-none'); // Show the keywords wrapper
         }
     }
 
+
     // Bind the addKeywords function to the 'keypress' and 'focusout' events
-    $('#keyword-input').on('keypress', addKeywords).on('focusout', addKeywords);
+    $('#autoComplete').on('keypress', addKeywords).on('focusout', addKeywords);
+
+    ///////////////////////
+    // REMOVING KEYWORDS
+    ///////////////////////
 
     $(document).on('click', '.keyword-bubble .remove', function () {
         const keyword = $(this).parent().text().slice(0, -1);
@@ -45,13 +140,18 @@ $(document).ready(function () {
         }
 
         // Clear the error message from the input box when keyword is removed
-        $('#keyword-input').removeClass('is-invalid');
-        $('#keyword-input').attr('placeholder', 'Cherry-pick news flavors! e.g. health, economy, AI, taylor swift...');
+        $('#autoComplete').removeClass('is-invalid');
+        $('#autoComplete').attr('placeholder', 'Cherry-pick news flavors! e.g. health, economy, AI, politics...');
     });
 
     function updateHiddenKeywords() {
+        keywords.sort((a, b) => a.trim().toLowerCase().localeCompare(b.trim().toLowerCase()));
         $('input[name="keywords"]').val(keywords.join(','));
     }
+
+    ///////////////////////
+    // FORM SUBMISSION
+    ///////////////////////
 
     // Listen for form submission
     // Need to do this to make modal popup AND form validation with django

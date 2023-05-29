@@ -40,6 +40,15 @@ form {
     position: relative;
 }
 
+.autoComplete_wrapper {
+    width: 100%;
+}
+
+.autoComplete_wrapper>input {
+    color: black;
+    background-color: white;
+}
+
 .row {
     display: flex;
     align-items: center;
@@ -69,8 +78,8 @@ form {
 }
 
 input[type="text"].form-control {
-    display: inline-block;
-    width: auto;
+    display: block;
+    width: 100%;
     border: none;
     border-radius: 0;
 }
@@ -112,7 +121,7 @@ input[type="email"] {
     padding-left: 5px;
 }
 
-#keyword-input::placeholder,
+#autoComplete::placeholder,
 #email-input::placeholder {
     font-size: 11px;
     /* Adjust the font size as per your preference */
@@ -138,7 +147,7 @@ input[type="email"] {
         font-size: 1.25rem;
     }
 
-    #keyword-input::placeholder,
+    #autoComplete::placeholder,
     #email-input::placeholder {
         font-size: 12px;
         /* Adjust the font size as per your preference */

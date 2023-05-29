@@ -4,6 +4,7 @@ Hosts:
 
 - https://apps.chansoos.com/centraljersey
     - does "Central Jersey" exist???
+- https://tailoredscoops.com
 - api for personal reminder tool endpoint
 
 To run:

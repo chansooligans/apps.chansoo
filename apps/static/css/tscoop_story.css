@@ -102,7 +102,7 @@ input[type="email"] {
     font-family: "Nunito";
 }
 
-#keyword-input::placeholder,
+#autoComplete::placeholder,
 #email-input::placeholder {
     font-size: 12px;
     /* Adjust the font size as per your preference */
