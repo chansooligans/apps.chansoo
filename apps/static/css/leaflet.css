@@ -1,5 +1,5 @@
 .narrative {
-    display: flex;
+    /* display: flex; */
     flex-direction: column;
     align-items: center;
     font-size: 1rem;
@@ -20,6 +20,13 @@ footer {
     text-align: center;
 }
 
+header {
+    text-align: center;
+}
+
+a {
+    white-space: nowrap;
+}
 
 /* ------------------------------------ */
 /* title step */
