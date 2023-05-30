@@ -169,6 +169,13 @@ a {
     color: rgb(148, 143, 143);
 }
 
+/* pca */
+
+.container.pca {
+    display: flex;
+    justify-content: center;
+}
+
 /* ------------------------------------ */
 /* mobile */
 /* ------------------------------------ */
