@@ -1,51 +1,79 @@
 $(document).ready(function () {
 
     validKeywords  = [
-        "economy", 
-        "health", 
-        "ai", 
-        "us",
-        "world",
-        "world",
-        "business",
-        "technology",
-        "entertainment",
-        "sports",
-        "science",
-        "health",
-        "economy",
-        "economics",
-        "markets",
-        "jobs",
-        "personal",
-        "entrepreneurship",
-        "mobile",
-        "gadgets",
-        "internet",
-        "vr",
-        "virtual",
-        "ai",
-        "artificial",
-        "computing",
-        "movies",
-        "music",
-        "tv",
-        "books",
-        "arts",
-        "design",
-        "celebrities",
-        "environment",
-        "space",
-        "physics",
-        "genetics",
-        "wildlife",
-        "healthcare",
-        "health",
-        "mental",
-        "nutrition",
-        "fitness",
-        "medication",
-        "politics",
+        'us',
+        'world',
+        'world news',
+        'business',
+        'technology',
+        'entertainment',
+        'sports',
+        'science',
+        'health',
+        'economy',
+        'economics',
+        'markets',
+        'jobs',
+        'personal finance',
+        'entrepreneurship',
+        'mobile',
+        'gadgets',
+        'internet',
+        'vr',
+        'virtual reality',
+        'ai',
+        'artificial intelligence',
+        'computing',
+        'movies',
+        'music',
+        'tv',
+        'books',
+        'arts',
+        'design',
+        'celebrities',
+        'environment',
+        'space',
+        'physics',
+        'genetics',
+        'wildlife',
+        'healthcare',
+        'health care',
+        'mental health',
+        'nutrition',
+        'fitness',
+        'medication',
+        'taylor swift',
+        'politics',
+        'education',
+        'real estate',
+        'travel',
+        'social media',
+        'cybersecurity',
+        'climate change',
+        'renewable energy',
+        'sustainability',
+        'human rights',
+        'immigration',
+        'cultural diversity',
+        'philosophy',
+        'animal rights',
+        'architecture',
+        'astronomy',
+        'military',
+        'gender equality',
+        'religion',
+        'terrorism',
+        'infrastructure',
+        'agriculture',
+        'aviation',
+        'psychology',
+        'robotics',
+        'quantum computing',
+        'emerging technologies',
+        'pharmaceutical industry',
+        'insurance',
+        'retail',
+        'e-commerce'
     ].map(keyword => keyword.toLowerCase());
     
     ///////////////////////
@@ -61,6 +89,19 @@ $(document).ready(function () {
         resultItem: {
             highlight: true
         },
+        resultsList: {
+            element: (list, data) => {
+                if (!data.results.length) {
+                    // Create "No Results" message list element
+                    const message = document.createElement("li");
+                    // Add message text content
+                    message.innerHTML = `Found No Results for "${data.query}"`;
+                    // Add message list element to the list
+                    list.appendChild(message);
+                }
+            },
+            noResults: true,
+        },
         events: {
             input: {
                 selection: (event) => {
@@ -69,7 +110,8 @@ $(document).ready(function () {
                 }
             }
         },
-        submit: true
+        submit: true,
+        searchEngine: "loose"
     });
 
     // 

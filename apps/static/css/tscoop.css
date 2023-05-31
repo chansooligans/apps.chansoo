@@ -127,6 +127,10 @@ input[type="email"] {
     /* Adjust the font size as per your preference */
 }
 
+.mark, mark {
+    padding: 0;
+}
+
 
 /* Media Query for Desktop Devices */
 @media (min-width: 1024px) {
