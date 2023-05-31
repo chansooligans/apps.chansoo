@@ -93,7 +93,7 @@ $(document).ready(function () {
         if (keywords.length === 3) {
             inputElement.val('').attr('placeholder', 'Maximum number of keywords reached (3)');
         } else {
-            inputElement.val('').attr('placeholder', 'Invalid Keyword');
+            inputElement.val('').attr('placeholder', 'Invalid Keyword -- Try "politics" or "sports"!');
         }
     }
 
