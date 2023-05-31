@@ -7,9 +7,22 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3">
+            </div>
+            <div class="col-md-6 offset-md-3">
                 <h1 class="text-center my-5">Today's Scoops</h1>
+                <div class="text-center mb-5">
+                    <img style="height:150px" src="{% static 'images/scoops.png' %}" alt="News Scoop" class="img-fluid">
+                </div>
                 {% comment %} <h3 class="text-center explain my-5">Subscribe to our AI-generated daily newsletter</h3> {% endcomment %}
                 <div class="story-text">{{ story_text|safe }}</div>       
+            </div>
+            <footer class="text-center my-1">
+                <p>
+                  <a href="../">Back</a>
+                </p>
+            </footer>
+            <div class="text-center mb-5">
+                <img style="height:100px" src="{% static 'images/news_scoop.png' %}" alt="News Scoop" class="img-fluid">
             </div>
         </div>
     </div>
