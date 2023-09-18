@@ -15,3 +15,9 @@ cd apps && python manage.py collectstatic --settings=apps.settings.prod --no-inp
 cd apps && python manage.py runserver --settings=apps.settings.prod
 sudo /opt/bitnami/ctlscript.sh restart apache
 ```
+
+Reminder for setup:
+
+https://github.com/chansooligans/django/blob/master/lecture_notes/new_project_steps.md
+
+

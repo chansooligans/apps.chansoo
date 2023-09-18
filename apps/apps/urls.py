@@ -26,6 +26,7 @@ urlpatterns = [
     path("centraljersey", include("centraljersey.urls")),
     path("sms", twilioviews.receive_sms),
     path("tailoredscoop/", include("tailorscoop.urls")),
+    path("themind/", include("themind.urls")),
     path("demo/", apps_views.demo, name='demo'),
     path("", RedirectView.as_view(url="/tailoredscoop/")),
 ]
