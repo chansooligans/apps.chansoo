@@ -1,0 +1,73 @@
+/* static/css/themind.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.card-container {
+    display: flex;
+    gap: 20px;
+}
+
+.card {
+    width: 100px;
+    height: 150px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #555;
+    transition: transform 0.3s;
+}
+
+.selected {
+    background-color: rgb(241, 214, 178);
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+form {
+    margin-top: 30px;
+}
+
+button {
+    background-color: #4908fa;
+    color: white;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 5px;
+    width: 220px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button.newcard {
+    background-color: #237fca;
+    color: white;
+}
+
+button.newcard:hover {
+    background-color: #5b8bb8;
+}
+
+button:hover {
+    background-color: #b93b25;
+}
