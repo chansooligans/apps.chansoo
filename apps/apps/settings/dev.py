@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'centraljersey',
     'twilioapp',
-    'tailorscoop'
+    'tailorscoop',
+    'themind'
 ]
 
 MIDDLEWARE = [
