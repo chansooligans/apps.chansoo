@@ -31,7 +31,7 @@ with open(Path(__file__).resolve().parent.parent.parent.parent.joinpath("secrets
     SECRET_KEY = secrest_file["DJANGO_SECRET"]
     SENDGRID_API_KEY = secrest_file["SENDGRID_SECRET"]
 
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 # Application definition
@@ -80,7 +80,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'apps.wsgi.application'
+ASGI_APPLICATION = "apps.asgi.application"
 
 
 # Database
@@ -167,3 +167,13 @@ EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
 EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+# Channels
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
