@@ -9,7 +9,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 80vh;
 }
 
 h1 {
@@ -81,4 +81,28 @@ button.newcard:hover {
 
 button:hover {
     background-color: #b93b25;
+}
+
+.submitted-cards {
+    margin-top:30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.submitted-cards h2 {
+    width: 100%;
+    text-align: center;
+}
+
+.submitted-cards .card {
+    margin-right: -60px; /* Adjust this value to increase/decrease overlap */
+    position: relative;
+    z-index: 1; /* ensure cards stack on top of each other */
+}
+
+.submitted-cards .card:hover {
+    z-index: 2; /* raise the hovered card slightly above the others */
 }
