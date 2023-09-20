@@ -31,7 +31,7 @@ with open(Path(__file__).resolve().parent.parent.parent.parent.joinpath("secrets
     SECRET_KEY = secrest_file["DJANGO_SECRET"]
     SENDGRID_API_KEY = secrest_file["SENDGRID_SECRET"]
 
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['54.210.64.57', '127.0.0.1', 'tailoredscoops.com', 'apps.chansoos.com']
 
 # Application definition

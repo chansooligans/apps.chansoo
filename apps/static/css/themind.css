@@ -51,7 +51,7 @@ h2 {
     justify-content: center;
     font-size: 1.5rem;
     color: #555;
-    transition: transform 0.3s;
+    transition: transform 0.1s;
 }
 
 .selected {
@@ -59,7 +59,7 @@ h2 {
 }
 
 .card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-6px);
 }
 
 form {
