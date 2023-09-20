@@ -54,11 +54,17 @@ h2 {
     transition: transform 0.1s;
 }
 
+.card.used {
+    opacity: 0.5;      
+    pointer-events: none;  
+    background-color: rgb(211, 211, 211);
+}
+
 .selected {
     background-color: rgb(241, 214, 178);
 }
 
-.card:hover {
+.card:not(.used):hover {
     transform: translateY(-6px);
 }
 

@@ -28,7 +28,19 @@
         };
         
         function toggleHighlight(cardElement) {
-            cardElement.classList.toggle('selected');
+            // Check if the card is already used
+            if (cardElement.classList.contains('used')) {
+                return;  // Exit the function if the card is used
+            }
+            
+            // Deselect all cards
+            const selectedCards = document.querySelectorAll('.card.selected');
+            selectedCards.forEach(card => {
+                card.classList.remove('selected');
+            });
+
+            // Select the clicked card
+            cardElement.classList.add('selected');
         }
         
         function submitCard(cardValue) {
@@ -37,7 +49,14 @@
                     'card': cardValue
                 }));
             }
+            
+            // Mark the card as used
+            const cardElem = document.querySelector(`.card[data-value="${cardValue}"]`);
+            if (cardElem) {
+                cardElem.classList.add('used');
+            }
         }
+        
 
         function displaySubmittedCard(cardValue) {
             const container = document.querySelector('.submitted-cards');
