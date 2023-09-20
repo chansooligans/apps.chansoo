@@ -1,5 +1,7 @@
 /* static/css/themind.css */
 
+
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -9,8 +11,13 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 120vh;
+    min-height: 100vh;
     overflow-y: auto; 
+}
+@media (max-width: 900px) {
+    body {
+        min-height: 110vh;
+    }
 }
 
 h1 {
