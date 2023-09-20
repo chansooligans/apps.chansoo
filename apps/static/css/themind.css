@@ -1,28 +1,46 @@
 /* static/css/themind.css */
 
+
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    margin: 0;
+    margin: 10px;
     padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
+    overflow-y: auto; 
+}
+@media (max-width: 900px) {
+    body {
+        min-height: 110vh;
+    }
 }
 
 h1 {
+    font-family: Skranji;
     color: #333;
     margin-bottom: 20px;
+}
+
+h2 {
+    font-family: Skranji;
+    color: #555;
+    margin-top: 20px;
 }
 
 .card-container {
     display: flex;
     gap: 20px;
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 .card {
+    font-family: Skranji;
     width: 100px;
     height: 150px;
     background-color: white;
@@ -33,15 +51,21 @@ h1 {
     justify-content: center;
     font-size: 1.5rem;
     color: #555;
-    transition: transform 0.3s;
+    transition: transform 0.1s;
+}
+
+.card.used {
+    opacity: 0.5;      
+    pointer-events: none;  
+    background-color: rgb(211, 211, 211);
 }
 
 .selected {
     background-color: rgb(241, 214, 178);
 }
 
-.card:hover {
-    transform: translateY(-10px);
+.card:not(.used):hover {
+    transform: translateY(-6px);
 }
 
 form {
@@ -52,7 +76,7 @@ button {
     background-color: #4908fa;
     color: white;
     border: none;
-    padding: 10px 10px;
+    padding: 6px 6px;
     border-radius: 5px;
     width: 220px;
     cursor: pointer;
@@ -62,6 +86,7 @@ button {
 button.newcard {
     background-color: #237fca;
     color: white;
+    margin-top: 10;
 }
 
 button.newcard:hover {
@@ -70,4 +95,49 @@ button.newcard:hover {
 
 button:hover {
     background-color: #b93b25;
+}
+
+/* Submitted Cards */
+.submitted-cards {
+    margin-top:30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.submitted-cards h2 {
+    width: 100%;
+    text-align: center;
+}
+
+.submitted-cards .card {
+    margin-right: -60px; /* Adjust this value to increase/decrease overlap */
+    position: relative;
+    z-index: 1; /* ensure cards stack on top of each other */
+}
+
+.submitted-cards .card:hover {
+    z-index: 2; /* raise the hovered card slightly above the others */
+}
+
+/* Room Selection */
+.room-selection {
+    text-align: center; /* Centers the text and form elements */
+    padding: 20px;      /* Adds some space around the content */
+}
+
+.room-selection h1 {
+    margin-bottom: 20px; /* Adds space between the title and the form */
+}
+
+.room-selection form {
+    display: flex;       /* Makes the form use Flexbox */
+    flex-direction: column; /* Stacks the children (input and button) vertically */
+    align-items: center;    /* Centers the children horizontally */
+    gap: 10px;              /* Adds space between the children */
+    width: 100%;            /* Ensures form takes up full width of parent */
+    max-width: 300px;       /* Optionally, limits the maximum width */
+    margin: 0 auto;         /* Centers the form if the parent container is wider */
 }

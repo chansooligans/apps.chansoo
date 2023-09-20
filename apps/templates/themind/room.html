@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+{% extends 'themind/base.html' %}
+{% block body_block %}
+{% load static %}
+</head>
+<link rel="stylesheet" href="{% static 'css/themind.css' %}">
+<body>
+    {{ room_name|json_script:"room-name" }}
+    <script>
+
+        const roomName = JSON.parse(document.getElementById('room-name').textContent);
+
+        const socket = new WebSocket(
+            'wss://' 
+            + window.location.host 
+            + '/ws/cards/'
+            + roomName
+            + '/'
+        );    
+        socket.onmessage = function(e) {
+            var data = JSON.parse(e.data);
+            var card = data['card'];
+            displaySubmittedCard(card);
+        };
+
+        socket.onclose = function(e) {
+            console.error('Chat socket closed unexpectedly');
+        };
+        
+        function toggleHighlight(cardElement) {
+            // Check if the card is already used
+            if (cardElement.classList.contains('used')) {
+                return;  // Exit the function if the card is used
+            }
+            
+            // Deselect all cards
+            const selectedCards = document.querySelectorAll('.card.selected');
+            selectedCards.forEach(card => {
+                card.classList.remove('selected');
+            });
+
+            // Select the clicked card
+            cardElement.classList.add('selected');
+        }
+        
+        function submitCard(cardValue) {
+            if (socket) {
+                socket.send(JSON.stringify({
+                    'card': cardValue
+                }));
+            }
+            
+            // Mark the card as used
+            const cardElem = document.querySelector(`.card[data-value="${cardValue}"]`);
+            if (cardElem) {
+                cardElem.classList.add('used');
+            }
+        }
+        
+
+        function displaySubmittedCard(cardValue) {
+            const container = document.querySelector('.submitted-cards');
+            const cardElem = document.createElement('div');
+            cardElem.className = 'card';
+            cardElem.textContent = cardValue;
+            container.appendChild(cardElem);
+        }
+    </script>
+    
+    <nav class="navbar fixed-top bg-body-tertiary">
+        <div class="container-fluid">
+            <div class="room-name">Room: {{ room_name }}</div>
+            <a class="me-2" href="/themind/">Change Room</a>
+        </div>
+    </nav>
+
+    
+    <h1>Your numbers are:</h1>
+    <div class="card-container">
+        <div class="card" onclick="toggleHighlight(this)" data-value="{{ number1 }}">{{ number1 }}</div>
+        <div class="card" onclick="toggleHighlight(this)" data-value="{{ number2 }}">{{ number2 }}</div>
+    </div>
+    
+    <button class = "newcard" onclick="submitSelectedCard()" type="submit">Submit</button>
+
+    <form action="/themind/delete-all-numbers/{{ room_name }}" method="get">
+        <button type="submit">Reshuffle deck</button>
+    </form>
+
+    
+    <div class="submitted-cards">
+        <hr>
+        <h2>Submitted Cards:</h2>
+        <!-- Submitted cards will be shown here -->
+    </div>
+
+    <script>
+        function submitSelectedCard() {
+            const selectedCards = document.querySelectorAll('.card.selected');
+            if (selectedCards.length) {
+                const cardValue = selectedCards[0].getAttribute('data-value');
+                submitCard(cardValue);
+                toggleHighlight(selectedCards[0]); // Deselect after submitting
+            } else {
+                alert('Please select a card to submit.');
+            }
+        }
+    </script>
+</body>
+{% endblock %}

@@ -1,42 +1,23 @@
 <!DOCTYPE html>
+{% extends 'themind/base.html' %}
+{% block body_block %}
 {% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Mind</title>
+    <title>Select a Room</title>
+    <link rel="stylesheet" href="{% static 'css/themind.css' %}">
 </head>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="{% static 'css/themind.css' %}">
-<script>
-    function toggleHighlight(cardElement) {
-        console.log(cardElement)
-        cardElement.classList.toggle('selected');
-    }
-
-    function submitCard(cardValue) {
-        if (socket) {
-            socket.send(JSON.stringify({
-                'card': cardValue
-            }));
-        }
-    }
-</script>
 <body>
-    <h1>Your numbers are:</h1>
-    <div class="card-container">
-        <div class="card" onclick="toggleHighlight(this)" data-value="{{ number1 }}">{{ number1 }}</div>
-        <div class="card" onclick="toggleHighlight(this)" data-value="{{ number2 }}">{{ number2 }}</div>
+    <div class="room-selection">
+        <h1>Select a Room Name</h1>
+        <form action="/themind/set-room-name/" method="post">
+            {% csrf_token %}
+            <input type="text" name="room_name" placeholder="Enter room name..." required>
+            <button type="submit">Proceed</button>
+        </form>
     </div>
-
-    <form action="/themind" method="get">
-        <button class = "newcard" type="submit">Click to get new cards.</button>
-    </form>
-
-    <form action="{% url 'delete_all_numbers' %}" method="post">
-        {% csrf_token %}
-        <button type="submit">Reshuffle deck.</button>
-    </form>
-
 </body>
 </html>
+{% endblock %}
