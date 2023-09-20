@@ -28,7 +28,6 @@ class CardConsumer(AsyncWebsocketConsumer):
 
     async def send_card(self, event):
         card = event['card']
-        print("send: ",card)
 
         # Send card info to WebSocket
         await self.send(text_data=json.dumps({

@@ -28,12 +28,10 @@ def room(request, room_name):
 
     return render(request, 'themind/room.html', context)
 
-def reset(request):
-    return render(request, 'themind/reset.html')
-
 def delete_all_numbers(request, room_name):
+    context = {"room_name": room_name}
     RandomNumber.objects.filter(room_name=room_name).delete()
-    return redirect('reset') 
+    return render(request, 'themind/reset.html', context)
 
 def set_room_name(request):
     if request.method == "POST":
