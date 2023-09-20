@@ -3,13 +3,13 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    margin: 0;
+    margin: 10px;
     padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 80vh;
+    height: 100vh;
 }
 
 h1 {
@@ -62,7 +62,7 @@ button {
     background-color: #4908fa;
     color: white;
     border: none;
-    padding: 10px 10px;
+    padding: 6px 6px;
     border-radius: 5px;
     width: 220px;
     cursor: pointer;
@@ -83,6 +83,7 @@ button:hover {
     background-color: #b93b25;
 }
 
+/* Submitted Cards */
 .submitted-cards {
     margin-top:30px;
     display: flex;
@@ -105,4 +106,24 @@ button:hover {
 
 .submitted-cards .card:hover {
     z-index: 2; /* raise the hovered card slightly above the others */
+}
+
+/* Room Selection */
+.room-selection {
+    text-align: center; /* Centers the text and form elements */
+    padding: 20px;      /* Adds some space around the content */
+}
+
+.room-selection h1 {
+    margin-bottom: 20px; /* Adds space between the title and the form */
+}
+
+.room-selection form {
+    display: flex;       /* Makes the form use Flexbox */
+    flex-direction: column; /* Stacks the children (input and button) vertically */
+    align-items: center;    /* Centers the children horizontally */
+    gap: 10px;              /* Adds space between the children */
+    width: 100%;            /* Ensures form takes up full width of parent */
+    max-width: 300px;       /* Optionally, limits the maximum width */
+    margin: 0 auto;         /* Centers the form if the parent container is wider */
 }
