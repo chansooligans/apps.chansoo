@@ -16,6 +16,7 @@ class CardConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
         card = text_data_json['card']
+        user_name = text_data_json['user_name'] 
 
         # Send card info to all connected clients
         await self.channel_layer.group_send(
@@ -23,13 +24,16 @@ class CardConsumer(AsyncWebsocketConsumer):
             {
                 'type': 'send_card',
                 'card': card,
+                'user_name': user_name
             }
         )
 
     async def send_card(self, event):
         card = event['card']
+        user_name = event['user_name'] 
 
         # Send card info to WebSocket
         await self.send(text_data=json.dumps({
-            'card': card
+            'card': card,
+            'user_name': user_name
         }))

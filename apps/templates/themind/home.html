@@ -14,7 +14,8 @@
         <h1>Select a Room Name</h1>
         <form action="/themind/set-room-name/" method="post">
             {% csrf_token %}
-            <input type="text" name="room_name" placeholder="Enter room name..." required>
+            <input type="text" name="user_name" placeholder="Enter your name..." required>
+            <input type="text" name="room_name" placeholder="And room name..." required>
             <button type="submit">Proceed</button>
         </form>
     </div>

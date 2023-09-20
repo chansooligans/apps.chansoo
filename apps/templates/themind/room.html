@@ -5,10 +5,12 @@
 </head>
 <link rel="stylesheet" href="{% static 'css/themind.css' %}">
 <body>
+    {{ user_name|json_script:"user-name" }}
     {{ room_name|json_script:"room-name" }}
     <script>
 
         const roomName = JSON.parse(document.getElementById('room-name').textContent);
+        const userName = JSON.parse(document.getElementById('user-name').textContent);
 
         const socket = new WebSocket(
             'wss://' 
@@ -20,7 +22,8 @@
         socket.onmessage = function(e) {
             var data = JSON.parse(e.data);
             var card = data['card'];
-            displaySubmittedCard(card);
+            var user_name = data['user_name']; 
+            displaySubmittedCard(card, user_name);
         };
 
         socket.onclose = function(e) {
@@ -46,7 +49,8 @@
         function submitCard(cardValue) {
             if (socket) {
                 socket.send(JSON.stringify({
-                    'card': cardValue
+                    'card': cardValue,
+                    'userName': userName
                 }));
             }
             
@@ -58,18 +62,27 @@
         }
         
 
-        function displaySubmittedCard(cardValue) {
+        function displaySubmittedCard(cardValue, user_name) {
             const container = document.querySelector('.submitted-cards');
             const cardElem = document.createElement('div');
             cardElem.className = 'card';
-            cardElem.textContent = cardValue;
+            cardElem.textContent = cardValue; 
+    
+            // Create a span for the user_name
+            const userNameSpan = document.createElement('span');
+            userNameSpan.className = 'username-label';
+            userNameSpan.textContent = `${user_name}`;
+            
+            // Append the user_name span to the card element
+            cardElem.appendChild(userNameSpan);
+
             container.appendChild(cardElem);
         }
     </script>
     
     <nav class="navbar fixed-top bg-body-tertiary">
         <div class="container-fluid">
-            <div class="room-name">Room: {{ room_name }}</div>
+            <div class="room-name">Room: {{ room_name }} | User: {{ user_name }}</div>
             <a class="me-2" href="/themind/">Change Room</a>
         </div>
     </nav>

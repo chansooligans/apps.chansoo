@@ -52,6 +52,7 @@ h2 {
     font-size: 1.5rem;
     color: #555;
     transition: transform 0.1s;
+    position: relative;
 }
 
 .card.used {
@@ -59,6 +60,17 @@ h2 {
     pointer-events: none;  
     background-color: rgb(211, 211, 211);
 }
+
+.card .username-label {
+    display: block;
+    font-size: 10px; /* or whatever size you prefer */
+    position: absolute;
+    bottom: 5px; /* padding from the bottom */
+    left: 50%;
+    transform: translateX(-50%); /* centering the username */
+    white-space: nowrap; /* prevent wrapping */
+}
+
 
 .selected {
     background-color: rgb(241, 214, 178);
