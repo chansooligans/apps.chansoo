@@ -179,3 +179,5 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
+CSRF_TRUSTED_ORIGINS = ['https://*.apps.chansoos.com', 'https://*.tailoredscoops.com','https://*.127.0.0.1']
