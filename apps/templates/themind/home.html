@@ -63,8 +63,7 @@
         <button class = "newcard" type="submit">Click to get new cards.</button>
     </form>
     
-    <form action="{% url 'delete_all_numbers' %}" method="post">
-        {% csrf_token %}
+    <form action="/themind/delete-all-numbers" method="get">
         <button type="submit">Reshuffle deck.</button>
     </form>
 

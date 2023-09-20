@@ -24,7 +24,7 @@ def home(request):
 def reset(request):
     return render(request, 'themind/reset.html')
 
-@require_POST
 def delete_all_numbers(request):
     RandomNumber.objects.all().delete()
+    print(1)
     return redirect('reset') 
