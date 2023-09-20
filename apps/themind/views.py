@@ -5,13 +5,16 @@ from django.shortcuts import render
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.http import HttpResponse
+from django.views.decorators.cache import never_cache
 from .models import RandomNumber
 import random
 
+@never_cache
 def home(request):
 
     return render(request, 'themind/home.html')
 
+@never_cache
 def room(request, room_name):
 
     generated_pairs = RandomNumber.objects.all()
@@ -33,6 +36,7 @@ def delete_all_numbers(request, room_name):
     RandomNumber.objects.filter(room_name=room_name).delete()
     return render(request, 'themind/reset.html', context)
 
+@never_cache
 def set_room_name(request):
     if request.method == "POST":
         room_name = request.POST.get("room_name")
